@@ -16,7 +16,7 @@ uv 的默认索引是清华源 `https://mirrors.tuna.tsinghua.edu.cn/pypi/web/si
 
 ```sh
 git clone https://github.com/AgariLab/agari-kit.git
-git -C agari-kit checkout c22c416a8f11da710c865f43228fe4379ab222ed
+git -C agari-kit checkout 9e3e866a046e40fecf94d03d315c9cc000d015b1
 git clone https://github.com/AgariLab/agari-research.git
 cd agari-research
 ```
@@ -34,7 +34,7 @@ python3 ../agari-kit/scripts/with_storage.py uv sync --frozen
 ```sh
 python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run \
   --config configs/smoke.json \
-  --split datasets/manifests/SELFPLAY_DATASET/split.json \
+  --split datasets/manifests/smoke-v1/split-v1.json \
   --run baseline-smoke
 ```
 
@@ -49,15 +49,18 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run \
 
 ```sh
 python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run \
-  --config configs/smoke.json --split datasets/manifests/SELFPLAY_DATASET/split.json \
+  --config configs/smoke.json --split datasets/manifests/smoke-v1/split-v1.json \
   --run resume-demo --stop-after-updates 6
 python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run \
-  --config configs/smoke.json --split datasets/manifests/SELFPLAY_DATASET/split.json \
+  --config configs/smoke.json --split datasets/manifests/smoke-v1/split-v1.json \
   --run resume-demo --resume checkpoints/resume-demo/latest.pt
 ```
 
 检查点包含 GRP、Q、Actor-Critic、冻结对手、优化器、调度器、随机数状态、数据游标、PPO 场次计数、
-配置及代码/数据/上游摘要。CPU 使用确定性运算。PPO 的恢复边界是完整更新；进程异常时从最近完成的更新继续，
+配置及代码/数据/上游摘要。当前版本还把实际 `agari-kit` 源码摘要、引擎动态库摘要、Python/Torch/NumPy 版本
+及 `uv.lock` 摘要写入检查点与导出元数据，恢复时逐项要求一致。缺少运行环境记录的历史检查点不能直接恢复；
+历史导出模型仍可用于推理。训练需要含 `uv.lock` 的源码 checkout。CPU 使用确定性运算。
+PPO 的恢复边界是完整更新；进程异常时从最近完成的更新继续，
 日志可能保留检查点写入前的重复指标。已有实验目录不会被新训练覆盖。
 
 所有运行产物位于 `AGARILAB_STORAGE_ROOT`，默认 `/Volumes/新加卷/AgariLab`：
@@ -87,14 +90,38 @@ PPO 从 Q 网络迁移骨干与决策头，以冻结模型作为对手和 KL 参
 `baseline-local-v1` 在 PPO 第 2 次更新中断恢复，385 个张量及其余状态精确一致。
 两者的恢复证据分别位于外置 `runs/baseline-resume-v2/` 和 `runs/baseline-local-resume-v1/`。
 `scripts/verify_resume.py` 可以重复比较全部模型、优化器、调度器、随机数与数据游标。
+新增运行环境绑定后的 `baseline-runtime-smoke-v2` / `baseline-runtime-resume-v2` 同样完成 259 个张量
+及全部状态精确比较，使用公共工具 commit `28894987cc121775fdbb12b22f0db72aca9b3695`。
+真实旧版公共工具检查点的恢复也因源码摘要不同被拒绝，证据为后者目录下的 `old-kit-rejection.json`。
+后来针对独立对手的修正不改写这次验收的运行环境记录；恢复该历史实验仍需匹配记录的环境。
 
 20 场数据只有 1 个验证半庄。local-small 的 GRP 验证准确率为 0，不能把训练完成当作奖励模型质量合格，
 也不能用这批小模型声称棋力提升。需要更大、来源合适的数据和独立对局评估。
+
+同一训练实现随后对 `selfplay-v1` 的 1000 场数据（900/50/50 分区）运行 `baseline-1000-v1`，
+仍使用 local-small 的固定更新预算。GRP 实际消费 3200 样本、涉及 80/900 场；CQL 消费 12800 样本、
+涉及 23/900 场；PPO 采集 4 场、649 次玩家决策。阶段验证各取前 128 样本，仅分别涉及 4/50 与 1/50 场：
+GRP 准确率 36.71875%、loss 1.37826，CQL loss 8.53376。这些数字不表示跑完一个 epoch、全量验证或棋力提升。
+消费顺序与场次清单保存在外置 `runs/baseline-1000-v1/sample-coverage.json`。
+随后用独立脚本完整评估 50 场验证分区：GRP 共 1680 样本，准确率 **27.0238%**、loss 1.38431；
+CQL 共 24603 样本，loss 8.63535（TD 0.319209、保守项 1.613290、辅助名次项 1.248475）。
+完整报告 `runs/baseline-1000-v1/full-validation.json` 绑定数据、权重和实际评估环境摘要，
+未打开训练或测试牌谱内容。这些全量验证指标取代前 128 样本作为验证集质量描述，但仍不是棋力结论。
+
+```sh
+python3 ../agari-kit/scripts/with_storage.py uv run --frozen python scripts/validate_models.py \
+  --split datasets/manifests/selfplay-v1/split-v1.json --models models/baseline-1000-v1 \
+  --output runs/baseline-1000-v1/new-full-validation.json
+```
+
+该历史运行对应研究 commit `f681c69bd7a61bfa25a131223b5c3786f9bd75fa`，先于新增运行环境绑定；
+新恢复逻辑另用小型实验验证，历史长评测结果不会被改写成新实现的验收结果。
+
 `scripts/benchmark_devices.py` 另测得本机 local-small(batch64) 的合成 CQL 更新中位耗时：
 CPU 13.67ms、MPS 5.63ms。此测量仅含网络训练计算，不含解析或自博弈；尚未以完整 MPS 训练验收替代 CPU 结果。
 
 GitHub CI 将本仓库与 `AgariLab/agari-kit` 并列检出，用锁文件安装包括 PyTorch 的完整环境后运行测试。
-公共工具的 CI 引用固定为 `c22c416a8f11da710c865f43228fe4379ab222ed`；本机仍使用相邻工作目录。
+公共工具的 CI 引用固定为 `9e3e866a046e40fecf94d03d315c9cc000d015b1`；本机仍使用相邻工作目录。
 
 独立进程的在线协议兼容性可以在本机预检，不需要 Token，也不会连接 riichi.dev：
 

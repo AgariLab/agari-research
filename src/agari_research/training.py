@@ -33,6 +33,7 @@ from .models.actor_critic import ActorCriticNetwork
 from .models.grp_model import RankPredictor
 from .models.q_network import QNetwork
 from .rollout import collect_rollout
+from .runtime import require_matching_runtime, runtime_provenance
 
 STAGES = ("grp", "cql", "ppo")
 
@@ -186,10 +187,12 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
     state = {"schema_version": 1, "config": config, "dataset_sha256": dataset.sha256,
              "implementation_sha256": implementation_sha256(), "encoding_version": ENCODING_VERSION,
              "engine_version": "0.4.10", "upstream_commit": UPSTREAM_COMMIT,
+             "runtime_provenance": runtime_provenance(),
              "progress": {stage: 0 for stage in STAGES}, "samples_seen": {stage: 0 for stage in ("grp", "cql")},
              "ppo_initialized": False, "games_seen": 0, "run_name": run_name}
     if resume is not None:
         restored = torch.load(resume, map_location="cpu", weights_only=True)
+        require_matching_runtime(restored.get("runtime_provenance"), state["runtime_provenance"])
         for key in ("schema_version", "config", "dataset_sha256", "implementation_sha256", "encoding_version",
                     "engine_version", "upstream_commit", "run_name"):
             if restored.get(key) != state[key]:
@@ -218,7 +221,7 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
     def export(stage):
         destination = export_dir / f"{stage}.pt"
         payload = {key: state[key] for key in ("schema_version", "dataset_sha256", "implementation_sha256",
-                                             "encoding_version", "engine_version", "upstream_commit")}
+                                             "encoding_version", "engine_version", "upstream_commit", "runtime_provenance")}
         payload.update(kind=stage, model_config=config["model"], state_dict=models[stage].state_dict(),
                        config=config, completed_updates=state["progress"][stage])
         atomic_torch_save(payload, destination)

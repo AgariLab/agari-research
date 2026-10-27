@@ -1,8 +1,10 @@
+import copy
 import json
 import math
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 import torch
 from agari_kit.agent import Context
@@ -17,7 +19,8 @@ from agari_research.losses import cql_loss, gae, ppo_loss
 from agari_research.model_agent import ModelAgent
 from agari_research.models.actor_critic import ActorCriticNetwork
 from agari_research.models.q_network import QNetwork
-from agari_research.training import atomic_torch_save, initialize_policy, restore_rng, rng_state
+from agari_research.runtime import require_matching_runtime, runtime_provenance
+from agari_research.training import atomic_torch_save, initialize_policy, restore_rng, rng_state, run_training
 
 CONFIG = json.loads((Path(__file__).parents[1] / "configs/smoke.json").read_text())
 
@@ -121,6 +124,39 @@ class TrainingTests(unittest.TestCase):
             self.assertEqual(random.random(), expected[0])
             self.assertEqual(np.random.random(), expected[1])
             self.assertTrue(torch.equal(torch.rand(3), expected[2]))
+
+    def test_resume_rejects_each_changed_runtime_component(self):
+        current = runtime_provenance()
+        paths = [("agari_kit", "source_sha256"), ("agari_kit", "version"),
+                 ("engine", "binary_sha256"), ("engine", "version"),
+                 ("python", "implementation"), ("python", "version"),
+                 ("torch",), ("numpy",), ("lockfile_sha256",)]
+        require_matching_runtime(copy.deepcopy(current), current)
+        for path in paths:
+            with self.subTest(component=path):
+                changed = copy.deepcopy(current)
+                target = changed
+                for key in path[:-1]:
+                    target = target[key]
+                target[path[-1]] = "changed-runtime-component"
+                with self.assertRaisesRegex(ValueError, "runtime provenance mismatch"):
+                    require_matching_runtime(changed, current)
+        with self.assertRaisesRegex(ValueError, "runtime provenance mismatch"):
+            require_matching_runtime(None, current)
+
+    def test_training_rejects_runtime_before_loading_model_state(self):
+        with tempfile.TemporaryDirectory() as directory:
+            storage = Storage(Path(directory))
+            changed = runtime_provenance()
+            changed["torch"] = "a-different-runtime"
+            checkpoint = storage.path("changed.pt")
+            # Deliberately omit model/optimizer tensors: the runtime guard must
+            # reject first, before trying to load or execute checkpoint models.
+            atomic_torch_save({"runtime_provenance": changed}, checkpoint)
+            dataset = SimpleNamespace(sha256="a" * 64)
+            with self.assertRaisesRegex(ValueError, "runtime provenance mismatch: torch"):
+                run_training(CONFIG, dataset, storage, run_name="runtime-rejection", resume=checkpoint)
+            self.assertFalse(storage.path("checkpoints/runtime-rejection/latest.pt").exists())
 
     def test_exported_agent_masks_native_illegal_actions(self):
         model = QNetwork(**CONFIG["model"])

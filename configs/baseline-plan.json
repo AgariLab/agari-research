@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "local-smoke-trained-not-strength-accepted",
+  "status": "local-training-verified-strength-not-accepted",
   "upstream": {
     "repository": "https://github.com/smly/RiichiEnv",
     "reference": "v0.4.10",
@@ -32,7 +32,7 @@
   },
   "reproduction": {
     "implementation": "GRP/MC-CQL/PPO local adaptation validated",
-    "training": "20-game verified split: smoke and local-small complete; strength not accepted",
+    "training": "20-game smoke/local-small and 1000-game-source fixed-budget training complete; no full epoch or strength acceptance",
     "strength": "pending independent evaluation and larger training"
   },
   "evidence": {
@@ -43,7 +43,7 @@
     "exports": "models/baseline-smoke-v2",
     "resume": "runs/baseline-resume-v2/resume-equivalence.json",
     "resume_tensors_exactly_equal": 259,
-    "unit_tests": 9,
+    "unit_tests": 11,
     "implementation_sha256": "284f46a503abfb9a9a765b44fc06dcda29686896722a9d55e96bc179f3598746",
     "local_small": {
       "run": "runs/baseline-local-v1/result.json",
@@ -70,6 +70,79 @@
       "timeouts": 0,
       "network_connected": false,
       "server_validation": "not-performed"
+    },
+    "dataset_1000": {
+      "split": "datasets/manifests/selfplay-v1/split-v1.json",
+      "dataset_sha256": "39194c82b1f3bb8bff219425dc0ffa06ed2f0468e94f4fbd13f73d158048e4d3",
+      "partitions": {
+        "train": 900,
+        "validation": 50,
+        "test": 50
+      },
+      "run": "runs/baseline-1000-v1/result.json",
+      "exports": "models/baseline-1000-v1",
+      "sample_coverage": "runs/baseline-1000-v1/sample-coverage.json",
+      "training_code_commit": "f681c69bd7a61bfa25a131223b5c3786f9bd75fa",
+      "training_implementation_sha256": "284f46a503abfb9a9a765b44fc06dcda29686896722a9d55e96bc179f3598746",
+      "train_samples": {
+        "grp": 3200,
+        "cql": 12800
+      },
+      "train_unique_games": {
+        "grp": 80,
+        "cql": 23
+      },
+      "validation_samples": 128,
+      "validation_unique_games": {
+        "grp": 4,
+        "cql": 1
+      },
+      "grp_validation_accuracy": 0.3671875,
+      "grp_validation_loss": 1.3782610893249512,
+      "cql_validation_loss": 8.533757209777832,
+      "ppo_games": 4,
+      "ppo_decisions": 649,
+      "strength": "not-accepted",
+      "full_validation": {
+        "report": "runs/baseline-1000-v1/full-validation.json",
+        "validation_games": 50,
+        "metrics": {
+          "cql": {
+            "aux_loss": 1.2484748014050742,
+            "conservative_loss": 1.6132898767106016,
+            "loss": 8.635353421465254,
+            "samples": 24603,
+            "td_loss": 0.3192090883476145
+          },
+          "grp": {
+            "accuracy": 0.2702380952380952,
+            "loss": 1.3843108790261405,
+            "samples": 1680
+          }
+        },
+        "train_content_read": false,
+        "test_content_read": false,
+        "strength_evaluation": "not-performed"
+      }
+    },
+    "runtime_bound_smoke": {
+      "run": "runs/baseline-runtime-smoke-v2/result.json",
+      "exports": "models/baseline-runtime-smoke-v2",
+      "resume": "runs/baseline-runtime-resume-v2/resume-equivalence.json",
+      "resume_tensors_exactly_equal": 259,
+      "old_kit_rejection": "runs/baseline-runtime-resume-v2/old-kit-rejection.json",
+      "implementation_sha256": "9bde41c60b9b580977ac57f37dfbe95c70a9b4d67d332c9024a21af0550d8c74",
+      "kit_commit": "28894987cc121775fdbb12b22f0db72aca9b3695",
+      "runtime_fields": [
+        "agari_kit.source_sha256",
+        "engine.binary_sha256",
+        "engine.version",
+        "python.implementation",
+        "python.version",
+        "torch",
+        "numpy",
+        "lockfile_sha256"
+      ]
     }
   }
 }
