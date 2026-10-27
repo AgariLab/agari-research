@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "run": "full-coverage-trace-1000-v1",
+  "accepted_at": "2026-10-27T20:17:31.228493+00:00",
+  "research_commit": "761b4522b5343b01413d640b58444b8a3fb7568e",
+  "sample_semantics_version": "seeded-trace-player-decisions-v1",
+  "implementation_sha256": "2f6e3618a1fa7812837b042e257d654c6e4d94f95764904002dbfef0bb9afedf",
+  "dataset_sha256": "39194c82b1f3bb8bff219425dc0ffa06ed2f0468e94f4fbd13f73d158048e4d3",
+  "training_plan_sha256": "7348d77afa63905e58be89b4cdac52ee326324463245aefdee0a0596fdf898f0",
+  "config_matches_full_coverage_small_and_historical_run": true,
+  "partition_games": {
+    "train": 900,
+    "validation": 50,
+    "test": 50
+  },
+  "test_content_read": false,
+  "timing": {
+    "approximate_run_directory_birth_to_result_mtime_seconds": 207.44000005722046,
+    "run_directory_birth_utc": "2026-10-27T20:12:30.950000+00:00",
+    "result_mtime_utc": "2026-10-27T20:15:58.390000+00:00",
+    "method": "filesystem birthtime and result mtime; approximate, not an instrumented process duration",
+    "includes": "per-game sample planning, model initialization, training and training-stage validation",
+    "excludes": "FrozenDataset construction and full native verification before run-directory creation; standalone validation after training",
+    "full_cli_elapsed_seconds": null,
+    "standalone_validation_seconds": 7.121093875030056
+  },
+  "independent_counts_audit": {
+    "path": "runs/trace-selected-actions-audit-v1/selfplay-v1-train-games.jsonl",
+    "sha256": "e1e8ba026bb331236a3b35d59d557c95660c589db2b0832cc1123669ecb100b4",
+    "games_compared": 900,
+    "all_ordered_ids_hashes_grp_and_cql_counts_match": true
+  },
+  "training": {
+    "grp": {
+      "updates": 1133,
+      "samples": 36228,
+      "complete_epochs": 1,
+      "unique_games_seen": 900,
+      "last_batch_samples": 4,
+      "every_game_count_matches_independent_audit": true,
+      "every_game_consumed_exactly_once": true
+    },
+    "cql": {
+      "updates": 8217,
+      "samples": 525853,
+      "complete_epochs": 1,
+      "unique_games_seen": 900,
+      "last_batch_samples": 29,
+      "every_game_count_matches_independent_audit": true,
+      "every_game_consumed_exactly_once": true
+    }
+  },
+  "ppo": {
+    "updates": 4,
+    "games": 4,
+    "hands": 49,
+    "hero_decisions": 812,
+    "steps": 3235,
+    "games_detail": [
+      {
+        "decisions": 166,
+        "hands": 11,
+        "hero": 0,
+        "scores": [
+          15300,
+          36100,
+          11100,
+          37500
+        ],
+        "seed": 1002026,
+        "steps": 644
+      },
+      {
+        "decisions": 224,
+        "hands": 13,
+        "hero": 1,
+        "scores": [
+          27600,
+          -3900,
+          61300,
+          15000
+        ],
+        "seed": 1002027,
+        "steps": 851
+      },
+      {
+        "decisions": 204,
+        "hands": 12,
+        "hero": 2,
+        "scores": [
+          6300,
+          23900,
+          41600,
+          28200
+        ],
+        "seed": 1002028,
+        "steps": 845
+      },
+      {
+        "decisions": 218,
+        "hands": 13,
+        "hero": 3,
+        "scores": [
+          14100,
+          58100,
+          25400,
+          2400
+        ],
+        "seed": 1002029,
+        "steps": 895
+      }
+    ]
+  },
+  "validation": {
+    "cql": {
+      "aux_loss": 0.9868081632641347,
+      "conservative_loss": 0.7215731959757135,
+      "loss": 4.799823261608764,
+      "samples": 24603,
+      "td_loss": 0.9945956193707423
+    },
+    "grp": {
+      "accuracy": 0.43333333333333335,
+      "loss": 1.2505604914256505,
+      "samples": 1680
+    }
+  },
+  "checks": {
+    "config_unchanged": true,
+    "all_900_training_game_ids_hashes_and_counts_match_independent_audit": true,
+    "all_900_actual_per_game_counts_match_plan_and_audit": true,
+    "metric_batch_totals_match_coverage": true,
+    "full_validation_counts_and_losses_match_training_stage": true,
+    "checkpoint_progress_and_sample_cursors_match": true,
+    "checkpoint_and_all_exports_match_runtime_implementation_config_and_semantics": true,
+    "export_metadata_and_descriptor_weight_hashes_match": true,
+    "source_and_runtime_unchanged_at_closeout": true
+  },
+  "limitations": [
+    "This report verifies training artifacts and complete validation, not playing strength.",
+    "No test partition content or online server was used in this acceptance.",
+    "No full CLI performance timer was available; the filesystem interval is approximate and excludes pre-directory replay.",
+    "Data migration from macOS to Linux was not exercised.",
+    "Historical experiments and model weights were not overwritten."
+  ],
+  "validation_command": "python3 ../agari-kit/scripts/with_storage.py uv run --frozen python scripts/validate_models.py --split datasets/manifests/selfplay-v1/split-v1.json --models models/full-coverage-trace-1000-v1 --output runs/full-coverage-trace-1000-v1/validation.json"
+}

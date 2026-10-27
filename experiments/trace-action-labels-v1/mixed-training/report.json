@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "run": "meld-coverage-trace-v1",
+  "reviewed_at": "2026-10-27T20:14:36.188856+00:00",
+  "research_commit": "761b4522b5343b01413d640b58444b8a3fb7568e",
+  "sample_semantics_version": "seeded-trace-player-decisions-v1",
+  "implementation_sha256": "2f6e3618a1fa7812837b042e257d654c6e4d94f95764904002dbfef0bb9afedf",
+  "dataset_sha256": "b236cc685a0633edff33c87ae4412512689b2063ef1e5f7e146ea9f3dedddb13",
+  "training_plan_sha256": "e0b73495e201608c63f9468f32c20cf7803425ef4338a0acbc47fd13ebf962ec",
+  "split": "datasets/manifests/meld-coverage-v1/split-v1.json",
+  "partition_games": {
+    "train": 90,
+    "validation": 5,
+    "test": 5
+  },
+  "test_content_read": false,
+  "config_matches_original": true,
+  "timing": {
+    "training_cli_wall_seconds": 17.699,
+    "training_cli_timing_source": "zsh time; includes frozen dataset validation, counts, training and stage validation",
+    "standalone_validation_seconds": 0.6402403749525547
+  },
+  "training": {
+    "grp": {
+      "updates": 105,
+      "samples": 3340,
+      "complete_epochs": 1,
+      "unique_games": 90,
+      "last_batch_samples": 12,
+      "every_game_consumed_exactly_once": true
+    },
+    "cql": {
+      "updates": 882,
+      "samples": 56429,
+      "complete_epochs": 1,
+      "unique_games": 90,
+      "last_batch_samples": 45,
+      "every_game_consumed_exactly_once": true
+    }
+  },
+  "ppo": {
+    "entropy": 2.0463327407836913,
+    "games": [
+      {
+        "decisions": 151,
+        "hands": 8,
+        "hero": 0,
+        "scores": [
+          21200,
+          39600,
+          13100,
+          26100
+        ],
+        "seed": 1002026,
+        "steps": 622
+      }
+    ],
+    "kl": 8.446173544029989e-06,
+    "kl_coef": 0.0,
+    "loss": 0.0741442631231621,
+    "minibatches": 10,
+    "policy_loss": -0.0006163496524095535,
+    "samples": 151,
+    "stage": "ppo",
+    "update": 1,
+    "value_loss": 0.15361388102173806
+  },
+  "validation": {
+    "cql": {
+      "aux_loss": 1.100078241100001,
+      "conservative_loss": 1.8516168965863644,
+      "loss": 9.680401910679212,
+      "samples": 3196,
+      "td_loss": 0.20230189668893517
+    },
+    "grp": {
+      "accuracy": 0.29891304347826086,
+      "loss": 1.2684735837190046,
+      "samples": 184
+    }
+  },
+  "checks": {
+    "all_90_training_games_exactly_once": true,
+    "metric_batches_sum_to_planned_counts": true,
+    "stage_and_standalone_validation_counts_match": true,
+    "checkpoint_progress_and_sample_cursors_match": true,
+    "checkpoint_and_all_exports_include_sample_semantics": true,
+    "checkpoint_and_all_exports_match_actual_runtime_and_implementation": true,
+    "export_metadata_and_agent_descriptor_weight_hashes_match": true,
+    "source_and_runtime_unchanged_at_closeout": true,
+    "stage_and_standalone_validation_losses_match_within_1e_minus_5_relative": true
+  },
+  "limitations": [
+    "Small local training acceptance only; no strength evaluation or online server validation.",
+    "PPO used one update with one newly generated self-play game.",
+    "Historical pre-fix experiments and artifacts remain unchanged.",
+    "Cross-platform compatibility was not exercised by this macOS training run."
+  ],
+  "commands": [
+    "python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run --config '/Volumes/新加卷/AgariLab/runs/meld-coverage-audit-v1/training-config.json' --split datasets/manifests/meld-coverage-v1/split-v1.json --run meld-coverage-trace-v1",
+    "python3 ../agari-kit/scripts/with_storage.py uv run --frozen python scripts/validate_models.py --split datasets/manifests/meld-coverage-v1/split-v1.json --models models/meld-coverage-trace-v1 --output runs/meld-coverage-trace-v1/validation.json"
+  ]
+}

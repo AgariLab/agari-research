@@ -1,0 +1,100 @@
+{
+  "storage_root": "/Volumes/新加卷/AgariLab",
+  "artifacts": [
+    {
+      "path": "runs/full-coverage-trace-1000-v1/config.json",
+      "bytes": 714,
+      "sha256": "7ea644b6560de0f429b030f696e782ed6ec4b1404a1636dd0e377db9dff9bd29"
+    },
+    {
+      "path": "runs/full-coverage-trace-1000-v1/dataset.json",
+      "bytes": 689188,
+      "sha256": "192e3af58dbeffbbde677234e423aa2ac37c76f5bf9071a0670cd6a768f1aa5a"
+    },
+    {
+      "path": "runs/full-coverage-trace-1000-v1/execution-plan.json",
+      "bytes": 180420,
+      "sha256": "f26ebb1afc31016ed6278a308b6e1bc31ee4f13dc64e64a07ae72eaf423e5f09"
+    },
+    {
+      "path": "runs/full-coverage-trace-1000-v1/result.json",
+      "bytes": 818,
+      "sha256": "201559530984c7bb9804ab0f813ae3462c3ea5f48d201f6c738fa8fcadb6f8cb"
+    },
+    {
+      "path": "runs/full-coverage-trace-1000-v1/coverage.json",
+      "bytes": 371317,
+      "sha256": "cff17349a0b06b33397f7b1fdc00b4b12dcdd9174f190facb4630292ea48f532"
+    },
+    {
+      "path": "runs/full-coverage-trace-1000-v1/validation.json",
+      "bytes": 2641,
+      "sha256": "bccd59cb9bd917a241f94be9bef0072a6c04d10aa4ad837ddddac754e8b0c435"
+    },
+    {
+      "path": "runs/full-coverage-trace-1000-v1/metrics.jsonl",
+      "bytes": 2950851,
+      "sha256": "83b5a697708add3d9c8ea71619f18bcc628c5a24a50878485d2710d9adb29264"
+    },
+    {
+      "path": "checkpoints/full-coverage-trace-1000-v1/latest.pt",
+      "bytes": 5208381,
+      "sha256": "f560edad5d6ee23a354ebf54b9817efa76cd41214d77f2f887412ac841a57b06"
+    },
+    {
+      "path": "datasets/manifests/selfplay-v1/split-v1.json",
+      "bytes": 689188,
+      "sha256": "192e3af58dbeffbbde677234e423aa2ac37c76f5bf9071a0670cd6a768f1aa5a"
+    },
+    {
+      "path": "runs/trace-selected-actions-audit-v1/selfplay-v1-train-games.jsonl",
+      "bytes": 1322935,
+      "sha256": "e1e8ba026bb331236a3b35d59d557c95660c589db2b0832cc1123669ecb100b4"
+    },
+    {
+      "path": "runs/full-coverage-1000-v1/config.json",
+      "bytes": 714,
+      "sha256": "7ea644b6560de0f429b030f696e782ed6ec4b1404a1636dd0e377db9dff9bd29"
+    },
+    {
+      "path": "models/full-coverage-trace-1000-v1/cql-agent.json",
+      "bytes": 219,
+      "sha256": "03ca0d2eaef6c3a9e1d969097b59ce98cd3e5087531d6ef6bcf9f0b89a10a9fb"
+    },
+    {
+      "path": "models/full-coverage-trace-1000-v1/cql.json",
+      "bytes": 2239,
+      "sha256": "149c0329833ee61cbc19a8d1317a44028b4e128d6597cf3446b1114ba348fe1f"
+    },
+    {
+      "path": "models/full-coverage-trace-1000-v1/cql.pt",
+      "bytes": 704138,
+      "sha256": "32d3693275e86c65ea01a8198007946f3a90bbc3f685dde2051e70b1a497c6e5"
+    },
+    {
+      "path": "models/full-coverage-trace-1000-v1/grp.json",
+      "bytes": 2232,
+      "sha256": "6431d2d0574db1af8ad093486bc5207f04d69956d1e863cfd0c633ba04da7176"
+    },
+    {
+      "path": "models/full-coverage-trace-1000-v1/grp.pt",
+      "bytes": 49749,
+      "sha256": "6938fda3bc5d2b3f76cda819b3ee93ad44bfecb4b9e3bd725bd6c2cd63bcf962"
+    },
+    {
+      "path": "models/full-coverage-trace-1000-v1/ppo-agent.json",
+      "bytes": 219,
+      "sha256": "51495822b3af9c6aff6f11a59aa3db0c1380ed4238088b22d4bc2741e052a381"
+    },
+    {
+      "path": "models/full-coverage-trace-1000-v1/ppo.json",
+      "bytes": 2236,
+      "sha256": "f1719760c7dcb073866946c21970e69ddf735bfc96db2a9602f8636461a6ef1c"
+    },
+    {
+      "path": "models/full-coverage-trace-1000-v1/ppo.pt",
+      "bytes": 701520,
+      "sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096"
+    }
+  ]
+}

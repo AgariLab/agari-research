@@ -1,0 +1,95 @@
+{
+  "storage_root": "/Volumes/新加卷/AgariLab",
+  "artifacts": [
+    {
+      "path": "runs/meld-coverage-trace-v1/config.json",
+      "bytes": 713,
+      "sha256": "0b9b809c8a39e9564601376852863837da89c0d163772bc0fcca7a13dfa56456"
+    },
+    {
+      "path": "runs/meld-coverage-trace-v1/dataset.json",
+      "bytes": 70588,
+      "sha256": "ad3d2f790454a315a01244d7989b102de6d453e9bc42119507e8de02a2b944fa"
+    },
+    {
+      "path": "runs/meld-coverage-trace-v1/execution-plan.json",
+      "bytes": 19219,
+      "sha256": "72a637e8a72c30b5a6a25c6f91a8f182fae0c5febb99108210009c439d01d27f"
+    },
+    {
+      "path": "runs/meld-coverage-trace-v1/result.json",
+      "bytes": 795,
+      "sha256": "8a59bcde6049a4e9c557862b198bca83a9ec5659d431e10908c799357e3d7074"
+    },
+    {
+      "path": "runs/meld-coverage-trace-v1/coverage.json",
+      "bytes": 37581,
+      "sha256": "d0e5a28f98987065d79990d337881dfe4c7257001bb143cc7d95d563d7fc2500"
+    },
+    {
+      "path": "runs/meld-coverage-trace-v1/validation.json",
+      "bytes": 2629,
+      "sha256": "7ca99cad1c43dffa030b8d4c31813ff613e8da8df435ea832ee7cc8d1cc14a29"
+    },
+    {
+      "path": "runs/meld-coverage-trace-v1/metrics.jsonl",
+      "bytes": 309010,
+      "sha256": "8082ca40077a04bb5168c8c3807546dcf0ab2f0009d9eec1001336fe55959301"
+    },
+    {
+      "path": "checkpoints/meld-coverage-trace-v1/latest.pt",
+      "bytes": 962105,
+      "sha256": "437f960fdcfe42585b6c770dca0bd235ab1392d22b4e7e80a46a5ce0c51cdb67"
+    },
+    {
+      "path": "datasets/manifests/meld-coverage-v1/split-v1.json",
+      "bytes": 70588,
+      "sha256": "ad3d2f790454a315a01244d7989b102de6d453e9bc42119507e8de02a2b944fa"
+    },
+    {
+      "path": "runs/meld-coverage-audit-v1/training-config.json",
+      "bytes": 713,
+      "sha256": "0b9b809c8a39e9564601376852863837da89c0d163772bc0fcca7a13dfa56456"
+    },
+    {
+      "path": "models/meld-coverage-trace-v1/cql-agent.json",
+      "bytes": 219,
+      "sha256": "a655ff37a26cb1ea86bf396985f0ac479096742032171e854fda12fde1291cdd"
+    },
+    {
+      "path": "models/meld-coverage-trace-v1/cql.json",
+      "bytes": 2230,
+      "sha256": "7f6a5c8cfb9a80cb1266be6b86a896f0e9a47e6ab4dcdf9dab2dc6884e7c3681"
+    },
+    {
+      "path": "models/meld-coverage-trace-v1/cql.pt",
+      "bytes": 116288,
+      "sha256": "dd8dd3337b2b15382d4de4a9313bf20738e43cdf72f0c99b7252c674fc1dd096"
+    },
+    {
+      "path": "models/meld-coverage-trace-v1/grp.json",
+      "bytes": 2225,
+      "sha256": "9fbbaf8d484b95a625f0210d72571ab463520fe4cf6761d32375807073bfca75"
+    },
+    {
+      "path": "models/meld-coverage-trace-v1/grp.pt",
+      "bytes": 49749,
+      "sha256": "c8f21b4a2228d1a591d787865f00575e4055dcba00d297cd249bb62af059bdab"
+    },
+    {
+      "path": "models/meld-coverage-trace-v1/ppo-agent.json",
+      "bytes": 219,
+      "sha256": "257c63ddce501c7ef617ee53cd29c2b9997c65a33f7d40e793cc93b625c5b6fb"
+    },
+    {
+      "path": "models/meld-coverage-trace-v1/ppo.json",
+      "bytes": 2228,
+      "sha256": "742f11bcefd5b945718585102129d77dc1edeb0226ca0e975abc62e51faafc0e"
+    },
+    {
+      "path": "models/meld-coverage-trace-v1/ppo.pt",
+      "bytes": 115206,
+      "sha256": "14d7cea573f6af568e6a5a2a75b7ad907dc91f428942df05c4dff6f3c317ec26"
+    }
+  ]
+}

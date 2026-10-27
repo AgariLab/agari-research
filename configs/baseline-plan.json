@@ -32,8 +32,8 @@
   },
   "reproduction": {
     "implementation": "GRP/MC-CQL/PPO local adaptation validated",
-    "training": "20-game smoke/resume and 1000-game-source full-epoch GRP/CQL/PPO complete; native cross-epoch resume exact",
-    "strength": "Positive paired screening against fixed weak opponents; formal promotion and strong-opponent strength acceptance pending"
+    "training": "Seeded selected-action labels corrected; mixed 100-game and original 1000-game complete-epoch training verified; native two-epoch interrupted resume exact",
+    "strength": "Corrected-model 1000-game fixed weak-opponent screening complete: paired rank difference +0.011, CI [-0.034, 0.059]; no directional conclusion or formal promotion. Historical exploratory Akochan comparison retained separately."
   },
   "evidence": {
     "dataset_sha256": "8848a4fcc1522526130b4d86f383bb0f2a75fe31a59b977056d39b7f73049760",
@@ -227,6 +227,121 @@
         "network_connected": false,
         "server_validation": "not-performed"
       }
+    },
+    "historical_training_labels": {
+      "semantics": "legacy-mjai-reconstructed-actions",
+      "affected_runs": [
+        "baseline-smoke-v2",
+        "baseline-local-v1",
+        "baseline-1000-v1",
+        "full-coverage-1000-v1",
+        "meld-coverage-training-v1"
+      ],
+      "limitation": "Old iterator mislabels overridden calls as PASS and omits some multi-RON and KYUSHU actions. Historical training/evaluation numbers retain their original meaning."
+    },
+    "trace_action_labels": {
+      "report": "experiments/trace-action-labels-v1/README.md",
+      "code_commit": "761b4522b5343b01413d640b58444b8a3fb7568e",
+      "implementation_sha256": "2f6e3618a1fa7812837b042e257d654c6e4d94f95764904002dbfef0bb9afedf",
+      "unit_tests": 29,
+      "independent_games_replayed": 1045,
+      "sample_semantics_version": "seeded-trace-player-decisions-v1",
+      "native_resume": "experiments/trace-action-labels-v1/native-resume/resume-equivalence.json",
+      "native_resume_tensors_exactly_equal": 259,
+      "mixed_training": "experiments/trace-action-labels-v1/mixed-training/README.md",
+      "test_content_read": false,
+      "mac_to_linux_migration_tested": false,
+      "code_ci": "https://github.com/AgariLab/agari-research/actions/runs/40575975409"
+    },
+    "full_coverage_trace_1000": {
+      "report": "experiments/full-coverage-trace-1000-v1/README.md",
+      "run": "runs/full-coverage-trace-1000-v1/result.json",
+      "training_code_commit": "761b4522b5343b01413d640b58444b8a3fb7568e",
+      "implementation_sha256": "2f6e3618a1fa7812837b042e257d654c6e4d94f95764904002dbfef0bb9afedf",
+      "dataset_sha256": "39194c82b1f3bb8bff219425dc0ffa06ed2f0468e94f4fbd13f73d158048e4d3",
+      "training_plan_sha256": "7348d77afa63905e58be89b4cdac52ee326324463245aefdee0a0596fdf898f0",
+      "training": {
+        "grp": {
+          "updates": 1133,
+          "samples": 36228,
+          "complete_epochs": 1,
+          "unique_games_seen": 900,
+          "last_batch_samples": 4,
+          "every_game_count_matches_independent_audit": true,
+          "every_game_consumed_exactly_once": true
+        },
+        "cql": {
+          "updates": 8217,
+          "samples": 525853,
+          "complete_epochs": 1,
+          "unique_games_seen": 900,
+          "last_batch_samples": 29,
+          "every_game_count_matches_independent_audit": true,
+          "every_game_consumed_exactly_once": true
+        }
+      },
+      "validation": {
+        "cql": {
+          "aux_loss": 0.9868081632641347,
+          "conservative_loss": 0.7215731959757135,
+          "loss": 4.799823261608764,
+          "samples": 24603,
+          "td_loss": 0.9945956193707423
+        },
+        "grp": {
+          "accuracy": 0.43333333333333335,
+          "loss": 1.2505604914256505,
+          "samples": 1680
+        }
+      },
+      "ppo": {
+        "updates": 4,
+        "games": 4,
+        "hero_decisions": 812
+      },
+      "ppo_weights_sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096",
+      "online_preflight": {
+        "report": "experiments/full-coverage-trace-1000-v1/online-preflight.json",
+        "games": 4,
+        "requests": 471,
+        "red_probes": 3,
+        "illegal_actions": 0,
+        "timeouts": 0,
+        "network_connected": false,
+        "server_validation": "not-performed"
+      },
+      "paired_evaluation": {
+        "report": "experiments/full-coverage-trace-1000-v1/comparison.json",
+        "baseline_model": "full-coverage-1000-v1",
+        "games_per_model": 1000,
+        "seed_groups": 250,
+        "baseline_mean_rank": 1.651,
+        "candidate_mean_rank": 1.662,
+        "mean_rank_difference": 0.011,
+        "mean_rank_difference_ci95": [
+          -0.034,
+          0.059
+        ],
+        "candidate_total_decisions": 680453,
+        "candidate_decisions": 181827,
+        "candidate_illegal_actions": 0,
+        "promotion_sample_size_met": false,
+        "strength_acceptance": "not-established-by-this-comparison"
+      }
+    },
+    "historical_coverage_akochan": {
+      "report": "experiments/coverage-akochan-v1/README.md",
+      "games_per_model": 16,
+      "seed_groups": 4,
+      "baseline_mean_rank": 2.6875,
+      "candidate_mean_rank": 2.25,
+      "mean_rank_difference": -0.4375,
+      "mean_rank_difference_ci95": [
+        -1,
+        -0.0625
+      ],
+      "interpretation": "Exploratory four-seed comparison using two legacy-label models; not corrected-model results or formal strength acceptance"
     }
-  }
+  },
+  "sample_semantics_version": "seeded-trace-player-decisions-v1"
 }
