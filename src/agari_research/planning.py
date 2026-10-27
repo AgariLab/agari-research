@@ -7,6 +7,7 @@ import math
 import random
 
 from agari_kit.mjai import canonical_json
+from .trace_samples import SAMPLE_SEMANTICS_VERSION
 
 
 def build_training_plan(config: dict, dataset) -> dict:
@@ -31,7 +32,10 @@ def build_training_plan(config: dict, dataset) -> dict:
             stages[stage] = {"mode": "steps", "target_updates": settings["steps"]}
             if stage != "ppo":
                 stages[stage]["target_samples"] = settings["steps"] * settings["batch_size"]
-    plan = {"schema_version": 1, "dataset_sha256": dataset.sha256, "training_games": counts, "stages": stages}
+    plan = {"schema_version": 1, "dataset_sha256": dataset.sha256,
+            "sample_semantics_version": SAMPLE_SEMANTICS_VERSION,
+            "producer_engines": getattr(dataset, "producer_engines", []),
+            "training_games": counts, "stages": stages}
     plan["sha256"] = hashlib.sha256(canonical_json(plan).encode()).hexdigest()
     return plan
 

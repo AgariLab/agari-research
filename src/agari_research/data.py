@@ -11,11 +11,31 @@ from pathlib import Path
 import torch
 from agari_kit.collection import verify_record
 from agari_kit.dataset import make_split
+from agari_kit.engine import require_engine
 from agari_kit.mjai import DataError, canonical_json, read_events
 from agari_kit.storage import Storage
 from riichienv import MjaiReplay
 
 from .features import action_mask, grp_features, policy_features, predicted_rewards, rank_of
+from .trace_samples import trace_rounds
+
+
+def require_trace_receipt(record: dict, receipt: dict) -> None:
+    """Only content-bound, verified local traces define behavior action labels."""
+    producer = receipt.get("producer_code")
+    if (record.get("source") != "agarilab-selfplay" or not record.get("trace_path")
+            or receipt.get("method") != "seeded-action-trace-v1"
+            or not isinstance(producer, dict)):
+        raise DataError("CQL requires locally generated self-play with a verified seeded trace")
+    hashes = (receipt.get("engine_binary_sha256"), producer.get("source_sha256"))
+    if (receipt.get("engine_version") != require_engine() or producer.get("package") != "agari-kit"
+            or not isinstance(producer.get("version"), str) or not producer["version"]
+            or any(not isinstance(value, str) or len(value) != 64
+                   or any(c not in "0123456789abcdef" for c in value) for value in hashes)):
+        raise DataError("Seeded training trace has invalid producer or engine identity")
+    # Producer binaries differ across OS/architectures. Compatibility is proved
+    # by full replay in FrozenDataset.__init__, not binary equality. The current
+    # training runtime's binary remains strictly bound to checkpoint resumes.
 
 
 class FrozenDataset:
@@ -32,11 +52,14 @@ class FrozenDataset:
             raise DataError("Split must use the verified chronological whole-game 90/5/5 policy")
         # All three partitions are checked for duplicate IDs and metadata above.
         # Held-out test content is never opened by training or model selection.
+        producer_engines = set()
         for part in ("train", "validation"):
             for record in self.manifest["partitions"][part]:
                 receipt = verify_record(storage, record, replay=True)
-                if receipt.get("engine_version") != "0.4.10":
-                    raise DataError("Training receipt uses an unpinned engine version")
+                require_trace_receipt(record, receipt)
+                producer_engines.add((receipt["engine_version"], receipt["engine_binary_sha256"]))
+        self.producer_engines = [{"version": version, "binary_sha256": digest}
+                                 for version, digest in sorted(producer_engines)]
         self.sha256 = digest
 
     def records(self, partition: str, seed: int | None = None):
@@ -72,14 +95,14 @@ class FrozenDataset:
 
     def cql_game_samples(self, record: dict, grp, config: dict):
         grp.eval()
-        replay = MjaiReplay.from_jsonl(str(self.storage.path(record["mjai_path"])), rule="tenhou")
-        for kyoku in replay.take_kyokus():
-            features = kyoku.take_grp_features()
+        for round_samples in self.trace_game_rounds(record):
+            features = round_samples.features
             rewards = predicted_rewards(grp, features, config["pts_weight"], config["device"])
             for player in range(4):
-                steps = list(kyoku.steps(player))
+                steps = round_samples.players[player]
                 rank = rank_of(features["round_end_scores"], player)
-                for index, (observation, action) in enumerate(steps):
+                for index, decision in enumerate(steps):
+                    observation, action = decision.observation, decision.action
                     mask = action_mask(observation)
                     action_id = action.encode()
                     if not 0 <= action_id < 82 or not mask[action_id]:
@@ -88,16 +111,23 @@ class FrozenDataset:
                     yield (policy_features(observation), torch.tensor(action_id), mask,
                            torch.tensor(target, dtype=torch.float32), torch.tensor(rank))
 
+    def trace_game_rounds(self, record: dict):
+        # Recheck the content-bound receipt on every pass, including resumes;
+        # complete native/MJAI verification was performed at dataset opening.
+        receipt = verify_record(self.storage, record, replay=False)
+        require_trace_receipt(record, receipt)
+        yield from trace_rounds(self.storage.path(record["mjai_path"]),
+                                self.storage.path(record["trace_path"]),
+                                producer=receipt["producer_code"])
+
     def sample_counts(self, partition: str) -> list[dict]:
         """Count the same native samples as training, never trace decision totals."""
         counts = []
         for record in self.records(partition):
-            replay = MjaiReplay.from_jsonl(str(self.storage.path(record["mjai_path"])), rule="tenhou")
             grp_count = cql_count = 0
-            for kyoku in replay.take_kyokus():
+            for round_samples in self.trace_game_rounds(record):
                 grp_count += 4
-                for player in range(4):
-                    cql_count += sum(1 for _ in kyoku.steps(player))
+                cql_count += sum(len(decisions) for decisions in round_samples.players)
             if not grp_count or not cql_count:
                 raise DataError(f"Complete game produced no training samples: {record['game_id']}")
             counts.append({"game_id": record["game_id"], "sha256": record["sha256"],

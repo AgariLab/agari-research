@@ -49,8 +49,8 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run \
 默认 CPU、1 线程；MPS 必须在配置中显式选择，可用性和数值结果需在目标机器验证。
 
 `configs/full-coverage-small.json` 保持 local-small 的模型、种子、优化器参数和 PPO 4 次更新，
-把 GRP/CQL 预算改为各完整 1 个 epoch。训练前从原生 `MjaiReplay.take_kyokus()` / `kyoku.steps(player)`
-计数，不用包含单一合法动作的轨迹总步数代替 CQL 样本数。每个训练半庄都消费一次；
+把 GRP/CQL 预算改为各完整 1 个 epoch。训练前从已验证的 seeded action trace 逐场重放并计数，
+跳过只有一个合法动作的强制决策。CQL 计数与实际训练使用同一读取器；每个训练半庄都消费一次；
 末尾不足 batch 的样本独立更新，即使只剩 1 个样本也保留，不从下一轮补齐。
 每阶段只能设置 `steps` 或 `epochs` 之一；PPO 的 `epochs` 仍表示每次采样后的优化轮数。
 
@@ -108,7 +108,22 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari evaluate \
 CQL 使用 GRP 预测的局末奖励形成 Monte Carlo 回报，加合法动作 `logsumexp(Q)-Q(data)` 保守项和四分类名次辅助损失。
 PPO 从 Q 网络迁移骨干与决策头，以冻结模型作为对手和 KL 参考；使用裁剪目标、GAE、价值损失和熵项。
 结果信息仅用于监督标签与训练奖励。`ModelAgent` 只接收玩家 `Observation`，无全局环境对象。
-完整局边界由 `end_kyoku` 识别，包含连庄；GRP 特征由原生重放解析，避免手工结算重复和供托错误。
+当前 CQL 样本语义版本为 `seeded-trace-player-decisions-v1`，仅接受带完整 seeded trace 的本地自采数据。
+原版 RiichiEnv 0.4.10 重放每一步，逐玩家检查实际 Observation 摘要与提交动作的合法性；只有一个合法动作的
+决策不作为样本。所有参与者先记录选择，再执行优先级结算，因此被碰覆盖的吃和双荣的两名赢家都保留原动作。
+历史 `Kyoku.steps` 会从最终 MJAI 事件推断未执行玩家的 PASS，且双荣仅产出首位赢家样本，不能把这些旧标签
+等同于 collector 的真实选择。下文及既有实验目录的历史结果仍对应原读取器，未被回写为新语义验收。
+
+CQL 按局、按玩家构造原算法的折扣回报，策略编码、网络和损失保持原定义。局边界使用玩家可见的
+`round_wind/kyoku_index/honba`，逐局与原生 GRP 的起始局面和结算分数校验，包含连庄与流局。
+极端 `honba=255` 因原生计数饱和无法唯一识别连续局，会明确拒绝。读取器逐条消费 trace，每次仅保留一局
+的决策；原生环境及 MJAI 解析器最多保留一场牌谱。完整 native log 仅在终局读取一次，区分最后一局结算
+和整场结束分配的遗留供托；GRP 继续使用原生 `take_grp_features` 的局末结果。
+样本语义版本写入执行计划、检查点和导出元数据，旧检查点不能跨实现恢复；冻结数据清单及历史模型不变。
+采集端原生二进制摘要保留在回执和执行计划中，不要求与训练端二进制相同，因此允许 Mac 采集后在
+Linux 训练；训练端必须用固定版本完整重放并匹配 Observation、MJAI 和终分，才能接受该数据。
+检查点仍绑定训练端实际二进制摘要，跨平台迁移数据不意味着允许跨运行环境直接恢复优化器状态。
+当前仅在本机验证了不同采集端摘要、内容一致可接受及 Observation 不一致被拒绝；尚未实测 Mac → Linux。
 
 验收结果记录在 `configs/baseline-plan.json`，最新的完整覆盖实验见
 [full-coverage-1000-v1](experiments/full-coverage-1000-v1/README.md)。完整实力评测、未见牌谱泛化和更大训练预算需单独实验，

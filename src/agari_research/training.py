@@ -35,6 +35,7 @@ from .models.q_network import QNetwork
 from .planning import build_training_plan, coverage, expected_samples
 from .rollout import collect_rollout
 from .runtime import require_matching_runtime, runtime_provenance
+from .trace_samples import SAMPLE_SEMANTICS_VERSION
 
 STAGES = ("grp", "cql", "ppo")
 
@@ -212,6 +213,7 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
                   T_max=plan["stages"][stage]["target_updates"], eta_min=config["grp"]["eta_min"])
                   for stage in ("grp", "cql")}
     state = {"schema_version": 1, "config": config, "dataset_sha256": dataset.sha256,
+             "sample_semantics_version": SAMPLE_SEMANTICS_VERSION,
              "implementation_sha256": implementation_sha256(), "encoding_version": ENCODING_VERSION,
              "engine_version": "0.4.10", "upstream_commit": UPSTREAM_COMMIT,
              "runtime_provenance": runtime, "training_plan": plan,
@@ -219,7 +221,7 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
              "ppo_initialized": False, "games_seen": 0, "run_name": run_name}
     if restored is not None:
         for key in ("schema_version", "config", "dataset_sha256", "implementation_sha256", "encoding_version",
-                    "engine_version", "upstream_commit", "run_name", "training_plan"):
+                    "engine_version", "upstream_commit", "run_name", "training_plan", "sample_semantics_version"):
             if restored.get(key) != state[key]:
                 raise ValueError(f"Resume checkpoint mismatch: {key}")
         for stage in ("grp", "cql"):
@@ -258,7 +260,8 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
     def export(stage):
         destination = export_dir / f"{stage}.pt"
         payload = {key: state[key] for key in ("schema_version", "dataset_sha256", "implementation_sha256",
-                                             "encoding_version", "engine_version", "upstream_commit", "runtime_provenance")}
+                                             "encoding_version", "engine_version", "upstream_commit", "runtime_provenance",
+                                             "sample_semantics_version")}
         payload.update(kind=stage, model_config=config["model"], state_dict=models[stage].state_dict(),
                        config=config, completed_updates=state["progress"][stage], training_plan_sha256=plan["sha256"],
                        training_coverage={name: coverage(plan, name, state["samples_seen"][name], config["seed"])

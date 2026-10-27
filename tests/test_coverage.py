@@ -17,6 +17,7 @@ from agari_kit.mjai import DataError
 from agari_kit.dataset import make_split
 from agari_kit.mjai import canonical_json
 from agari_kit.storage import Storage
+from agari_kit.engine import engine_identity
 from agari_research.data import BatchStream, EpochBatchStream, FrozenDataset
 from agari_research.planning import build_training_plan, coverage, expected_samples
 from agari_research.training import atomic_torch_save, run_training, validate_config, validation_metrics
@@ -121,7 +122,8 @@ class CoverageTests(unittest.TestCase):
 
     def test_verification_and_native_counting_never_open_test_content(self):
         records = [{"game_id": str(index), "sha256": f"{index:064x}",
-                    "played_at": f"2026-01-01T00:00:{index:02d}+00:00", "source": "test",
+                    "played_at": f"2026-01-01T00:00:{index:02d}+00:00", "source": "agarilab-selfplay",
+                    "trace_path": f"{index}.trace.jsonl",
                     "rules": "4p-red-half/tenhou", "usage_basis": "test", "validation": "engine-verified"}
                    for index in range(20)]
         manifest = make_split(records)
@@ -130,7 +132,9 @@ class CoverageTests(unittest.TestCase):
             self.assertTrue(replay)
             self.assertNotIn(record, manifest["partitions"]["test"])
             visited.append(record)
-            return {"engine_version": "0.4.10"}
+            return {"engine_version": "0.4.10", "engine_binary_sha256": engine_identity()["binary_sha256"],
+                    "method": "seeded-action-trace-v1", "producer_code": {
+                        "package": "agari-kit", "version": "0.1.0", "source_sha256": "a" * 64}}
         with tempfile.TemporaryDirectory() as directory, patch("agari_research.data.verify_record", side_effect=verify):
             storage = Storage(Path(directory))
             split = storage.path("split.json")
@@ -250,6 +254,12 @@ class CoverageTests(unittest.TestCase):
                 self.assertEqual([row["batch_samples"] for row in rows], [2, 2, 1, 2, 2, 1])
                 self.assertEqual(rows[-1]["validation_samples"], 5)
                 self.assertEqual(rows[-1]["validation_scope"], "full")
+            legacy = torch.load(checkpoint, weights_only=True)
+            legacy.pop("sample_semantics_version")
+            old_checkpoint = storage.path("legacy.pt")
+            atomic_torch_save(legacy, old_checkpoint)
+            with self.assertRaisesRegex(ValueError, "sample_semantics_version"):
+                run_training(config, dataset, storage, run_name="resume", resume=old_checkpoint)
 
 
 if __name__ == "__main__":

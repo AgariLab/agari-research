@@ -23,6 +23,7 @@ from agari_research.models.grp_model import RankPredictor
 from agari_research.models.q_network import QNetwork
 from agari_research.runtime import runtime_provenance
 from agari_research.training import implementation_sha256
+from agari_research.trace_samples import SAMPLE_SEMANTICS_VERSION
 
 
 class ValidationOnlyDataset(FrozenDataset):
@@ -120,6 +121,7 @@ def main():
     if runtime != runtime_provenance() or implementation != implementation_sha256():
         raise ValueError("Evaluation runtime or source changed during validation")
     report = {"status": "complete", "scope": "all samples in the full validation partition",
+              "sample_semantics_version": SAMPLE_SEMANTICS_VERSION,
               "dataset_sha256": dataset.sha256, "validation_games": len(dataset.records("validation")),
               "train_content_read": False, "test_content_read": False, "batch_size": args.batch_size,
               "models": {name: {"path": str(path.relative_to(storage.root)), "sha256": hashes[name],
