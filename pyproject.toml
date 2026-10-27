@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=77.0.3,<82"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agari-research"
+version = "0.1.0"
+description = "AgariLab reproducible Riichi AI experiments"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+dependencies = [
+    "agari-kit==0.1.0",
+    "numpy==2.4.1",
+    "torch==2.9.1",
+    "tensorboard==2.20.0",
+]
+
+[project.scripts]
+agari-train = "agari_research.cli:main"
+
+[tool.uv.sources]
+agari-kit = { path = "../agari-kit", editable = true }
+
+[[tool.uv.index]]
+name = "tsinghua"
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+default = true
+
+[tool.setuptools.packages.find]
+where = ["src"]

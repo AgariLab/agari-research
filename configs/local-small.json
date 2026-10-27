@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "seed": 2026,
+  "device": "cpu",
+  "torch_threads": 1,
+  "model": {
+    "in_channels": 74,
+    "num_actions": 82,
+    "conv_channels": 32,
+    "num_blocks": 2,
+    "fc_dim": 128,
+    "tile_dim": 34,
+    "aux_dims": 4
+  },
+  "pts_weight": [
+    6.0,
+    4.0,
+    2.0,
+    0.0
+  ],
+  "grp": {
+    "steps": 100,
+    "batch_size": 32,
+    "lr": 0.0005,
+    "eta_min": 1e-07
+  },
+  "cql": {
+    "steps": 200,
+    "batch_size": 64,
+    "lr": 0.0005,
+    "alpha": 5.0,
+    "gamma": 1.0,
+    "weight_decay": 0.1,
+    "aux_weight": 0.2
+  },
+  "ppo": {
+    "steps": 4,
+    "hanchan_per_update": 1,
+    "batch_size": 64,
+    "lr": 1e-05,
+    "gamma": 1.0,
+    "gae_lambda": 0.95,
+    "ppo_clip": 0.02,
+    "epochs": 2,
+    "value_coef": 0.5,
+    "entropy_coef": 0.001,
+    "max_grad_norm": 0.5,
+    "weight_decay": 0.1,
+    "alpha_kl": 0.1,
+    "alpha_kl_warmup_steps": 50
+  }
+}

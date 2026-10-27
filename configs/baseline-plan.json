@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "status": "local-smoke-trained-not-strength-accepted",
+  "upstream": {
+    "repository": "https://github.com/smly/RiichiEnv",
+    "reference": "v0.4.10",
+    "verified_commit": "479c1faeb33d082965eef8198f63261a79c0fce3",
+    "verification_source": "https://github.com/smly/RiichiEnv/releases/tag/v0.4.10",
+    "local_git_verification": "verified by git ls-remote tag and local rev-parse HEAD",
+    "license": "Apache-2.0"
+  },
+  "rules": {
+    "game_mode": "4p-red-half",
+    "preset": "tenhou"
+  },
+  "stages": [
+    "grp",
+    "cql",
+    "ppo"
+  ],
+  "local": {
+    "device": "cpu",
+    "seed": 2026,
+    "workers": 1,
+    "torch_threads": 1
+  },
+  "acceptance": {
+    "resume_checkpoint": true,
+    "export_agent": true,
+    "reliability_hanchan": 1000,
+    "ranked_games": 100
+  },
+  "reproduction": {
+    "implementation": "GRP/MC-CQL/PPO local adaptation validated",
+    "training": "20-game verified split: smoke and local-small complete; strength not accepted",
+    "strength": "pending independent evaluation and larger training"
+  },
+  "evidence": {
+    "dataset_sha256": "8848a4fcc1522526130b4d86f383bb0f2a75fe31a59b977056d39b7f73049760",
+    "dataset_games": 20,
+    "split": "datasets/manifests/smoke-v1/split-v1.json",
+    "run": "runs/baseline-smoke-v2/result.json",
+    "exports": "models/baseline-smoke-v2",
+    "resume": "runs/baseline-resume-v2/resume-equivalence.json",
+    "resume_tensors_exactly_equal": 259,
+    "unit_tests": 9,
+    "implementation_sha256": "284f46a503abfb9a9a765b44fc06dcda29686896722a9d55e96bc179f3598746",
+    "local_small": {
+      "run": "runs/baseline-local-v1/result.json",
+      "exports": "models/baseline-local-v1",
+      "updates": {
+        "grp": 100,
+        "cql": 200,
+        "ppo": 4
+      },
+      "resume": "runs/baseline-local-resume-v1/resume-equivalence.json",
+      "resume_tensors_exactly_equal": 385,
+      "grp_validation_accuracy": 0.0,
+      "validation_games": 1,
+      "reward_model_quality": "not-accepted"
+    },
+    "device_benchmark": "runs/baseline-smoke-v2/device-benchmark.json",
+    "online_worker_preflight": {
+      "report": "runs/baseline-local-v1-online-preflight/report-with-red-probes.json",
+      "complete_east_games": 4,
+      "game_requests": 445,
+      "forced_red_probes": 3,
+      "worker_reach_actions": 2,
+      "illegal_actions": 0,
+      "timeouts": 0,
+      "network_connected": false,
+      "server_validation": "not-performed"
+    }
+  }
+}

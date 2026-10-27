@@ -1,0 +1,36 @@
+name: checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agari-research
+    env:
+      AGARILAB_STORAGE_ROOT: ${{ github.workspace }}/.ci-storage
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: agari-research
+      - uses: actions/checkout@v4
+        with:
+          repository: AgariLab/agari-kit
+          ref: c22c416a8f11da710c865f43228fe4379ab222ed
+          path: agari-kit
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.6'
+          enable-cache: false
+      - name: Require reviewed dependency lockfile
+        run: test -f uv.lock
+      - name: Install complete frozen training environment
+        run: python ../agari-kit/scripts/with_storage.py uv sync --frozen
+      - name: Verify dependency consistency
+        run: python ../agari-kit/scripts/with_storage.py uv lock --check --offline
+      - name: Test training losses, checkpoints, data verification and native Agent
+        run: python ../agari-kit/scripts/with_storage.py uv run --frozen python -m unittest discover -s tests -v

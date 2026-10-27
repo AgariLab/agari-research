@@ -1,0 +1,54 @@
+{
+  "repository": "https://github.com/smly/RiichiEnv",
+  "commit": "479c1faeb33d082965eef8198f63261a79c0fce3",
+  "files": [
+    {
+      "file": "riichienv-ml/src/riichienv_ml/models/backbone.py",
+      "sha256": "28a8a7304b14d923480fdff326f6d8e61617371e3a75ea328549afbe089319fb"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/models/q_network.py",
+      "sha256": "1bac79b85a62b9cb5e8dc116e040b90234f2e6c8305a7c56e1ac56137125c927"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/models/actor_critic.py",
+      "sha256": "64a5bd31cf78780d89d35196d106a85739e9268f00d6fdc1087a533c40450554"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/models/grp_model.py",
+      "sha256": "042d767412c42a186353d2ce2a19592d4511c6e4b885c4229206305d9ed09ab8"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/datasets/mjai_logs.py",
+      "sha256": "2197246d706230a7eecd7e2cb714e8f052630a60af809fab58cdbd0572fc9f89"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/datasets/grp_dataset.py",
+      "sha256": "d6772c20e955d65f02af8d73e5535f3e22a389973db93c89fb706ea2de9d4f2d"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/trainers/grp.py",
+      "sha256": "ce38287993291a183b9f7e5de90fb1ee41e6306b4ca8f06dc76bcb1e776d197d"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/trainers/cql.py",
+      "sha256": "a5fc4348485c5fbbab478f81e0ab5ce7ee9d6371ad24f4edd6b5140e12fb4511"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/trainers/bc_logs.py",
+      "sha256": "044d587e01ed7bdb3efa94aca9b0b20c56c62d6c08a83eab5525913c3f612a98"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/trainers/_ppo_worker.py",
+      "sha256": "3e556beb68a627ef2a671f4c610c992cf387d4345cd4293d40ee2489dca644da"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/trainers/_ppo_learner.py",
+      "sha256": "c99be27df27bf62aea7d92f835a32131a1b92d04db21e7fa929dd50b43b6aebb"
+    },
+    {
+      "file": "riichienv-ml/src/riichienv_ml/trainers/ppo.py",
+      "sha256": "477685ff7a706854813781d15fc7ca68ba3b07c185074843eaec313b7a59041a"
+    }
+  ]
+}
