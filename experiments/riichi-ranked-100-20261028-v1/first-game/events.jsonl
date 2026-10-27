@@ -1,0 +1,256 @@
+{"event": "start_game", "seat": 0, "game_index": 0}
+{"event": "decision", "request_id": 1, "latency_ms": 7.523666950874031, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 1, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 5, "latency_ms": 6.688374909572303, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 5, "status": "accepted", "elapsed_ms": 310, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 9, "latency_ms": 6.467083934694529, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 9, "status": "accepted", "elapsed_ms": 307, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 12, "latency_ms": 6.028999923728406, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 12, "status": "accepted", "elapsed_ms": 299, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 14, "latency_ms": 6.558540975674987, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 14, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 19, "latency_ms": 6.58629194367677, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 19, "status": "accepted", "elapsed_ms": 307, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 28, "latency_ms": 6.362624932080507, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 28, "status": "accepted", "elapsed_ms": 299, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 31, "latency_ms": 6.099291029386222, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 31, "status": "accepted", "elapsed_ms": 309, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 35, "latency_ms": 6.693040952086449, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 35, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 39, "latency_ms": 6.6032500471919775, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 39, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 44, "latency_ms": 6.6003750544041395, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 44, "status": "accepted", "elapsed_ms": 307, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 50, "latency_ms": 5.969083053059876, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 50, "status": "accepted", "elapsed_ms": 300, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 55, "latency_ms": 6.353042088449001, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 55, "status": "accepted", "elapsed_ms": 299, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 56, "latency_ms": 6.202375050634146, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 56, "status": "accepted", "elapsed_ms": 301, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 62, "latency_ms": 5.8626249665394425, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 62, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 67, "latency_ms": 6.5955419559031725, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 67, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 72, "latency_ms": 6.523624993860722, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 72, "status": "accepted", "elapsed_ms": 302, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 79, "latency_ms": 5.948874983005226, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 79, "status": "accepted", "elapsed_ms": 300, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 82, "latency_ms": 5.888125044293702, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 82, "status": "accepted", "elapsed_ms": 298, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 83, "latency_ms": 6.194291054271162, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 83, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 89, "latency_ms": 6.026624934747815, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 89, "status": "accepted", "elapsed_ms": 302, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 90, "latency_ms": 6.584458984434605, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 90, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 94, "latency_ms": 5.886040977202356, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 94, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 103, "latency_ms": 5.915165995247662, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 103, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 108, "latency_ms": 6.315832957625389, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 108, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 112, "latency_ms": 6.240749964490533, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 112, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 116, "latency_ms": 6.08183303847909, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 116, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 121, "latency_ms": 6.383083062246442, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 121, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 127, "latency_ms": 6.7059580469504, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 127, "status": "accepted", "elapsed_ms": 314, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 134, "latency_ms": 6.557333981618285, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 134, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 138, "latency_ms": 6.496709072962403, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 138, "status": "accepted", "elapsed_ms": 300, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 139, "latency_ms": 6.194417015649378, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 139, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 143, "latency_ms": 6.184166995808482, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 143, "status": "accepted", "elapsed_ms": 303, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 149, "latency_ms": 5.670750048011541, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 149, "status": "accepted", "elapsed_ms": 313, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 153, "latency_ms": 6.847791955806315, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 153, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 154, "latency_ms": 5.916791036725044, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 154, "status": "accepted", "elapsed_ms": 307, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 159, "latency_ms": 6.348625058308244, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 159, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 160, "latency_ms": 6.086499895900488, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 160, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 165, "latency_ms": 6.730832974426448, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 165, "status": "accepted", "elapsed_ms": 307, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 168, "latency_ms": 6.536833010613918, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 168, "status": "accepted", "elapsed_ms": 301, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 170, "latency_ms": 6.405291031114757, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 170, "status": "accepted", "elapsed_ms": 298, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 171, "latency_ms": 6.1272080056369305, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 171, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 176, "latency_ms": 6.270332960411906, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 176, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 180, "latency_ms": 6.225291988812387, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 180, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 185, "latency_ms": 6.5463329665362835, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 185, "status": "accepted", "elapsed_ms": 317, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 190, "latency_ms": 6.064041052013636, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 190, "status": "accepted", "elapsed_ms": 298, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 191, "latency_ms": 6.510374951176345, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 191, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 195, "latency_ms": 6.285291980020702, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 195, "status": "accepted", "elapsed_ms": 307, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 198, "latency_ms": 5.799249978736043, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 198, "status": "accepted", "elapsed_ms": 299, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 200, "latency_ms": 5.918333074077964, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 200, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 206, "latency_ms": 5.971750011667609, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 206, "status": "accepted", "elapsed_ms": 433, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 210, "latency_ms": 6.592959049157798, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 210, "status": "accepted", "elapsed_ms": 301, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 215, "latency_ms": 6.5272500505670905, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 215, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 219, "latency_ms": 6.199166062287986, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 219, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 223, "latency_ms": 6.626541959121823, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 223, "status": "accepted", "elapsed_ms": 301, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 228, "latency_ms": 6.00575003772974, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 228, "status": "accepted", "elapsed_ms": 303, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 232, "latency_ms": 5.9969170251861215, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 232, "status": "accepted", "elapsed_ms": 300, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 238, "latency_ms": 6.177040981128812, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 238, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 242, "latency_ms": 6.454041111283004, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 242, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 246, "latency_ms": 5.816500051878393, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 246, "status": "accepted", "elapsed_ms": 678, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 251, "latency_ms": 6.498750066384673, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 251, "status": "accepted", "elapsed_ms": 299, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 257, "latency_ms": 6.336375023238361, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 257, "status": "accepted", "elapsed_ms": 311, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 259, "latency_ms": 6.4279589569196105, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 259, "status": "accepted", "elapsed_ms": 308, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 263, "latency_ms": 5.925375036895275, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 263, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 267, "latency_ms": 6.472375011071563, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 267, "status": "accepted", "elapsed_ms": 300, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 268, "latency_ms": 5.895916023291647, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 268, "status": "accepted", "elapsed_ms": 298, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 270, "latency_ms": 6.395999924279749, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 270, "status": "accepted", "elapsed_ms": 298, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 274, "latency_ms": 5.987667012959719, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 274, "status": "accepted", "elapsed_ms": 302, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 279, "latency_ms": 6.521916016936302, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 279, "status": "accepted", "elapsed_ms": 307, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 284, "latency_ms": 6.6875830525532365, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 284, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 291, "latency_ms": 6.68570795096457, "action_type": "reach", "game_index": 0}
+{"event": "action_ack", "request_id": 291, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 292, "latency_ms": 6.260707974433899, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 292, "status": "accepted", "elapsed_ms": 298, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 297, "latency_ms": 6.358291953802109, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 297, "status": "accepted", "elapsed_ms": 299, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 301, "latency_ms": 6.330457981675863, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 301, "status": "accepted", "elapsed_ms": 299, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 307, "latency_ms": 5.937749985605478, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 307, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 308, "latency_ms": 6.366583984345198, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 308, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 312, "latency_ms": 5.965417018160224, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 312, "status": "accepted", "elapsed_ms": 301, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 317, "latency_ms": 6.615166086703539, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 317, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 322, "latency_ms": 6.284708040766418, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 322, "status": "accepted", "elapsed_ms": 309, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 328, "latency_ms": 6.674458039924502, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 328, "status": "accepted", "elapsed_ms": 302, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 334, "latency_ms": 6.277125095948577, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 334, "status": "accepted", "elapsed_ms": 302, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 338, "latency_ms": 6.550249992869794, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 338, "status": "accepted", "elapsed_ms": 313, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 341, "latency_ms": 6.445875042118132, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 341, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 344, "latency_ms": 6.053291959688067, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 344, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 348, "latency_ms": 6.161708035506308, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 348, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 353, "latency_ms": 6.484042038209736, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 353, "status": "accepted", "elapsed_ms": 677, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 358, "latency_ms": 6.453667068853974, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 358, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 363, "latency_ms": 6.040666019544005, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 363, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 368, "latency_ms": 6.645333021879196, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 368, "status": "accepted", "elapsed_ms": 308, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 371, "latency_ms": 6.495082983747125, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 371, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 374, "latency_ms": 6.5742910373955965, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 374, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 380, "latency_ms": 6.369833019562066, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 380, "status": "accepted", "elapsed_ms": 307, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 385, "latency_ms": 6.061290972866118, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 385, "status": "accepted", "elapsed_ms": 686, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 390, "latency_ms": 6.200958043336868, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 390, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 397, "latency_ms": 6.523582967929542, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 397, "status": "accepted", "elapsed_ms": 308, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 401, "latency_ms": 5.907958024181426, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 401, "status": "accepted", "elapsed_ms": 318, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 405, "latency_ms": 6.306957919150591, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 405, "status": "accepted", "elapsed_ms": 312, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 409, "latency_ms": 6.615624995902181, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 409, "status": "accepted", "elapsed_ms": 309, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 411, "latency_ms": 6.486458005383611, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 411, "status": "accepted", "elapsed_ms": 331, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 415, "latency_ms": 6.5131670562550426, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 415, "status": "accepted", "elapsed_ms": 309, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 420, "latency_ms": 6.022042012773454, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 420, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 424, "latency_ms": 6.263624993152916, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 424, "status": "accepted", "elapsed_ms": 310, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 426, "latency_ms": 5.930584040470421, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 426, "status": "accepted", "elapsed_ms": 303, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 430, "latency_ms": 6.359332939609885, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 430, "status": "accepted", "elapsed_ms": 315, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 436, "latency_ms": 5.867541069164872, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 436, "status": "accepted", "elapsed_ms": 308, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 442, "latency_ms": 6.588374963030219, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 442, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 446, "latency_ms": 5.8564579812809825, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 446, "status": "accepted", "elapsed_ms": 306, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 450, "latency_ms": 6.478583090938628, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 450, "status": "accepted", "elapsed_ms": 308, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 455, "latency_ms": 6.671541021205485, "action_type": "reach", "game_index": 0}
+{"event": "action_ack", "request_id": 455, "status": "accepted", "elapsed_ms": 311, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 456, "latency_ms": 6.2303750310093164, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 456, "status": "accepted", "elapsed_ms": 308, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 462, "latency_ms": 6.335209007374942, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 462, "status": "accepted", "elapsed_ms": 308, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 468, "latency_ms": 6.222583935596049, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 468, "status": "accepted", "elapsed_ms": 302, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 472, "latency_ms": 6.025040987879038, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 472, "status": "accepted", "elapsed_ms": 303, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 476, "latency_ms": 6.362708983942866, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 476, "status": "accepted", "elapsed_ms": 300, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 481, "latency_ms": 6.2788330251351, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 481, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 482, "latency_ms": 6.470459047704935, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 482, "status": "accepted", "elapsed_ms": 302, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 486, "latency_ms": 6.312042009085417, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 486, "status": "accepted", "elapsed_ms": 311, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 492, "latency_ms": 6.24270795378834, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 492, "status": "accepted", "elapsed_ms": 299, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 493, "latency_ms": 6.47679204121232, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 493, "status": "accepted", "elapsed_ms": 302, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 497, "latency_ms": 6.171207991428673, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 497, "status": "accepted", "elapsed_ms": 308, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 502, "latency_ms": 6.617083097808063, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 502, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 506, "latency_ms": 6.686249980702996, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 506, "status": "accepted", "elapsed_ms": 303, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 511, "latency_ms": 6.36570795904845, "action_type": "none", "game_index": 0}
+{"event": "action_ack", "request_id": 511, "status": "accepted", "elapsed_ms": 310, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 512, "latency_ms": 6.4461249858140945, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 512, "status": "accepted", "elapsed_ms": 305, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 517, "latency_ms": 6.49325002450496, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 517, "status": "accepted", "elapsed_ms": 311, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 521, "latency_ms": 5.879458971321583, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 521, "status": "accepted", "elapsed_ms": 304, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "decision", "request_id": 526, "latency_ms": 6.260249996557832, "action_type": "dahai", "game_index": 0}
+{"event": "action_ack", "request_id": 526, "status": "accepted", "elapsed_ms": 314, "bank_consumed_ms": 0, "bank_ms": 15000, "game_index": 0}
+{"event": "end_game", "scores": [-300, 14600, 46100, 39600], "game_index": 0}

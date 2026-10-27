@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "run": "riichi-validation-v1",
+  "archived_on": "2026-10-28",
+  "source_directory": "/Volumes/新加卷/AgariLab/runs/riichi-validation-v1",
+  "result": {
+    "status": "complete",
+    "validation_passed": true,
+    "games_completed": 1,
+    "mode": "validate",
+    "seat": 0,
+    "scores": [
+      49100,
+      5400,
+      22100,
+      23400
+    ],
+    "seat_rank": 1,
+    "degraded_games": 0,
+    "counts": {
+      "requests": 120,
+      "replies_prepared": 120,
+      "replies_sent": 120,
+      "ack_accepted": 120
+    }
+  },
+  "event_audit": {
+    "lines": 243,
+    "event_counts": {
+      "start_game": 1,
+      "decision": 120,
+      "action_ack": 120,
+      "end_game": 1,
+      "validation_result": 1
+    },
+    "decision_action_counts": {
+      "dahai": 85,
+      "none": 31,
+      "reach": 2,
+      "hora": 2
+    },
+    "ack_status_counts": {
+      "accepted": 120
+    },
+    "unique_decision_request_ids": 120,
+    "decisions_and_acks_match_in_order": true,
+    "local_timeout_events": 0,
+    "defaulted_acks": 0,
+    "rejected_acks": 0,
+    "unparseable_acks": 0,
+    "stale_acks": 0
+  },
+  "timing": {
+    "unit": "ms",
+    "quantile_method": "linear interpolation at (n - 1) * p, with sorted observations",
+    "local_decision": {
+      "scope": "From client socket.recv receipt timestamp to response preparation/decision emission; includes queueing, parsing, worker IPC/inference and legal-action checks; excludes model loading, socket.send and network round trip.",
+      "statistics": {
+        "count": 120,
+        "min": 5.619790987111628,
+        "mean": 6.32140972011257,
+        "p50": 6.396999990101904,
+        "p95": 6.581626780098304,
+        "p99": 6.687714729923755,
+        "max": 6.733707967214286
+      }
+    },
+    "server_ack_elapsed": {
+      "scope": "Server-reported action_ack.elapsed_ms; official server clock starts when request_action is sent, including request/response network round trip. Not a client-measured ack RTT or pure inference time.",
+      "statistics": {
+        "count": 120,
+        "min": 294,
+        "mean": 342.625,
+        "p50": 300.0,
+        "p95": 665.2499999999998,
+        "p99": 817.81,
+        "max": 1012
+      }
+    },
+    "bank_consumed_ms_total": 0,
+    "bank_ms_observed": [
+      15000
+    ]
+  },
+  "provenance_verification": {
+    "model_weights": {
+      "sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096",
+      "bytes": 701520,
+      "matches_manifest": true
+    },
+    "agent_descriptor": {
+      "sha256": "51495822b3af9c6aff6f11a59aa3db0c1380ed4238088b22d4bc2741e052a381",
+      "bytes": 219,
+      "matches_manifest": true
+    },
+    "agari_kit_source": {
+      "sha256": "e1991979d79a373ca54050786616f57ded571a8d20de326a6e66982244dd1979",
+      "python_files": 19,
+      "matches_manifest": true
+    },
+    "agari_research_source": {
+      "sha256": "43eabb39e1518ec550f8692bce79224060f07aa280f12a254b990ccc2c3e7e21",
+      "python_files": 17,
+      "matches_manifest": true
+    }
+  },
+  "engine_verification": {
+    "environment": "agari-research/.venv",
+    "version": "0.4.10",
+    "binary_sha256": "169c8c2c53bdace01e4ca319f54050565fe728a5b1b2fc6b7f3046738887071d",
+    "matches_manifest": true
+  },
+  "copy_verification": {
+    "manifest.json": {
+      "bytes": 2242,
+      "sha256": "eeda31536b58f9fbc061ee18d63235bb96ae668e4c242fa55b8f4e5ff07ea3e7",
+      "matches_read_only_source": true
+    },
+    "games.jsonl": {
+      "bytes": 252,
+      "sha256": "d380a1ea587494f722bdf3b046c10dc93e06654b354ee6bf2749bc38ff655aa8",
+      "matches_read_only_source": true
+    },
+    "events.jsonl": {
+      "bytes": 30945,
+      "sha256": "e4ad2b1a4fd136697eadacaa378cd8201caf3965a08e55bfbab50bb61cb3be5b",
+      "matches_read_only_source": true
+    },
+    "report.json": {
+      "bytes": 221,
+      "sha256": "5e83aab87e65a23b7c776a6ba335cbddaa6ce13e279adf121b3d2a215493bcde",
+      "matches_read_only_source": true
+    }
+  },
+  "credential_pattern_scan": {
+    "scope": "Only the four evidence files; no credential or environment values read.",
+    "patterns": [
+      "JWT-shaped eyJ header with three base64url segments",
+      "PEM private-key header"
+    ],
+    "findings": {
+      "manifest.json": {
+        "jwt": 0,
+        "private_key": 0
+      },
+      "games.jsonl": {
+        "jwt": 0,
+        "private_key": 0
+      },
+      "events.jsonl": {
+        "jwt": 0,
+        "private_key": 0
+      },
+      "report.json": {
+        "jwt": 0,
+        "private_key": 0
+      }
+    },
+    "limitation": "Static pattern scan only; not a general secret-detection guarantee."
+  },
+  "session_context": {
+    "source": "Active status confirmed by user; not independently queried during archival.",
+    "bot_active_confirmed_by_user": true,
+    "validation_rerun_during_archival": false,
+    "ranked_scope": "Excluded from this fixed validation report.",
+    "ranked_report": "../riichi-ranked-100-20261028-v1/README.md"
+  },
+  "official_references": [
+    {
+      "url": "https://riichi.dev/docs/validation",
+      "accessed_on": "2026-10-28"
+    },
+    {
+      "url": "https://riichi.dev/docs/protocol",
+      "accessed_on": "2026-10-28"
+    }
+  ],
+  "limitations": [
+    "One validation East-only game against three platform-internal tsumogiri bots; no evidence of ranked strength.",
+    "Bounded transport records, not a full MJAI replay; disconnection/chombo success follows the server validation verdict.",
+    "A first-place score in this validation game is descriptive, not a statistically supported playing-strength result.",
+    "Ranked progress and results are tracked separately; this fixed validation report makes no ranked completion or playing-strength claim."
+  ]
+}

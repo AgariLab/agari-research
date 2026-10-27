@@ -341,6 +341,30 @@
         -0.0625
       ],
       "interpretation": "Exploratory four-seed comparison using two legacy-label models; not corrected-model results or formal strength acceptance"
+    },
+    "riichi_validation": {
+      "report": "experiments/riichi-validation-20261028-v1/README.md",
+      "run": "runs/riichi-validation-v1",
+      "server_validation": "passed",
+      "validation_passed": true,
+      "network_connected": true,
+      "requests": 120,
+      "ack_accepted": 120,
+      "degraded_games": 0,
+      "bot_status_user_confirmed": "active",
+      "model": "full-coverage-trace-1000-v1/ppo",
+      "ppo_weights_sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096"
+    },
+    "riichi_ranked_campaign": {
+      "report": "experiments/riichi-ranked-100-20261028-v1/README.md",
+      "target_games": 100,
+      "status": "running",
+      "first_run": "runs/riichi-ranked-first-v1",
+      "remaining99_run": "runs/riichi-ranked-campaign-remaining99-v1",
+      "supervisor_kit_commit": "e086d9f308736a5422d4a63ace35f07b5d90eeb9",
+      "supervisor_sha256": "cd570e8abc1b5b028661f6dfa7881ebdea7c650db11b7d5a0c7fd53adbe4aede",
+      "source_changed": false,
+      "validation_repeated": false
     }
   },
   "sample_semantics_version": "seeded-trace-player-decisions-v1"

@@ -168,7 +168,7 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python scripts/vali
 平均顺位从 2.287 降至 1.651；配对种子组差值的 95% 区间为 −0.699 至 −0.578，均无非法动作。
 这支持该弱对手池上的改善，尚未通过正式晋级和强对手棋力验收。
 真实小数据的跨 epoch、跨阶段中断恢复再次比较 259 个张量及全部检查点状态，精确一致。
-新模型也完成四座位本地协议预检，线上验证仍待 Bot Token。逐场统计、覆盖与恢复证据保存在上述实验目录。
+该旧模型也完成四座位本地协议预检；当时尚未连接线上服务。逐场统计、覆盖与恢复证据保存在对应历史实验目录。
 
 以上为旧标签历史结果。修复后 `full-coverage-trace-1000-v1` 完整消费相同 900 场的
 36,228 个 GRP、525,853 个真实行为策略样本，更新数为 1,133/8,217/4；
@@ -177,7 +177,10 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python scripts/vali
 新 PPO 本地协议预检完成四个东风局、471 次请求和三种赤五探针，零非法动作和超时。
 固定弱对手池 1,000 半庄无非法动作；相对旧标签整轮模型的平均顺位差 +0.011，
 配对 95% 区间 [−0.034, +0.059]，尚无明确方向性结论。
-当前服务端验证与线上排位仍为 0。
+随后已通过一次真实 riichi.dev 验证：120 次动作全部 accepted，服务端返回 `passed=true`，用户确认 Bot active。
+首场正式排位已完成，剩余 99 场正由逐场健康监督脚本执行；验证通过不代表棋力验收。
+证据见 [真实平台验证](experiments/riichi-validation-20261028-v1/README.md) 和
+[首批 100 场排位](experiments/riichi-ranked-100-20261028-v1/README.md)。
 
 `scripts/benchmark_devices.py` 另测得本机 local-small(batch64) 的合成 CQL 更新中位耗时：
 CPU 13.67ms、MPS 5.63ms。此测量仅含网络训练计算，不含解析或自博弈；尚未以完整 MPS 训练验收替代 CPU 结果。

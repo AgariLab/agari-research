@@ -1,0 +1,1 @@
+{"mode": "ranked", "status": "complete", "seat": 0, "scores": [-300, 14600, 46100, 39600], "validation_passed": null, "degraded": false, "counts": {"requests": 127, "replies_prepared": 127, "replies_sent": 127, "ack_accepted": 127}, "game_index": 0}

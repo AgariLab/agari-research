@@ -1,0 +1,1 @@
+{"mode": "validate", "status": "complete", "seat": 0, "scores": [49100, 5400, 22100, 23400], "validation_passed": true, "degraded": false, "counts": {"requests": 120, "replies_prepared": 120, "replies_sent": 120, "ack_accepted": 120}, "game_index": 0}

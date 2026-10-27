@@ -1,0 +1,12 @@
+{
+  "games_requested": 1,
+  "games_completed": 1,
+  "validation_passed": true,
+  "degraded_games": 0,
+  "counts": {
+    "ack_accepted": 120,
+    "replies_prepared": 120,
+    "replies_sent": 120,
+    "requests": 120
+  }
+}
