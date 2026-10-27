@@ -25,13 +25,14 @@ from agari_kit.engine import require_engine
 from agari_kit.mjai import canonical_json
 from agari_kit.storage import Storage
 
-from .data import BatchStream, FrozenDataset
+from .data import BatchStream, EpochBatchStream, FrozenDataset
 from .features import ENCODING_VERSION, UPSTREAM_COMMIT
 from .losses import cql_loss, ppo_loss
 from .manifest import file_sha256
 from .models.actor_critic import ActorCriticNetwork
 from .models.grp_model import RankPredictor
 from .models.q_network import QNetwork
+from .planning import build_training_plan, coverage, expected_samples
 from .rollout import collect_rollout
 from .runtime import require_matching_runtime, runtime_provenance
 
@@ -65,14 +66,24 @@ def validate_config(config: dict) -> None:
         raise ValueError("Four finite rank reward weights are required")
     for stage in STAGES:
         settings = config[stage]
-        if any(type(settings[key]) is not int or settings[key] < 1 for key in ("steps", "batch_size")):
-            raise ValueError("Training steps and batch sizes must be positive integers")
+        budgets = [key for key in ("steps", "epochs") if key in settings] if stage != "ppo" else ["steps"]
+        if len(budgets) != 1:
+            raise ValueError("GRP/CQL require exactly one budget: steps or epochs")
+        if any(type(settings.get(key)) is not int or settings[key] < 1 for key in (*budgets, "batch_size")):
+            raise ValueError("Training budgets and batch sizes must be positive integers")
         if not 0 < settings["lr"] < 1:
             raise ValueError("Invalid learning rate")
     if any(not 0 < config[stage]["gamma"] <= 1 for stage in ("cql", "ppo")):
         raise ValueError("Discount factors must be in (0, 1]")
     if config["ppo"]["hanchan_per_update"] < 1 or config["ppo"]["epochs"] < 1:
         raise ValueError("PPO requires positive complete-game and epoch counts")
+    interval = config.get("checkpoint_interval_updates", 1)
+    validation = config.get("validation", {})
+    batch_size, limit = validation.get("batch_size", 128), validation.get("max_samples")
+    if type(interval) is not int or interval < 1 or type(batch_size) is not int or batch_size < 1:
+        raise ValueError("Checkpoint interval and validation batch size must be positive integers")
+    if limit is not None and (type(limit) is not int or limit < 1):
+        raise ValueError("Validation max_samples must be null or a positive integer")
 
 
 def rng_state() -> dict:
@@ -127,26 +138,37 @@ def scalar_metrics(values: dict) -> dict:
 
 
 def validation_metrics(stage: str, dataset, models, config) -> dict:
-    """Fixed first 128 held-out samples, never the test partition."""
+    """Stream the held-out partition with sample-weighted metrics; never test."""
     model = models[stage]
     model.eval()
     factory = dataset.grp_samples("validation") if stage == "grp" else dataset.cql_samples(
         "validation", models["grp"], config)
-    samples = list(itertools.islice(factory, 128))
-    if not samples:
-        raise ValueError("Validation partition has no usable samples")
-    batch = [torch.stack(values).to(config["device"]) for values in zip(*samples)]
+    settings = config.get("validation", {})
+    limit = settings.get("max_samples")
+    if limit is not None:
+        factory = itertools.islice(factory, limit)
+    factory = iter(factory)
+    totals, count = {}, 0
     with torch.inference_mode():
-        if stage == "grp":
-            logits = model(batch[0])
-            loss = F.cross_entropy(logits, batch[1])
-            result = {"validation_loss": loss, "validation_accuracy": (logits.argmax(1) == batch[1]).float().mean()}
-        else:
-            q, aux = model.forward_with_aux(batch[0])
-            loss, _ = cql_loss(q, aux, *batch[1:], alpha=config["cql"]["alpha"],
-                               aux_weight=config["cql"]["aux_weight"])
-            result = {"validation_loss": loss}
-    return dict(scalar_metrics(result), validation_samples=len(samples))
+        while samples := list(itertools.islice(factory, settings.get("batch_size", 128))):
+            batch = [torch.stack(values).to(config["device"]) for values in zip(*samples)]
+            if stage == "grp":
+                logits = model(batch[0])
+                loss = F.cross_entropy(logits, batch[1])
+                result = {"validation_loss": loss,
+                          "validation_accuracy": (logits.argmax(1) == batch[1]).float().mean()}
+            else:
+                q, aux = model.forward_with_aux(batch[0])
+                loss, terms = cql_loss(q, aux, *batch[1:], alpha=config["cql"]["alpha"],
+                                       aux_weight=config["cql"]["aux_weight"])
+                result = dict(validation_loss=loss, **{f"validation_{key}": value for key, value in terms.items()})
+            for key, value in scalar_metrics(result).items():
+                totals[key] = totals.get(key, 0.0) + value * len(samples)
+            count += len(samples)
+    if not count:
+        raise ValueError("Validation partition has no usable samples")
+    return dict({key: value / count for key, value in totals.items()}, validation_samples=count,
+                validation_scope="full" if limit is None else "bounded", validation_sample_limit=limit)
 
 
 def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_name: str,
@@ -171,6 +193,11 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
         raise FileExistsError("Run already exists; use an explicit checkpoint to resume or a new run name")
     for path in (run_dir, checkpoint_dir, export_dir):
         path.mkdir(parents=True, exist_ok=True)
+    runtime = runtime_provenance()
+    restored = torch.load(resume, map_location="cpu", weights_only=True) if resume is not None else None
+    if restored is not None:
+        require_matching_runtime(restored.get("runtime_provenance"), runtime)
+    plan = build_training_plan(config, dataset)
     models = {"grp": RankPredictor(), "cql": QNetwork(**config["model"]),
               "ppo": ActorCriticNetwork(**config["model"]), "reference": ActorCriticNetwork(**config["model"])}
     for model in models.values():
@@ -182,21 +209,23 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
         "ppo": torch.optim.AdamW(models["ppo"].parameters(), lr=config["ppo"]["lr"], weight_decay=config["ppo"]["weight_decay"]),
     }
     schedulers = {stage: torch.optim.lr_scheduler.CosineAnnealingLR(optimizers[stage],
-                  T_max=config[stage]["steps"], eta_min=config["grp"]["eta_min"])
+                  T_max=plan["stages"][stage]["target_updates"], eta_min=config["grp"]["eta_min"])
                   for stage in ("grp", "cql")}
     state = {"schema_version": 1, "config": config, "dataset_sha256": dataset.sha256,
              "implementation_sha256": implementation_sha256(), "encoding_version": ENCODING_VERSION,
              "engine_version": "0.4.10", "upstream_commit": UPSTREAM_COMMIT,
-             "runtime_provenance": runtime_provenance(),
+             "runtime_provenance": runtime, "training_plan": plan,
              "progress": {stage: 0 for stage in STAGES}, "samples_seen": {stage: 0 for stage in ("grp", "cql")},
              "ppo_initialized": False, "games_seen": 0, "run_name": run_name}
-    if resume is not None:
-        restored = torch.load(resume, map_location="cpu", weights_only=True)
-        require_matching_runtime(restored.get("runtime_provenance"), state["runtime_provenance"])
+    if restored is not None:
         for key in ("schema_version", "config", "dataset_sha256", "implementation_sha256", "encoding_version",
-                    "engine_version", "upstream_commit", "run_name"):
+                    "engine_version", "upstream_commit", "run_name", "training_plan"):
             if restored.get(key) != state[key]:
                 raise ValueError(f"Resume checkpoint mismatch: {key}")
+        for stage in ("grp", "cql"):
+            expected = expected_samples(plan["stages"][stage], restored["progress"][stage], config[stage]["batch_size"])
+            if restored["samples_seen"][stage] != expected:
+                raise ValueError(f"Resume checkpoint mismatch: {stage} sample cursor")
         for name, model in models.items():
             model.load_state_dict(restored["models"][name], strict=True)
         for name, optimizer in optimizers.items():
@@ -207,6 +236,8 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
         state = {key: value for key, value in restored.items() if key not in ("models", "optimizers", "schedulers", "rng")}
     write_json(run_dir / "config.json", config)
     write_json(run_dir / "dataset.json", dataset.manifest)
+    write_json(run_dir / "execution-plan.json", dict(plan=plan, runtime_provenance=runtime,
+                                                   implementation_sha256=state["implementation_sha256"]))
     writer = SummaryWriter(str(run_dir / "tensorboard"))
     checkpoint = checkpoint_dir / "latest.pt"
     invocation_updates = 0
@@ -217,13 +248,21 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
                        optimizers={name: optimizer.state_dict() for name, optimizer in optimizers.items()},
                        schedulers={name: scheduler.state_dict() for name, scheduler in schedulers.items()}, rng=rng_state())
         atomic_torch_save(payload, checkpoint)
+        write_json(run_dir / "coverage.json", {
+            "dataset_sha256": dataset.sha256, "training_plan_sha256": plan["sha256"],
+            "progress": state["progress"], "stages": {
+                stage: coverage(plan, stage, state["samples_seen"][stage], config["seed"], include_games=True)
+                for stage in ("grp", "cql")}})
+        writer.flush()
 
     def export(stage):
         destination = export_dir / f"{stage}.pt"
         payload = {key: state[key] for key in ("schema_version", "dataset_sha256", "implementation_sha256",
                                              "encoding_version", "engine_version", "upstream_commit", "runtime_provenance")}
         payload.update(kind=stage, model_config=config["model"], state_dict=models[stage].state_dict(),
-                       config=config, completed_updates=state["progress"][stage])
+                       config=config, completed_updates=state["progress"][stage], training_plan_sha256=plan["sha256"],
+                       training_coverage={name: coverage(plan, name, state["samples_seen"][name], config["seed"])
+                                          for name in ("grp", "cql")})
         atomic_torch_save(payload, destination)
         metadata = {key: value for key, value in payload.items() if key != "state_dict"}
         metadata.update(weights_sha256=file_sha256(destination), filename=destination.name)
@@ -242,14 +281,20 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
         for key, value in metrics.items():
             if isinstance(value, (float, int)):
                 writer.add_scalar(f"{stage}/{key}", value, step)
-        writer.flush()
 
     try:
         for stage in STAGES:
             settings = config[stage]
-            if state["progress"][stage] >= settings["steps"]:
+            stage_plan = plan["stages"][stage]
+            if state["progress"][stage] >= stage_plan["target_updates"]:
                 continue
-            if stage == "grp":
+            if stage in ("grp", "cql") and stage_plan["mode"] == "epochs":
+                factory = dataset.grp_game_samples if stage == "grp" else (
+                    lambda record: dataset.cql_game_samples(record, models["grp"], config))
+                stream = EpochBatchStream(dataset.records("train"),
+                    {row["game_id"]: row[f"{stage}_samples"] for row in plan["training_games"]},
+                    factory, settings["batch_size"], settings["epochs"], state["samples_seen"][stage], config["seed"])
+            elif stage == "grp":
                 stream = BatchStream(lambda seed: dataset.grp_samples("train", seed), settings["batch_size"],
                                      state["samples_seen"][stage], config["seed"])
             elif stage == "cql":
@@ -259,7 +304,7 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
             elif not state["ppo_initialized"]:
                 initialize_policy(models["cql"], models["ppo"], models["reference"])
                 state["ppo_initialized"] = True
-            while state["progress"][stage] < settings["steps"]:
+            while state["progress"][stage] < stage_plan["target_updates"]:
                 model, optimizer = models[stage], optimizers[stage]
                 model.train()
                 if stage in ("grp", "cql"):
@@ -278,6 +323,8 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
                     optimizer.step()
                     schedulers[stage].step()
                     state["samples_seen"][stage] = stream.seen
+                    metrics.update(batch_samples=len(batch[0]),
+                                   **coverage(plan, stage, stream.seen, config["seed"]))
                 else:
                     samples, games = [], []
                     for _ in range(settings["hanchan_per_update"]):
@@ -320,21 +367,29 @@ def run_training(config: dict, dataset: FrozenDataset, storage: Storage, *, run_
                     metrics.update(samples=len(samples), minibatches=count, kl_coef=kl_coef, games=games)
                 state["progress"][stage] += 1
                 invocation_updates += 1
-                if state["progress"][stage] == settings["steps"]:
+                stage_complete = state["progress"][stage] == stage_plan["target_updates"]
+                if stage_complete:
                     if stage in ("grp", "cql"):
                         metrics.update(validation_metrics(stage, dataset, models, config))
                     export(stage)
                 log(stage, metrics)
-                save()
-                if stop_after_updates is not None and invocation_updates >= stop_after_updates:
+                stopping = stop_after_updates is not None and invocation_updates >= stop_after_updates
+                epoch_complete = stage_plan["mode"] == "epochs" and stream.seen % stage_plan["samples_per_epoch"] == 0
+                if (stage_complete or epoch_complete or stopping or
+                        sum(state["progress"].values()) % config.get("checkpoint_interval_updates", 1) == 0):
+                    save()
+                if stopping:
                     break
             if stop_after_updates is not None and invocation_updates >= stop_after_updates:
                 break
     finally:
         writer.close()
-    complete = all(state["progress"][stage] == config[stage]["steps"] for stage in STAGES)
+    complete = all(state["progress"][stage] == plan["stages"][stage]["target_updates"] for stage in STAGES)
     result = {"run": run_name, "status": "complete" if complete else "interrupted",
               "progress": state["progress"], "checkpoint": str(checkpoint), "models": str(export_dir),
-              "dataset_sha256": dataset.sha256, "implementation_sha256": state["implementation_sha256"]}
+              "dataset_sha256": dataset.sha256, "implementation_sha256": state["implementation_sha256"],
+              "training_plan_sha256": plan["sha256"],
+              "training_coverage": {stage: coverage(plan, stage, state["samples_seen"][stage], config["seed"])
+                                    for stage in ("grp", "cql")}}
     write_json(run_dir / "result.json", result)
     return result

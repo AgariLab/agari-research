@@ -41,7 +41,9 @@ def main():
     right = torch.load(right_path, map_location="cpu", weights_only=True)
     names = [left.pop("run_name"), right.pop("run_name")]
     for stage in ("grp", "cql", "ppo"):
-        if left["progress"][stage] != left["config"][stage]["steps"]:
+        target = (left["training_plan"]["stages"][stage]["target_updates"] if "training_plan" in left
+                  else left["config"][stage]["steps"])
+        if left["progress"][stage] != target:
             raise AssertionError("Compare completed checkpoints")
     tensors = identical(left, right)
     result = {"status": "exact-match", "runs": names, "tensors_compared": tensors,

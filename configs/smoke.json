@@ -3,6 +3,7 @@
   "seed": 2026,
   "device": "cpu",
   "torch_threads": 1,
+  "validation": {"batch_size": 128, "max_samples": 128},
   "model": {"in_channels": 74, "num_actions": 82, "conv_channels": 16, "num_blocks": 1, "fc_dim": 32, "tile_dim": 34, "aux_dims": 4},
   "pts_weight": [6.0, 4.0, 2.0, 0.0],
   "grp": {"steps": 4, "batch_size": 16, "lr": 0.0005, "eta_min": 0.0000001},

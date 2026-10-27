@@ -42,8 +42,34 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run \
 用于确认完整训练链路。`configs/local-small.json` 增加网络容量，运行 100/200/4 次更新，
 每次 PPO 更新采集一个完整半庄。两份配置均为固定更新预算，不保证遍历大数据集；实际离线样本数
 记录在检查点 `samples_seen`，PPO 采样场次、座位和种子写入指标。小规模训练通过不代表达到强基线水平。
-阶段结束的验证指标使用验证分区固定顺序的前 128 个样本，日志同时记录实际样本数；这不是全量验证报告。
+当前阶段结束默认遍历完整验证分区，按样本数加权汇总各批 loss、准确率及 CQL 损失分量；
+`smoke.json` 显式设置 `validation.max_samples=128`，保持短验收有界。
+日志中的 `validation_scope`、`validation_samples` 和 `validation_sample_limit` 区分完整与有界验证。
+这改变了旧版 local-small 的前 128 样本验证行为，下面保留的历史数字仍对应旧实现。
 默认 CPU、1 线程；MPS 必须在配置中显式选择，可用性和数值结果需在目标机器验证。
+
+`configs/full-coverage-small.json` 保持 local-small 的模型、种子、优化器参数和 PPO 4 次更新，
+把 GRP/CQL 预算改为各完整 1 个 epoch。训练前从原生 `MjaiReplay.take_kyokus()` / `kyoku.steps(player)`
+计数，不用包含单一合法动作的轨迹总步数代替 CQL 样本数。每个训练半庄都消费一次；
+末尾不足 batch 的样本独立更新，即使只剩 1 个样本也保留，不从下一轮补齐。
+每阶段只能设置 `steps` 或 `epochs` 之一；PPO 的 `epochs` 仍表示每次采样后的优化轮数。
+
+可先生成完整预算而不启动训练，再使用相同冻结清单运行：
+
+```sh
+python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train plan \
+  --config configs/full-coverage-small.json \
+  --split datasets/manifests/selfplay-v1/split-v1.json \
+  --output runs/full-coverage-preflight-v1/execution-plan.json
+python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run \
+  --config configs/full-coverage-small.json \
+  --split datasets/manifests/selfplay-v1/split-v1.json --run full-coverage-1000-v1
+```
+
+`plan` 与训练均独立重放训练/验证数据，不打开测试牌谱。实际训练重新计算计划，检查点绑定计划摘要，
+恢复时要求逐场计数、目标预算、样本游标全部一致；余弦调度器周期来自实际更新总数。
+`execution-plan.json` 保存逐场原生样本数和总预算，`coverage.json` 保存实际消费样本数、完整轮次、
+覆盖半庄数及逐场消费数。恢复直接跳到当前半庄，不重新计算已完成轮次的特征和奖励。
 
 可在任意更新后保存并停止，再使用完全相同的代码、配置和数据恢复：
 
@@ -60,13 +86,15 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run \
 配置及代码/数据/上游摘要。当前版本还把实际 `agari-kit` 源码摘要、引擎动态库摘要、Python/Torch/NumPy 版本
 及 `uv.lock` 摘要写入检查点与导出元数据，恢复时逐项要求一致。缺少运行环境记录的历史检查点不能直接恢复；
 历史导出模型仍可用于推理。训练需要含 `uv.lock` 的源码 checkout。CPU 使用确定性运算。
-PPO 的恢复边界是完整更新；进程异常时从最近完成的更新继续，
-日志可能保留检查点写入前的重复指标。已有实验目录不会被新训练覆盖。
+PPO 的恢复边界是完整更新。`checkpoint_interval_updates` 默认 1，全覆盖配置为 100，
+按三阶段累计更新数计数；每个完整 epoch、阶段结束及 `--stop-after-updates` 都强制落盘。
+异常退出从最近已保存的更新恢复，最多重新执行间隔内尚未保存的更新；日志可能保留重复指标。
+已有实验目录不会被新训练覆盖。旧代码检查点仍受实现摘要约束，不能直接跨版本恢复。
 
 所有运行产物位于 `AGARILAB_STORAGE_ROOT`，默认 `/Volumes/新加卷/AgariLab`：
 
-- `runs/<run>/`：配置、冻结清单、JSONL 指标、TensorBoard、最终状态。
-- `checkpoints/<run>/latest.pt`：每次更新原子替换的完整恢复检查点。
+- `runs/<run>/`：配置、冻结清单、执行计划、实际覆盖明细、JSONL 指标、TensorBoard、最终状态。
+- `checkpoints/<run>/latest.pt`：按配置间隔及强制边界原子替换的完整恢复检查点。
 - `models/<run>/{grp,cql,ppo}.pt`：阶段完成后的权重及对应 `.json` 摘要。
 - `models/<run>/{cql,ppo}-agent.json`：公共工具可加载的工厂描述，绑定权重文件 SHA-256。
 
