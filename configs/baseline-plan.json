@@ -32,8 +32,8 @@
   },
   "reproduction": {
     "implementation": "GRP/MC-CQL/PPO local adaptation validated",
-    "training": "20-game smoke/local-small and 1000-game-source fixed-budget training complete; no full epoch or strength acceptance",
-    "strength": "pending independent evaluation and larger training"
+    "training": "20-game smoke/resume and 1000-game-source full-epoch GRP/CQL/PPO complete; native cross-epoch resume exact",
+    "strength": "Positive paired screening against fixed weak opponents; formal promotion and strong-opponent strength acceptance pending"
   },
   "evidence": {
     "dataset_sha256": "8848a4fcc1522526130b4d86f383bb0f2a75fe31a59b977056d39b7f73049760",
@@ -143,6 +143,90 @@
         "numpy",
         "lockfile_sha256"
       ]
+    },
+    "full_coverage_1000": {
+      "report": "experiments/full-coverage-1000-v1/README.md",
+      "run": "runs/full-coverage-1000-v1/result.json",
+      "training_code_commit": "0ed06ae7fe87a96a7e9e0636e8f1d65f4b7fc373",
+      "implementation_sha256": "db575140fe2c10e2023bc9c366c1f9eb499def53be0b26598b860ba852385de9",
+      "dataset_sha256": "39194c82b1f3bb8bff219425dc0ffa06ed2f0468e94f4fbd13f73d158048e4d3",
+      "training_plan_sha256": "ca36ad4346433fa51c3dbdf8f318ee2c2ed374479edaea03a0a640e71d7bb7ba",
+      "updates": {
+        "cql": 8215,
+        "grp": 1133,
+        "ppo": 4
+      },
+      "training_coverage": {
+        "cql": {
+          "complete_epochs": 1,
+          "mode": "epochs",
+          "samples_in_epoch": 0,
+          "samples_seen": 525721,
+          "training_games": 900,
+          "unique_games_seen": 900
+        },
+        "grp": {
+          "complete_epochs": 1,
+          "mode": "epochs",
+          "samples_in_epoch": 0,
+          "samples_seen": 36228,
+          "training_games": 900,
+          "unique_games_seen": 900
+        }
+      },
+      "validation": [
+        {
+          "complete_epochs": 1,
+          "samples_seen": 36228,
+          "stage": "grp",
+          "unique_games_seen": 900,
+          "update": 1133,
+          "validation_accuracy": 0.43333333333333335,
+          "validation_loss": 1.2505604914256505,
+          "validation_sample_limit": null,
+          "validation_samples": 1680,
+          "validation_scope": "full"
+        },
+        {
+          "complete_epochs": 1,
+          "samples_seen": 525721,
+          "stage": "cql",
+          "unique_games_seen": 900,
+          "update": 8215,
+          "validation_aux_loss": 0.98176199813851,
+          "validation_conservative_loss": 0.7217236440758228,
+          "validation_loss": 4.783583862211812,
+          "validation_sample_limit": null,
+          "validation_samples": 24603,
+          "validation_scope": "full",
+          "validation_td_loss": 0.9786132280479547
+        }
+      ],
+      "unit_tests": 23,
+      "code_ci": "https://github.com/AgariLab/agari-research/actions/runs/40567092964",
+      "native_resume_report": "experiments/full-coverage-1000-v1/native-resume/resume-equivalence.json",
+      "native_resume_tensors_exactly_equal": 259,
+      "paired_evaluation": {
+        "games_per_model": 1000,
+        "baseline_mean_rank": 2.287,
+        "candidate_mean_rank": 1.651,
+        "mean_rank_difference": -0.636,
+        "mean_rank_difference_ci95": [
+          -0.699,
+          -0.578
+        ],
+        "promotion_sample_size_met": false
+      },
+      "online_preflight": {
+        "report": "experiments/full-coverage-1000-v1/online-preflight.json",
+        "games": 4,
+        "requests": 458,
+        "red_probes": 3,
+        "illegal_actions": 0,
+        "timeouts": 0,
+        "network_connected": false,
+        "server_validation": "not-performed"
+      }
     }
   }
 }

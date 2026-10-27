@@ -1,0 +1,38 @@
+{
+  "scope": "all validation samples at stage completion",
+  "metrics": [
+    {
+      "complete_epochs": 1,
+      "samples_seen": 36228,
+      "stage": "grp",
+      "unique_games_seen": 900,
+      "update": 1133,
+      "validation_accuracy": 0.43333333333333335,
+      "validation_loss": 1.2505604914256505,
+      "validation_sample_limit": null,
+      "validation_samples": 1680,
+      "validation_scope": "full"
+    },
+    {
+      "complete_epochs": 1,
+      "samples_seen": 525721,
+      "stage": "cql",
+      "unique_games_seen": 900,
+      "update": 8215,
+      "validation_aux_loss": 0.98176199813851,
+      "validation_conservative_loss": 0.7217236440758228,
+      "validation_loss": 4.783583862211812,
+      "validation_sample_limit": null,
+      "validation_samples": 24603,
+      "validation_scope": "full",
+      "validation_td_loss": 0.9786132280479547
+    }
+  ],
+  "test_content_read": false,
+  "implementation_sha256": "db575140fe2c10e2023bc9c366c1f9eb499def53be0b26598b860ba852385de9",
+  "training_code_commit": "0ed06ae7fe87a96a7e9e0636e8f1d65f4b7fc373",
+  "observed_duration": {
+    "seconds": 241.84,
+    "scope": "Approximate filesystem interval from training-run directory creation to result write; excludes initial frozen-dataset replay validation"
+  }
+}

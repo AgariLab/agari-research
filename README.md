@@ -11,7 +11,7 @@ AgariLab 的本机 GRP 奖励预测 → 离线 Monte Carlo CQL → 在线 PPO �
 uv 的默认索引是清华源 `https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple`。
 存储启动器把下载缓存、临时文件、数据和模型指向已配置外置卷，卷不可用时立即失败。
 
-在同一父目录检出两个仓库，固定公共工具版本后进入研究仓库。研究仓库需要对应私有仓库访问权限；
+在同一父目录检出两个公共仓库，固定公共工具版本后进入研究仓库；
 复现实验时还应检出实验所记录的研究代码 commit，检查其实现摘要与模型元数据一致。
 
 ```sh
@@ -110,7 +110,8 @@ PPO 从 Q 网络迁移骨干与决策头，以冻结模型作为对手和 KL 参
 结果信息仅用于监督标签与训练奖励。`ModelAgent` 只接收玩家 `Observation`，无全局环境对象。
 完整局边界由 `end_kyoku` 识别，包含连庄；GRP 特征由原生重放解析，避免手工结算重复和供托错误。
 
-当前验收结果记录在 `configs/baseline-plan.json`。完整实力评测、未见牌谱泛化和更大训练预算需单独实验，
+验收结果记录在 `configs/baseline-plan.json`，最新的完整覆盖实验见
+[full-coverage-1000-v1](experiments/full-coverage-1000-v1/README.md)。完整实力评测、未见牌谱泛化和更大训练预算需单独实验，
 不能从 smoke loss 或同源规则 AI 自博弈数据推出。
 
 2026-10-28 已使用 20 场完整引擎验证牌谱跑完两种 CPU 配置。冒烟运行
@@ -144,6 +145,14 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python scripts/vali
 
 该历史运行对应研究 commit `f681c69bd7a61bfa25a131223b5c3786f9bd75fa`，先于新增运行环境绑定；
 新恢复逻辑另用小型实验验证，历史长评测结果不会被改写成新实现的验收结果。
+
+`full-coverage-1000-v1` 随后完整训练了全部 900 场：GRP 36,228 样本、CQL 525,721 样本，
+各一个完整 epoch，PPO 仍为 4 次更新。全部 50 场验证上的 GRP 准确率为 43.3333%、loss 1.25056。
+新旧 PPO 在同一 250 种子 × 四座位、efficiency/random/tsumogiri 对手池上各评测 1,000 场，
+平均顺位从 2.287 降至 1.651；配对种子组差值的 95% 区间为 −0.699 至 −0.578，均无非法动作。
+这支持该弱对手池上的改善，尚未通过正式晋级和强对手棋力验收。
+真实小数据的跨 epoch、跨阶段中断恢复再次比较 259 个张量及全部检查点状态，精确一致。
+新模型也完成四座位本地协议预检，线上验证仍待 Bot Token。逐场统计、覆盖与恢复证据保存在上述实验目录。
 
 `scripts/benchmark_devices.py` 另测得本机 local-small(batch64) 的合成 CQL 更新中位耗时：
 CPU 13.67ms、MPS 5.63ms。此测量仅含网络训练计算，不含解析或自博弈；尚未以完整 MPS 训练验收替代 CPU 结果。
