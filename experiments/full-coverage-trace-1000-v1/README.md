@@ -83,7 +83,7 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run \
 离线推理快照和真实验证使用的研究包分别记录，不将其合并成同一版本。
 
 复核脚本实际检查了 49 个模型状态张量的严格加载及有限性、19 项历史训练产物、30 个直接引用工件、
-全部离线对局和 120 个验证动作回执。v1 不包含尚在运行的正式排位；后续结果用新版本清单追加，保留 v1。
+全部离线对局和 120 个验证动作回执。v1 不包含正式排位；排位结果以新增 v2 追加，保留 v1。
 
 ```sh
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python \
@@ -94,5 +94,9 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python \
 Python/依赖与原生引擎二进制也必须相同。以后源码升级时，应使用隔离的对应版本环境复核，
 不能为此切换仍在排位的主工作区。该检查不重新训练或连接平台，也不打开测试分区牌谱内容。
 
-[release-v2 工作流](release-v2-workflow.md)已准备独立发布门禁，10 项合成测试通过。
-目前真实探测仍为 pending，尚未生成 v2；完整 100 场先经独立审核，再生成和复核 v2，最后才能合并运行源码更新。
+[series release-v2 工作流](release-v2-series-workflow.md)已完成真实发布和复核。
+[model-release-v2.json](model-release-v2.json) 与外置副本字节相同，SHA
+`8edf5751901cadfa02af084a12e5d2048894c28a5e704d2778894c5fc1a09e2e`，均为 887,451 字节。
+清单追加独立核验的 100 个健康完局、全部 104 次尝试及 4 次中断，完整场 15,949 次动作全部 accepted。
+原 v1 的字段和历史来源保留，状态为 `completed_with_interruptions`，不宣称连续零故障或棋力晋级。
+旧严格 1+99 发布工具仍保留，其门槛不适用于这批有中断的记录。

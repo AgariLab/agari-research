@@ -4,8 +4,12 @@
 生成器或一次中断续跑生成器。新清单要求恰好 100 个健康完整排位，同时保留每次中断及其未知
 服务器结果。完成目标和数据完整性单独核对，原连续零故障标准始终为 false。
 
-当前真实 series 尚未完成；本流程及测试不代表已发布独立审计或 release。默认运行只读，
-未完成时返回 pending，不创建任何真实发布文件。
+本批已于 2026-10-28 发布并在原冻结环境重新核验：100 健康完整局、4 次中断、104 次实际尝试。
+两份 [release-v2](model-release-v2.json) 均为 887,451 字节，SHA
+`8edf5751901cadfa02af084a12e5d2048894c28a5e704d2778894c5fc1a09e2e`。
+业务状态为 `completed_with_interruptions`，不改写原零故障标准。
+下文 `--write` 保留首次发布顺序；本批文件已存在，应使用 `--verify-release`，不能重复创建。
+默认运行只读，未完成时返回 pending，不创建任何真实发布文件。
 
 ## 固定门禁
 
@@ -29,6 +33,9 @@
 series 根 registry 固定为
 `564d5f67baaa9dd0c901313ae3c5879b4e81ffb437c1d7e38c5f760a4fa5cc2f`。
 默认读取 `series-registry-v1.json`；显式 `--registry` 可以指定已登记的追加链新 head。
+当前生产 head 为 `series-registry-v3.json`，SHA
+`6f3f279caafcce2dabb8dc3b3747f0757eb4e33d2755c81626f297702de4ce5d`；
+以下命令均显式选择 v3，保留全部四次中断及新登记的 10 个尝试。
 独立审计验证 predecessor 摘要、连续 revision、旧计划前缀及不可变历史，不能借换 head 换 root。
 审计发布与 release 准备必须使用同一个 head；新 head 不允许覆盖已有独立审计或 release。
 
@@ -37,15 +44,19 @@ series 根 registry 固定为
 在保留已记录源码、模型和引擎的研究仓库锁定环境中，先只读检查：
 
 ```sh
-.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py
+.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py \
+  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v3.json
 ```
 
 真实 100 个健康完整局齐备、全部实际尝试已结束并经审查后，依次执行：
 
 ```sh
-.venv/bin/python -B experiments/riichi-ranked-100-20261028-v1/audit_ranked_series.py --write
-.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py --write
-.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py --verify-release
+.venv/bin/python -B experiments/riichi-ranked-100-20261028-v1/audit_ranked_series.py \
+  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v3.json --write
+.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py \
+  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v3.json --write
+.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py \
+  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v3.json --verify-release
 ```
 
 若采用后续 registry head，为上述独立审计和三种发布器模式显式传入同一个

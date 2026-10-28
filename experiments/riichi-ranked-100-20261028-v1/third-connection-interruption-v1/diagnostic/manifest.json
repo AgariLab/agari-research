@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "mode": "ranked",
+  "games_requested": 1,
+  "started_at": "2026-10-28T06:46:24.807804+00:00",
+  "wrapper_sha256": "9c8dd327662276771082a5dd543b7bd4b00d8fa419ce3de64962a808cd10e294",
+  "supervisor_sha256": "cd570e8abc1b5b028661f6dfa7881ebdea7c650db11b7d5a0c7fd53adbe4aede",
+  "websockets_version": "15.0.1",
+  "python_version": [
+    3,
+    12,
+    16
+  ],
+  "runtime_variant": "parent_transport_observer",
+  "same_runtime_as_uninstrumented": false,
+  "proxy_policy": "environment",
+  "network_path": "proxy",
+  "transport_config": {
+    "ping_interval": 20,
+    "ping_timeout": 20,
+    "open_timeout": 15,
+    "close_timeout": 2,
+    "max_size": 2097152,
+    "max_queue": 16,
+    "write_limit": 32768,
+    "compression": "deflate"
+  },
+  "automatic_reconnect": false,
+  "timeout_observation": "local_1011_exact_library_signature",
+  "recv_count_unit": "successfully_returned_application_messages"
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "status": "finalized",
+  "error": null,
+  "campaign_status": "stopped",
+  "connection_attempts": 1,
+  "connections_created": 1,
+  "events_recorded": 7,
+  "elapsed_seconds": 61.57610837498214
+}

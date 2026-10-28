@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "endpoint": "wss://game.riichi.dev/ws/ranked",
+  "mode": "ranked",
+  "agent": "@/Volumes/\u65b0\u52a0\u5377/AgariLab/models/full-coverage-trace-1000-v1/ppo-agent.json",
+  "agent_provenance": {
+    "kind": "external",
+    "name": "@/Volumes/\u65b0\u52a0\u5377/AgariLab/models/full-coverage-trace-1000-v1/ppo-agent.json",
+    "descriptor_path": "/Volumes/\u65b0\u52a0\u5377/AgariLab/models/full-coverage-trace-1000-v1/ppo-agent.json",
+    "descriptor_sha256": "51495822b3af9c6aff6f11a59aa3db0c1380ed4238088b22d4bc2741e052a381",
+    "descriptor": {
+      "artifacts": {
+        "weights_path": {
+          "path": "ppo.pt",
+          "sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096"
+        }
+      },
+      "factory": "agari_research.model_agent:ModelAgent",
+      "kwargs": {
+        "device": "cpu",
+        "torch_threads": 1
+      }
+    },
+    "factory": "agari_research.model_agent:ModelAgent",
+    "artifacts": {
+      "weights_path": {
+        "path": "/Volumes/\u65b0\u52a0\u5377/AgariLab/models/full-coverage-trace-1000-v1/ppo.pt",
+        "declared_path": "ppo.pt",
+        "declared_sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096",
+        "sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096"
+      }
+    },
+    "source": {
+      "package": "agari_research",
+      "module": "agari_research.model_agent",
+      "module_path": "/Users/zhou/MyCodes/AgariLab/agari-research/src/agari_research/model_agent.py",
+      "roots": [
+        "/Users/zhou/MyCodes/AgariLab/agari-research/src/agari_research"
+      ],
+      "source_sha256": "43eabb39e1518ec550f8692bce79224060f07aa280f12a254b990ccc2c3e7e21",
+      "files": 17
+    }
+  },
+  "code": {
+    "package": "agari-kit",
+    "version": "0.1.0",
+    "source_sha256": "e1991979d79a373ca54050786616f57ded571a8d20de326a6e66982244dd1979"
+  },
+  "engine": {
+    "version": "0.4.10",
+    "binary_sha256": "169c8c2c53bdace01e4ca319f54050565fe728a5b1b2fc6b7f3046738887071d"
+  },
+  "rules_expected": {
+    "game_mode": "4p-red-half",
+    "preset": "tenhou",
+    "engine_version": "0.4.10"
+  },
+  "games_requested": 1,
+  "reserve_ms": 100,
+  "status": "incomplete",
+  "games_recorded": 1
+}

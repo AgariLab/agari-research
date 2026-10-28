@@ -1,0 +1,4 @@
+{"event": "diagnostic_ready", "elapsed_seconds": 0.511809500050731}
+{"event": "connection_attempt", "elapsed_seconds": 0.5118267090292647, "attempt": 1}
+{"event": "connection_created", "elapsed_seconds": 0.5124676671111956, "connection_id": 1}
+{"event": "handshake_failed", "elapsed_seconds": 15.513273959048092, "exception_category": "timeout", "cause_category": "timeout"}

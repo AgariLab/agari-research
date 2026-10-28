@@ -4,6 +4,19 @@
 
 工具仅访问本机证据、源码和固定身份文件，不连接游戏服务器、不读取凭证或环境值，也不启动 bot。模型、客户端核心源码、本地引擎及监督脚本仍按实际字节核验；诊断 wrapper 另有固定身份。
 
+当前生产 head 为 [series-registry-v3.json](series-registry-v3.json)，SHA
+`6f3f279caafcce2dabb8dc3b3747f0757eb4e33d2755c81626f297702de4ce5d`。
+第一份计划在第 42 次尝试连接打开超时后停止；第二份计划在第 21 次尝试握手成功后无关闭帧断开，
+累计 90 完整、4 中断；两份旧计划的停止后缀均保持未执行。
+v3 追加 [10 次新尝试计划](observed-series-plan-v3.json)，SHA
+`95b74f69d815b320b571985282a692dd2ced5c1be7f0984baa895964a80c041b`，
+不改旧 registry 或旧计划。以下当前生产命令显式选择 v3；省略参数仍会读取旧 v1。
+
+最终 v3 计划的 10 场均已完整结束；[series-audit/report.json](series-audit/report.json)
+于 2026-10-28 发布，核验 104 次实际尝试、100 健康完整、4 次中断、0 活动或无效尝试，
+915 份来源（含 866 份原件）完整性 verified。
+本批已发布，不重复执行 `--write`；已有结果只读复核，旧失败和未执行尾部保持原样。
+
 ## 初版登记
 
 [series-registry-v1.json](series-registry-v1.json) 的根摘要为 `564d5f67baaa9dd0c901313ae3c5879b4e81ffb437c1d7e38c5f760a4fa5cc2f`，绑定四个既有 run 的全部 136 份原始文件：
@@ -24,7 +37,8 @@ registry 同时绑定主代理在执行前写出的 [observed-series-plan-v1.jso
 从研究仓库运行：
 
 ```sh
-python3 -B experiments/riichi-ranked-100-20261028-v1/audit_ranked_series.py
+python3 -B experiments/riichi-ranked-100-20261028-v1/audit_ranked_series.py \
+  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v3.json
 ```
 
 也可用 `--registry /absolute/path/to/registry-v2.json` 选择合法追加链的 head。工具必须递归验证到固定根摘要；旧历史、身份、目标和旧计划前缀都不得改写。
@@ -46,7 +60,7 @@ python3 -B experiments/riichi-ranked-100-20261028-v1/audit_ranked_series.py
 
 已核验的 end_game 和场次记录决定是否完整完成。receiver 取消、connection_lost、context_exit 或关闭阶段缺少 close frame 的诊断观察单独保存，不能把已经完整结束的健康场次追记成失败。诊断结果与场次结果矛盾、文件不完整或身份不符仍会阻止发布。
 
-两次历史中断的服务器最终结果及评级变化保持 unknown。没有观察到 start_game 不证明服务器未开局；已进入对局后断线也不代表不计评级。本地引擎摘要只说明本机模块身份，不倒推服务器升级时间或断线根因。
+全部中断的服务器最终结果及评级变化保持 unknown。没有观察到 start_game 不证明服务器未开局；已进入对局后断线也不代表不计评级。本地引擎摘要只说明本机模块身份，不倒推服务器升级时间或断线根因。
 
 ## 统计与原始证据
 
