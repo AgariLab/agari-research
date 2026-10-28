@@ -8,6 +8,7 @@ import torch
 from agari_kit.collection import write_json
 from agari_kit.storage import Storage
 from agari_research.manifest import file_sha256
+from agari_research.planning import selected_stages
 
 
 def identical(left, right, path="checkpoint"):
@@ -40,7 +41,7 @@ def main():
     left = torch.load(left_path, map_location="cpu", weights_only=True)
     right = torch.load(right_path, map_location="cpu", weights_only=True)
     names = [left.pop("run_name"), right.pop("run_name")]
-    for stage in ("grp", "cql", "ppo"):
+    for stage in selected_stages(left["config"]):
         target = (left["training_plan"]["stages"][stage]["target_updates"] if "training_plan" in left
                   else left["config"][stage]["steps"])
         if left["progress"][stage] != target:
