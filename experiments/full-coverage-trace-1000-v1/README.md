@@ -73,3 +73,23 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari-train run \
 对局计时 58.64 秒，进程总墙钟 67.10 秒；不与不同负载下的历史延迟作性能提升比较。
 完整逐场结果、250 个种子组差值、环境与预检证据见 `evaluation/`，配对分析见 [comparison.json](comparison.json)。
 这些固定种子已参与历史筛选，结果仅描述该对手池，不代表独立未知分布泛化或正式晋级。
+
+## 模型发布清单 v1
+
+[model-release-v1.json](model-release-v1.json) 对应外置 `models/full-coverage-trace-1000-v1/release-v1.json`，
+两份字节相同，SHA-256 为 `8e5d2467cda1a4f0570f64eceb3a862e253d6bfcd81e235cd31133c1d15a4f1a`。
+清单记录训练代码 commit、170,295 个参数的完整架构配置、编码与标签语义、数据划分、规则、权重、
+运行环境，以及实际离线 1,000 场和一次真实服务端验证的证据路径与哈希。
+离线推理快照和真实验证使用的研究包分别记录，不将其合并成同一版本。
+
+复核脚本实际检查了 49 个模型状态张量的严格加载及有限性、19 项历史训练产物、30 个直接引用工件、
+全部离线对局和 120 个验证动作回执。v1 不包含尚在运行的正式排位；后续结果用新版本清单追加，保留 v1。
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python \
+  experiments/full-coverage-trace-1000-v1/build_model_release.py --verify-release
+```
+
+复核要求清单所记录的原运行环境：研究源码对应 `761b452`，工具源码对应 `9e3e866`，
+Python/依赖与原生引擎二进制也必须相同。以后源码升级时，应使用隔离的对应版本环境复核，
+不能为此切换仍在排位的主工作区。该检查不重新训练或连接平台，也不打开测试分区牌谱内容。

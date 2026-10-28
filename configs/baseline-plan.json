@@ -327,6 +327,15 @@
         "candidate_illegal_actions": 0,
         "promotion_sample_size_met": false,
         "strength_acceptance": "not-established-by-this-comparison"
+      },
+      "model_release_v1": {
+        "manifest": "experiments/full-coverage-trace-1000-v1/model-release-v1.json",
+        "storage_manifest": "models/full-coverage-trace-1000-v1/release-v1.json",
+        "sha256": "8e5d2467cda1a4f0570f64eceb3a862e253d6bfcd81e235cd31133c1d15a4f1a",
+        "scope": "Completed training, 1000 local hanchan and one server validation East game; ranked excluded",
+        "parameters": 170295,
+        "state_dict_tensors": 49,
+        "direct_artifacts_verified": 30
       }
     },
     "historical_coverage_akochan": {

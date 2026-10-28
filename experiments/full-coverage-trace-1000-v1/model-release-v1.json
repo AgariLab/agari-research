@@ -1,0 +1,577 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-28T00:00:28.759719+00:00",
+  "code_revision": "761b4522b5343b01413d640b58444b8a3fb7568e",
+  "upstream_revision": "479c1faeb33d082965eef8198f63261a79c0fce3",
+  "architecture": "ActorCriticNetwork: Conv1d ResNet + channel attention, actor82 and scalar critic",
+  "encoding_version": "riichienv-0.4.10-feat-v1-74x34-actions82",
+  "dataset_sha256": "39194c82b1f3bb8bff219425dc0ffa06ed2f0468e94f4fbd13f73d158048e4d3",
+  "rules": {
+    "mode": "4p-red-half",
+    "preset": "tenhou",
+    "riichienv": "0.4.10"
+  },
+  "weights": {
+    "filename": "ppo.pt",
+    "sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096",
+    "bytes": 701520,
+    "artifact": {
+      "path": "models/full-coverage-trace-1000-v1/ppo.pt",
+      "bytes": 701520,
+      "sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096"
+    }
+  },
+  "evaluation": {
+    "filename": "report.json",
+    "sha256": "bffb4162240152f718297b9ce0c4dee4ac3fc30ffe47197d8fcb313ad4e81c97",
+    "games": 1000,
+    "run": "trace-1000-candidate-eval-v1",
+    "rules": {
+      "game_mode": "4p-red-half",
+      "preset": "tenhou",
+      "engine_version": "0.4.10"
+    },
+    "opponents": [
+      "efficiency",
+      "random",
+      "tsumogiri"
+    ],
+    "seeds": {
+      "first": 600000,
+      "last": 600249,
+      "groups": 250,
+      "rotations_per_seed": 4
+    },
+    "inference_source": {
+      "commit": "723b81090944ecc430c2be331ba1cba364ab41b6",
+      "python_files": 15,
+      "training_implementation_sha256": "9bde41c60b9b580977ac57f37dfbe95c70a9b4d67d332c9024a21af0550d8c74",
+      "agent_package_source_sha256": "44bb7f08633036823aef7e61c0f7351fd9886ede798ec5ec2cd9b389835771cc",
+      "file_sha256": {
+        "__init__.py": "f1fc029a64e20c91f4016734965bd54e051fa43ac57d9c786587597bb29bd71a",
+        "cli.py": "05d223ce5f5812e29a8bc0dc541e81d11618a1251c637a1b4efb5851df1d8a6d",
+        "data.py": "1a4f25e01aaed81ffe74caf215ac9a4fbcba1cfe15c51615f268d9cd2bdbc635",
+        "features.py": "6e1ae5e0dee9954bc43309594d1187e1a836dc28482d5d07caa8f125d817ae6f",
+        "losses.py": "0fb445de4e3a62de5f0e7a8c067294209510c26cbbbc74f488977c1bf006e045",
+        "manifest.py": "1bea06feada03cc0f7c733d90f9b430d02d4752ca9535f819dd3f48d5d8971da",
+        "model_agent.py": "19ec1d9f783e64c3db93749130b0097220bfc727f8bbed0474c718272c95389f",
+        "models/__init__.py": "fd61d413558e3674ee34bbf8a95f84af9f635f03d43df196146507ba0e8b944e",
+        "models/actor_critic.py": "629e5a1c421df4960235d7a45b93284f7ce7611ff7cb04a436a698f7c3640e02",
+        "models/backbone.py": "852b63e486ec86955226eabf09a53c4b802669d994e717e73f454a3837dd1a3d",
+        "models/grp_model.py": "74aa4e28960877d831d871808a3c01116f823729e89037fec3406fb200c4cf80",
+        "models/q_network.py": "128ec9ab6c4cae562c7947cd54bf487ed8d802809e7133913ebd6f7f78db7a1d",
+        "rollout.py": "765a9a2cf90de1782e359d4a9442cf3616c8661a6016f28883579d5411fb26e8",
+        "runtime.py": "70612cb86dc0621068fd9663dd888d912d4d261c62f6cd2d24b4110014885b23",
+        "training.py": "73071a6e0437fe8b07c52edd4929060351cf10adc3849558d776f67404af00fe"
+      }
+    },
+    "recorded_source": {
+      "package": "agari_research",
+      "module": "agari_research.model_agent",
+      "module_path": "/private/tmp/agari-eval-723b810-trace-1hwa0ijo/src/agari_research/model_agent.py",
+      "roots": [
+        "/private/tmp/agari-eval-723b810-trace-1hwa0ijo/src/agari_research"
+      ],
+      "source_sha256": "44bb7f08633036823aef7e61c0f7351fd9886ede798ec5ec2cd9b389835771cc",
+      "files": 15
+    },
+    "recorded_runtime": {
+      "engine": {
+        "version": "0.4.10",
+        "binary_sha256": "169c8c2c53bdace01e4ca319f54050565fe728a5b1b2fc6b7f3046738887071d"
+      },
+      "agari_kit": {
+        "package": "agari-kit",
+        "version": "0.1.0",
+        "source_sha256": "e1991979d79a373ca54050786616f57ded571a8d20de326a6e66982244dd1979"
+      },
+      "python": "3.12.16 (main, Oct 26 2026, 13:59:40) [Clang 23.1.3 ]"
+    },
+    "artifacts": {
+      "manifest.json": {
+        "storage": {
+          "path": "runs/trace-1000-candidate-eval-v1/manifest.json",
+          "bytes": 5572,
+          "sha256": "2cf9c6e72ab35bb63da937499df43727eb242d73a276ee1a1d378bff499ff1ae"
+        },
+        "repository": {
+          "path": "experiments/full-coverage-trace-1000-v1/evaluation/manifest.json",
+          "bytes": 5572,
+          "sha256": "2cf9c6e72ab35bb63da937499df43727eb242d73a276ee1a1d378bff499ff1ae"
+        }
+      },
+      "games.jsonl": {
+        "storage": {
+          "path": "runs/trace-1000-candidate-eval-v1/games.jsonl",
+          "bytes": 775575,
+          "sha256": "8c1fe5ece1b18bbdfb25168a343c6d0adaa2206f8c3cc585e2050c3092f19c84"
+        },
+        "repository": {
+          "path": "experiments/full-coverage-trace-1000-v1/evaluation/games.jsonl",
+          "bytes": 775575,
+          "sha256": "8c1fe5ece1b18bbdfb25168a343c6d0adaa2206f8c3cc585e2050c3092f19c84"
+        }
+      },
+      "report.json": {
+        "storage": {
+          "path": "runs/trace-1000-candidate-eval-v1/report.json",
+          "bytes": 1397,
+          "sha256": "bffb4162240152f718297b9ce0c4dee4ac3fc30ffe47197d8fcb313ad4e81c97"
+        },
+        "repository": {
+          "path": "experiments/full-coverage-trace-1000-v1/evaluation/report.json",
+          "bytes": 1397,
+          "sha256": "bffb4162240152f718297b9ce0c4dee4ac3fc30ffe47197d8fcb313ad4e81c97"
+        }
+      }
+    },
+    "report": {
+      "games": 1000,
+      "seed_groups": 250,
+      "candidate": {
+        "mean_rank": 1.662,
+        "rank_rates": [
+          0.429,
+          0.505,
+          0.041,
+          0.025
+        ],
+        "mean_point_delta": 13820.1
+      },
+      "ci95": {
+        "mean_rank": [
+          1.624,
+          1.701
+        ],
+        "mean_point_delta": [
+          12887.4,
+          14773.2
+        ],
+        "rank_1_rate": [
+          0.4,
+          0.456
+        ],
+        "rank_2_rate": [
+          0.476,
+          0.535
+        ],
+        "rank_3_rate": [
+          0.029,
+          0.055
+        ],
+        "rank_4_rate": [
+          0.016,
+          0.035
+        ]
+      },
+      "ci_method": "seed-group-percentile-bootstrap",
+      "bootstrap_seed": 0,
+      "bootstrap_samples": 2000,
+      "promotion_sample_size_met": false,
+      "candidate_decisions": 181827,
+      "candidate_latency_ms_mean": 0.10310163828451585,
+      "candidate_latency_ms_p95": 0.11583406012505293,
+      "candidate_latency_ms_max": 1.7977909883484244,
+      "latency_scope": "agent.act only; candidate seat isolated; excludes loading and transport",
+      "event_counts": {
+        "start_game": 1000,
+        "start_kyoku": 9371,
+        "tsumo": 524835,
+        "dahai": 534703,
+        "chi": 7801,
+        "reach": 9775,
+        "reach_accepted": 9650,
+        "hora": 6139,
+        "end_kyoku": 9371,
+        "pon": 3646,
+        "ryukyoku": 3253,
+        "kakan": 96,
+        "dora": 139,
+        "end_game": 1000,
+        "daiminkan": 28,
+        "ankan": 17
+      },
+      "illegal_actions": 0,
+      "decisions": 680453,
+      "elapsed_seconds": 58.63909643085208
+    },
+    "verification": {
+      "complete_unique_seed_rotations": true,
+      "outcomes_and_event_totals_recomputed": true
+    },
+    "limitation": "Fixed weak opponent pool and previously used screening seeds; not formal promotion or strong-baseline reproduction"
+  },
+  "release_id": "full-coverage-trace-1000-v1/release-v1",
+  "model_run": "full-coverage-trace-1000-v1",
+  "kind": "ppo",
+  "scope": "Completed training, 1000 local hanchan, and one server validation East game only",
+  "artifact_roots": {
+    "storage": "/Volumes/新加卷/AgariLab",
+    "repository": "https://github.com/AgariLab/agari-research"
+  },
+  "architecture_details": {
+    "class": "agari_research.models.actor_critic:ActorCriticNetwork",
+    "parameters": {
+      "aux_dims": 4,
+      "conv_channels": 32,
+      "fc_dim": 128,
+      "in_channels": 74,
+      "num_actions": 82,
+      "num_blocks": 2,
+      "tile_dim": 34
+    },
+    "trainable_parameters": 170295,
+    "state_dict_tensors": 49,
+    "state_dict_schema_sha256": "c4d8f68251d2b9e8e6f016d8204dd8960327acb805a0ea3890e96d4286d381a6",
+    "strict_load_verified": true,
+    "all_tensors_finite": true
+  },
+  "sample_semantics_version": "seeded-trace-player-decisions-v1",
+  "agent": {
+    "descriptor": {
+      "artifacts": {
+        "weights_path": {
+          "path": "ppo.pt",
+          "sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096"
+        }
+      },
+      "factory": "agari_research.model_agent:ModelAgent",
+      "kwargs": {
+        "device": "cpu",
+        "torch_threads": 1
+      }
+    },
+    "descriptor_artifact": {
+      "path": "models/full-coverage-trace-1000-v1/ppo-agent.json",
+      "bytes": 219,
+      "sha256": "51495822b3af9c6aff6f11a59aa3db0c1380ed4238088b22d4bc2741e052a381"
+    },
+    "export_metadata_artifact": {
+      "path": "models/full-coverage-trace-1000-v1/ppo.json",
+      "bytes": 2236,
+      "sha256": "f1719760c7dcb073866946c21970e69ddf735bfc96db2a9602f8636461a6ef1c"
+    },
+    "payload_metadata_equals_export_json": true
+  },
+  "dataset": {
+    "name": "selfplay-v1",
+    "canonical_sha256": "39194c82b1f3bb8bff219425dc0ffa06ed2f0468e94f4fbd13f73d158048e4d3",
+    "split_artifact": {
+      "path": "datasets/manifests/selfplay-v1/split-v1.json",
+      "bytes": 689188,
+      "sha256": "192e3af58dbeffbbde677234e423aa2ac37c76f5bf9071a0670cd6a768f1aa5a"
+    },
+    "partitions": {
+      "test": 50,
+      "train": 900,
+      "validation": 50
+    },
+    "whole_game_id_and_hash_disjoint": true,
+    "chronological": true,
+    "test_content_opened_by_this_verification": false,
+    "source": "agarilab-selfplay",
+    "rules": "4p-red-half/tenhou",
+    "usage_basis": [
+      "Locally generated self-play; no third-party replay redistribution"
+    ],
+    "behavior_limit": "Four efficiency producers; no chi/pon/kan events"
+  },
+  "training": {
+    "run": "full-coverage-trace-1000-v1",
+    "source": {
+      "commit": "761b4522b5343b01413d640b58444b8a3fb7568e",
+      "python_files": 17,
+      "training_implementation_sha256": "2f6e3618a1fa7812837b042e257d654c6e4d94f95764904002dbfef0bb9afedf",
+      "agent_package_source_sha256": "43eabb39e1518ec550f8692bce79224060f07aa280f12a254b990ccc2c3e7e21",
+      "file_sha256": {
+        "__init__.py": "f1fc029a64e20c91f4016734965bd54e051fa43ac57d9c786587597bb29bd71a",
+        "cli.py": "e39ebb4ef60f5bb00021fb4a632ac1d8e8e657cf002e0938e88d3e766ccde7e2",
+        "data.py": "688b8f747cd3b1dd7c3f95bfe2e3c75bd58ff7ecb8e4e4a00e07a4baedaa3602",
+        "features.py": "6e1ae5e0dee9954bc43309594d1187e1a836dc28482d5d07caa8f125d817ae6f",
+        "losses.py": "0fb445de4e3a62de5f0e7a8c067294209510c26cbbbc74f488977c1bf006e045",
+        "manifest.py": "1bea06feada03cc0f7c733d90f9b430d02d4752ca9535f819dd3f48d5d8971da",
+        "model_agent.py": "19ec1d9f783e64c3db93749130b0097220bfc727f8bbed0474c718272c95389f",
+        "models/__init__.py": "fd61d413558e3674ee34bbf8a95f84af9f635f03d43df196146507ba0e8b944e",
+        "models/actor_critic.py": "629e5a1c421df4960235d7a45b93284f7ce7611ff7cb04a436a698f7c3640e02",
+        "models/backbone.py": "852b63e486ec86955226eabf09a53c4b802669d994e717e73f454a3837dd1a3d",
+        "models/grp_model.py": "74aa4e28960877d831d871808a3c01116f823729e89037fec3406fb200c4cf80",
+        "models/q_network.py": "128ec9ab6c4cae562c7947cd54bf487ed8d802809e7133913ebd6f7f78db7a1d",
+        "planning.py": "4fd933db62e4e90c08f1e477553f18074ca5caf9ad71b79dba4696cdb50c6f08",
+        "rollout.py": "765a9a2cf90de1782e359d4a9442cf3616c8661a6016f28883579d5411fb26e8",
+        "runtime.py": "70612cb86dc0621068fd9663dd888d912d4d261c62f6cd2d24b4110014885b23",
+        "trace_samples.py": "0bd9a8df043dd79f357b7b420f7e33e9a288b60096c00ee0c481f89b8e570dd7",
+        "training.py": "1f69f5f121180124b95a756d53f3795ef210ac41f9c272a2a2f738c84de9a180"
+      }
+    },
+    "runtime_provenance": {
+      "agari_kit": {
+        "package": "agari-kit",
+        "source_sha256": "e1991979d79a373ca54050786616f57ded571a8d20de326a6e66982244dd1979",
+        "version": "0.1.0"
+      },
+      "engine": {
+        "binary_sha256": "169c8c2c53bdace01e4ca319f54050565fe728a5b1b2fc6b7f3046738887071d",
+        "version": "0.4.10"
+      },
+      "lockfile_sha256": "e77f024ebd5a8f4ab8cc686ce3ec3e6acccb7a997f574d02f3bf0679bd4e0406",
+      "numpy": "2.4.1",
+      "python": {
+        "implementation": "CPython",
+        "version": "3.12.16"
+      },
+      "schema_version": 1,
+      "torch": "2.9.1"
+    },
+    "training_plan_sha256": "7348d77afa63905e58be89b4cdac52ee326324463245aefdee0a0596fdf898f0",
+    "progress": {
+      "cql": 8217,
+      "grp": 1133,
+      "ppo": 4
+    },
+    "coverage": {
+      "cql": {
+        "complete_epochs": 1,
+        "mode": "epochs",
+        "samples_in_epoch": 0,
+        "samples_seen": 525853,
+        "training_games": 900,
+        "unique_games_seen": 900
+      },
+      "grp": {
+        "complete_epochs": 1,
+        "mode": "epochs",
+        "samples_in_epoch": 0,
+        "samples_seen": 36228,
+        "training_games": 900,
+        "unique_games_seen": 900
+      }
+    },
+    "artifacts": {
+      "config.json": {
+        "path": "runs/full-coverage-trace-1000-v1/config.json",
+        "bytes": 714,
+        "sha256": "7ea644b6560de0f429b030f696e782ed6ec4b1404a1636dd0e377db9dff9bd29"
+      },
+      "dataset.json": {
+        "path": "runs/full-coverage-trace-1000-v1/dataset.json",
+        "bytes": 689188,
+        "sha256": "192e3af58dbeffbbde677234e423aa2ac37c76f5bf9071a0670cd6a768f1aa5a"
+      },
+      "execution-plan.json": {
+        "path": "runs/full-coverage-trace-1000-v1/execution-plan.json",
+        "bytes": 180420,
+        "sha256": "f26ebb1afc31016ed6278a308b6e1bc31ee4f13dc64e64a07ae72eaf423e5f09"
+      },
+      "result.json": {
+        "path": "runs/full-coverage-trace-1000-v1/result.json",
+        "bytes": 818,
+        "sha256": "201559530984c7bb9804ab0f813ae3462c3ea5f48d201f6c738fa8fcadb6f8cb"
+      },
+      "coverage.json": {
+        "path": "runs/full-coverage-trace-1000-v1/coverage.json",
+        "bytes": 371317,
+        "sha256": "cff17349a0b06b33397f7b1fdc00b4b12dcdd9174f190facb4630292ea48f532"
+      },
+      "validation.json": {
+        "path": "runs/full-coverage-trace-1000-v1/validation.json",
+        "bytes": 2641,
+        "sha256": "bccd59cb9bd917a241f94be9bef0072a6c04d10aa4ad837ddddac754e8b0c435"
+      },
+      "metrics.jsonl": {
+        "path": "runs/full-coverage-trace-1000-v1/metrics.jsonl",
+        "bytes": 2950851,
+        "sha256": "83b5a697708add3d9c8ea71619f18bcc628c5a24a50878485d2710d9adb29264"
+      }
+    },
+    "checkpoint": {
+      "path": "checkpoints/full-coverage-trace-1000-v1/latest.pt",
+      "bytes": 5208381,
+      "sha256": "f560edad5d6ee23a354ebf54b9817efa76cd41214d77f2f887412ac841a57b06"
+    },
+    "historical_acceptance": {
+      "path": "experiments/full-coverage-trace-1000-v1/training/acceptance.json",
+      "bytes": 4929,
+      "sha256": "47eeabc48ae050da467c8493ccbdccb72890d0ee20bdeceb37ab554562257292"
+    },
+    "historical_artifact_inventory": {
+      "path": "experiments/full-coverage-trace-1000-v1/training/artifacts.json",
+      "bytes": 3527,
+      "sha256": "5f6a754e95b5b4e29faf36d0434bddf2ccb6baf359928f8fafae4dc19aa6f9ba"
+    },
+    "historical_inventory_entries_verified": 19
+  },
+  "online_validation": {
+    "run": "riichi-validation-v1",
+    "endpoint": "wss://game.riichi.dev/ws/validate",
+    "rules": {
+      "game_mode": "4p-red-east",
+      "preset": "tenhou",
+      "engine_version": "0.4.10"
+    },
+    "report": {
+      "games_requested": 1,
+      "games_completed": 1,
+      "validation_passed": true,
+      "degraded_games": 0,
+      "counts": {
+        "ack_accepted": 120,
+        "replies_prepared": 120,
+        "replies_sent": 120,
+        "requests": 120
+      }
+    },
+    "game": {
+      "mode": "validate",
+      "status": "complete",
+      "seat": 0,
+      "scores": [
+        49100,
+        5400,
+        22100,
+        23400
+      ],
+      "validation_passed": true,
+      "degraded": false,
+      "counts": {
+        "requests": 120,
+        "replies_prepared": 120,
+        "replies_sent": 120,
+        "ack_accepted": 120
+      },
+      "game_index": 0
+    },
+    "recorded_source": {
+      "package": "agari_research",
+      "module": "agari_research.model_agent",
+      "module_path": "/Users/zhou/MyCodes/AgariLab/agari-research/src/agari_research/model_agent.py",
+      "roots": [
+        "/Users/zhou/MyCodes/AgariLab/agari-research/src/agari_research"
+      ],
+      "source_sha256": "43eabb39e1518ec550f8692bce79224060f07aa280f12a254b990ccc2c3e7e21",
+      "files": 17
+    },
+    "source_commit_matched_by_bytes": "761b4522b5343b01413d640b58444b8a3fb7568e",
+    "source_commit_note": "Verified package-byte match; the online manifest did not record an execution Git commit",
+    "recorded_runtime": {
+      "engine": {
+        "version": "0.4.10",
+        "binary_sha256": "169c8c2c53bdace01e4ca319f54050565fe728a5b1b2fc6b7f3046738887071d"
+      },
+      "agari_kit": {
+        "package": "agari-kit",
+        "version": "0.1.0",
+        "source_sha256": "e1991979d79a373ca54050786616f57ded571a8d20de326a6e66982244dd1979"
+      }
+    },
+    "artifacts": {
+      "manifest.json": {
+        "storage": {
+          "path": "runs/riichi-validation-v1/manifest.json",
+          "bytes": 2242,
+          "sha256": "eeda31536b58f9fbc061ee18d63235bb96ae668e4c242fa55b8f4e5ff07ea3e7"
+        },
+        "repository": {
+          "path": "experiments/riichi-validation-20261028-v1/manifest.json",
+          "bytes": 2242,
+          "sha256": "eeda31536b58f9fbc061ee18d63235bb96ae668e4c242fa55b8f4e5ff07ea3e7"
+        }
+      },
+      "games.jsonl": {
+        "storage": {
+          "path": "runs/riichi-validation-v1/games.jsonl",
+          "bytes": 252,
+          "sha256": "d380a1ea587494f722bdf3b046c10dc93e06654b354ee6bf2749bc38ff655aa8"
+        },
+        "repository": {
+          "path": "experiments/riichi-validation-20261028-v1/games.jsonl",
+          "bytes": 252,
+          "sha256": "d380a1ea587494f722bdf3b046c10dc93e06654b354ee6bf2749bc38ff655aa8"
+        }
+      },
+      "report.json": {
+        "storage": {
+          "path": "runs/riichi-validation-v1/report.json",
+          "bytes": 221,
+          "sha256": "5e83aab87e65a23b7c776a6ba335cbddaa6ce13e279adf121b3d2a215493bcde"
+        },
+        "repository": {
+          "path": "experiments/riichi-validation-20261028-v1/report.json",
+          "bytes": 221,
+          "sha256": "5e83aab87e65a23b7c776a6ba335cbddaa6ce13e279adf121b3d2a215493bcde"
+        }
+      },
+      "events.jsonl": {
+        "storage": {
+          "path": "runs/riichi-validation-v1/events.jsonl",
+          "bytes": 30945,
+          "sha256": "e4ad2b1a4fd136697eadacaa378cd8201caf3965a08e55bfbab50bb61cb3be5b"
+        },
+        "repository": {
+          "path": "experiments/riichi-validation-20261028-v1/events.jsonl",
+          "bytes": 30945,
+          "sha256": "e4ad2b1a4fd136697eadacaa378cd8201caf3965a08e55bfbab50bb61cb3be5b"
+        }
+      }
+    },
+    "verification": {
+      "server_passed_verdict": true,
+      "unique_decisions_and_matching_accepted_acks": 120,
+      "event_counts": {
+        "start_game": 1,
+        "decision": 120,
+        "action_ack": 120,
+        "end_game": 1,
+        "validation_result": 1
+      },
+      "terminal_scores_match": true
+    },
+    "limitation": "One East validation game against platform tsumogiri bots; transport evidence is not a full MJAI replay or ranked-strength result"
+  },
+  "verification": {
+    "runtime_observed_now": {
+      "schema_version": 1,
+      "agari_kit": {
+        "package": "agari-kit",
+        "version": "0.1.0",
+        "source_sha256": "e1991979d79a373ca54050786616f57ded571a8d20de326a6e66982244dd1979"
+      },
+      "engine": {
+        "version": "0.4.10",
+        "binary_sha256": "169c8c2c53bdace01e4ca319f54050565fe728a5b1b2fc6b7f3046738887071d"
+      },
+      "python": {
+        "implementation": "CPython",
+        "version": "3.12.16"
+      },
+      "torch": "2.9.1",
+      "numpy": "2.4.1",
+      "lockfile_sha256": "e77f024ebd5a8f4ab8cc686ce3ec3e6acccb7a997f574d02f3bf0679bd4e0406"
+    },
+    "package_source_observed_now": "43eabb39e1518ec550f8692bce79224060f07aa280f12a254b990ccc2c3e7e21",
+    "generator": {
+      "path": "experiments/full-coverage-trace-1000-v1/build_model_release.py",
+      "bytes": 23472,
+      "sha256": "0f9e5c1b62b500af4b3482658915363d1bb25f550a9335f709d0fdef65fc4747"
+    },
+    "manifest_helper": {
+      "path": "src/agari_research/manifest.py",
+      "bytes": 2056,
+      "sha256": "1bea06feada03cc0f7c733d90f9b430d02d4752ca9535f819dd3f48d5d8971da"
+    },
+    "no_training_or_game_connections": true,
+    "verification_scope": "Existing model tensors, source Git blobs, split metadata and completed run artifacts; no dataset replay or held-out game content"
+  },
+  "release_policy": {
+    "immutable": true,
+    "overwrite_allowed": false,
+    "ranked_campaign_included": false,
+    "next_version": "Add ranked acceptance only in a new release version after its independent completion audit"
+  },
+  "limitations": [
+    "Training and local evaluation use half games; server validation uses an East game.",
+    "Training and server validation match package 43eabb39; local evaluation used the distinct 723b810 snapshot / package 44bb7f08.",
+    "Offline latency covers Agent.act only; validation transport timings have different boundaries.",
+    "The running 100-game ranked campaign, formal 10000-game promotion and leaderboard milestones are outside this immutable release.",
+    "Weights, raw third-party data and credentials are not included in the repository manifest."
+  ]
+}
