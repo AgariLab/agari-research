@@ -29,6 +29,11 @@ jobs:
       - name: Require reviewed dependency lockfile
         run: test -f uv.lock
       - name: Install complete frozen training environment
+        env:
+          # Overseas runners may stall on connections and large mirror wheels.
+          UV_HTTP_CONNECT_TIMEOUT: "60"
+          UV_HTTP_TIMEOUT: "120"
+          UV_CONCURRENT_DOWNLOADS: "4"
         run: python ../agari-kit/scripts/with_storage.py uv sync --frozen
       - name: Verify dependency consistency
         run: python ../agari-kit/scripts/with_storage.py uv lock --check --offline
