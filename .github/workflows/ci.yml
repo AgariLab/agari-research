@@ -40,3 +40,5 @@ jobs:
         run: python ../agari-kit/scripts/with_storage.py uv run --frozen python -B experiments/full-coverage-trace-1000-v1/test_model_release_v2.py -v
       - name: Test historical one-interruption release rejection gates
         run: python ../agari-kit/scripts/with_storage.py uv run --frozen python -B experiments/full-coverage-trace-1000-v1/test_model_release_v2_continued.py -v
+      - name: Test complete-series model release gates
+        run: python ../agari-kit/scripts/with_storage.py uv run --frozen python -B experiments/full-coverage-trace-1000-v1/test_model_release_v2_series.py -v

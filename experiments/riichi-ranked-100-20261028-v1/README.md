@@ -51,7 +51,7 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python ../agari-kit
 
 02:53:41–02:57:18 UTC 完成唯一诊断对局 `runs/riichi-ranked-diagnostic-v1/`：seat 0，
 终分 `[4600, 32500, 49800, 13100]`，127 次动作全部 accepted，零超时、失败或降级。
-因此当前共 **31 次尝试、29 场完整、2 次中断**。完整场 4,494 次请求，全部观察 4,609 次；
+截至该诊断结束共 **31 次尝试、29 场完整、2 次中断**。完整场 4,494 次请求，全部观察 4,609 次；
 后者包含中断场的 115 次。该场未复现断线，不能据此推断原问题已修复。
 诊断观察器保留原连接配置、模型和推理源码；作为单独的 `parent_transport_observer` 运行变体记录，
 其脚本 SHA 为 `9c8dd327662276771082a5dd543b7bd4b00d8fa419ce3de64962a808cd10e294`。
@@ -60,7 +60,7 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python ../agari-kit
 
 [原独立验收工具](AUDIT.md)与[原发布顺序](../full-coverage-trace-1000-v1/release-v2-workflow.md)
 保留原门槛；[一次中断恢复版本](CONTINUATION-AUDIT.md)也因第二次中断而不满足。
-两者均不能发布真实最终审核或 release-v2。统一 series registry 正在实现，固定目标 100 场完整，
+两者均不能发布真实最终审核或 release-v2。[统一 series registry 审计](SERIES-AUDIT.md)已实现，固定目标 100 场完整，
 逐批保留全部尝试及来源摘要，分别报告完整性、完成进度和故障；原连续零故障标准保持未通过。
 历史 release-v1 与失败批次不重写，之后的完整场不替换或掩盖失败记录。
 
@@ -69,6 +69,10 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python ../agari-kit
 每次仍为 games=1，唯一活动连接；任一非成功退出立即停止，不自动重试失败场。
 启动前逐次核对脚本、计划、模型与描述文件摘要。未创建的计划项不算实际尝试。
 当前实时完成数须核对新 run 的真实 end_game 再加 29，不能以计划数代替实测。
+2026-10-28 03:35 UTC 的独立只读核对为 34 场完整、2 次中断、1 场进行中：完整场 5,147 次请求，
+中断场 115 次；状态 pending，完整性错误为空。审计 17 项及
+[series 发布门禁](../full-coverage-trace-1000-v1/release-v2-series-workflow.md)24 项合成测试通过，
+真实发布器只读联调正确保持 pending，未生成最终审核或 release-v2。
 
 本地 `decision.latency_ms` 计消息接收到动作准备的客户端处理时间，
 `action_ack.elapsed_ms` 是服务端报告的耗时，二者不混算。排位顺位是在线匹配结果，

@@ -1,0 +1,616 @@
+{
+  "schema_version": 1,
+  "series_id": "riichi-ranked-100-20261028-v1",
+  "revision": 1,
+  "target_complete_games": 100,
+  "runs_root": "/Volumes/新加卷/AgariLab/runs",
+  "predecessor": null,
+  "legacy_auditor_sha256": "191c396e01574782942059c902ff6ae7ad915c7a68e000cf663f9c43077bbc40",
+  "expected_identity": {
+    "weights": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096",
+    "descriptor": "51495822b3af9c6aff6f11a59aa3db0c1380ed4238088b22d4bc2741e052a381",
+    "kit": "e1991979d79a373ca54050786616f57ded571a8d20de326a6e66982244dd1979",
+    "research": "43eabb39e1518ec550f8692bce79224060f07aa280f12a254b990ccc2c3e7e21",
+    "engine": "169c8c2c53bdace01e4ca319f54050565fe728a5b1b2fc6b7f3046738887071d",
+    "launcher": "cd570e8abc1b5b028661f6dfa7881ebdea7c650db11b7d5a0c7fd53adbe4aede",
+    "kit_files": 19,
+    "research_files": 17
+  },
+  "diagnostic_wrapper": {
+    "path": "/Users/zhou/MyCodes/AgariLab/agari-kit/scripts/run_online_diagnostic.py",
+    "sha256": "9c8dd327662276771082a5dd543b7bd4b00d8fa419ce3de64962a808cd10e294"
+  },
+  "history_batches": [
+    {
+      "id": "first",
+      "run": "riichi-ranked-first-v1",
+      "kind": "standalone",
+      "runtime_variant": "uninstrumented",
+      "requested_games": 1,
+      "terminal_status": "complete",
+      "pins": {
+        "events.jsonl": {
+          "bytes": 32696,
+          "sha256": "16f1aa4b1b26d635105b1f419ebab928820d0fb71de8e13892896b688b5dfef3"
+        },
+        "games.jsonl": {
+          "bytes": 250,
+          "sha256": "95dfed903415964073d319f592e7e530d2e1607db0693a907952e7a6369381ea"
+        },
+        "manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "report.json": {
+          "bytes": 221,
+          "sha256": "426ad886fce666644ea0684fad02ed341309e9932f655e15a891252ffb8b374c"
+        }
+      }
+    },
+    {
+      "id": "remaining99",
+      "run": "riichi-ranked-campaign-remaining99-v1",
+      "kind": "campaign",
+      "runtime_variant": "uninstrumented",
+      "requested_games": 99,
+      "terminal_status": "stopped",
+      "pins": {
+        "game-000001/events.jsonl": {
+          "bytes": 19069,
+          "sha256": "5a7e885ad96145233e25c8c701ef97be68dfb23908d8e467fa743fe72d7152a6"
+        },
+        "game-000001/games.jsonl": {
+          "bytes": 247,
+          "sha256": "011c8f8cc4d79b75922ffc55913ecedcc588bbb92f1dd297671305d1118de8f7"
+        },
+        "game-000001/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000001/report.json": {
+          "bytes": 217,
+          "sha256": "4bf5b0fc8a2a13e2798fece8e35fe9c82a24f1853527b89d70c8b1b799b1e9cb"
+        },
+        "game-000002/events.jsonl": {
+          "bytes": 40909,
+          "sha256": "c0dd9626a889842ae82c5645e2b84bfd4eab6051dd2d1796306411357d3bb778"
+        },
+        "game-000002/games.jsonl": {
+          "bytes": 250,
+          "sha256": "a6a47f8d13c96e154cf7a16197825896def0d730c1024f7b0114113aef7dd83d"
+        },
+        "game-000002/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000002/report.json": {
+          "bytes": 221,
+          "sha256": "899991ec99ce474e74cdca13ee5b6ebe0e59a4e5613c57b9c1443fa90fa58379"
+        },
+        "game-000003/events.jsonl": {
+          "bytes": 40132,
+          "sha256": "bb9593e41855e4a048898aa7a68e685f0fa43cb1f344e32bf3a0452219d1fa63"
+        },
+        "game-000003/games.jsonl": {
+          "bytes": 252,
+          "sha256": "d43de7a3db7f64bae0984f2fba6a786b5183e0ca55534020fd032addf3149004"
+        },
+        "game-000003/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000003/report.json": {
+          "bytes": 221,
+          "sha256": "d4ebfa7a1270ad8d72abbdb7a6a6fa00f6a2a7c07bd1222471fef3c1809e613f"
+        },
+        "game-000004/events.jsonl": {
+          "bytes": 48098,
+          "sha256": "5c28a50ae593ca146fc43c6c4f1fd47bae2b14fe0a601caa065a0d2933d68938"
+        },
+        "game-000004/games.jsonl": {
+          "bytes": 251,
+          "sha256": "363c8669bdd9a51962598960b930f310ecc521771946148ae71ebb491703f00b"
+        },
+        "game-000004/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000004/report.json": {
+          "bytes": 221,
+          "sha256": "a70e385019c7776c4899445871c2dcc8c7da3e16d1838193ebd0f4ad55c5c297"
+        },
+        "game-000005/events.jsonl": {
+          "bytes": 48358,
+          "sha256": "b89550e4902f07911002ceeb960291dcd98112a739488e4c7b42e187a1de22a2"
+        },
+        "game-000005/games.jsonl": {
+          "bytes": 252,
+          "sha256": "5c875f774b5e48b6178501b09d65e675f3978180a7892bd8034285720c620f24"
+        },
+        "game-000005/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000005/report.json": {
+          "bytes": 221,
+          "sha256": "e46375eb1b37be63281ca00a78259f423b46760bebb1b15b8177c907494cdcbc"
+        },
+        "game-000006/events.jsonl": {
+          "bytes": 36794,
+          "sha256": "52384d6c1ad8c675379d1d68cfd8d9ec67b8bbf0a9801fe8316987a17005d457"
+        },
+        "game-000006/games.jsonl": {
+          "bytes": 251,
+          "sha256": "719f5d6de4d0f4641557b5d210f5a91061227954299da7e3c80046b2ce7425fa"
+        },
+        "game-000006/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000006/report.json": {
+          "bytes": 221,
+          "sha256": "ccb3adcfb7c7888a3e35c399d65bdc18304a8502cf97ca01a9be81579e2b34af"
+        },
+        "game-000007/events.jsonl": {
+          "bytes": 28067,
+          "sha256": "3c29c3e76bef8fc3ae7f2a86e38aa441cd7a06ea195fbfc70b138a6fddc8bf88"
+        },
+        "game-000007/games.jsonl": {
+          "bytes": 251,
+          "sha256": "a874f8e4f7c9096637f57f3357ef7de9f88ef102a7134944aeb344e1a405f1fb"
+        },
+        "game-000007/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000007/report.json": {
+          "bytes": 221,
+          "sha256": "49de17592f932f3c87be33b8bb226d9a9b5108aa9697acb7f404992fabfc1cad"
+        },
+        "game-000008/events.jsonl": {
+          "bytes": 37574,
+          "sha256": "d71f7b43f5e6a6058a3a66a8da80a2cbd42ba88b195ffa67b994975844fbb25b"
+        },
+        "game-000008/games.jsonl": {
+          "bytes": 251,
+          "sha256": "8f025477717d770e2369ede286657ef04f3c584bb2262d886b6df3ace8bb0363"
+        },
+        "game-000008/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000008/report.json": {
+          "bytes": 221,
+          "sha256": "368c37333aae8f3c846a7d5f83ecf1eb8f5caddc2b87d97448113e1ec4618034"
+        },
+        "game-000009/events.jsonl": {
+          "bytes": 48317,
+          "sha256": "d6f24c5fd88238bc286ebebe6843ad8c9d1be7df6ebbabceaa14088b2012fd1a"
+        },
+        "game-000009/games.jsonl": {
+          "bytes": 250,
+          "sha256": "8c823f0e7e58ce07ca265d4825563edf2ae43d6df30cb95bae51953cd3ed2b7c"
+        },
+        "game-000009/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000009/report.json": {
+          "bytes": 221,
+          "sha256": "e46375eb1b37be63281ca00a78259f423b46760bebb1b15b8177c907494cdcbc"
+        },
+        "game-000010/events.jsonl": {
+          "bytes": 41423,
+          "sha256": "a407f45790fc538bb2c9849773d2bb9681c99339646b8d4d7728ac76803d28eb"
+        },
+        "game-000010/games.jsonl": {
+          "bytes": 251,
+          "sha256": "5ed06b54e9169c4b27c6ce78b516c7f6d43278b7ebf9a9cb64474a082682639c"
+        },
+        "game-000010/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000010/report.json": {
+          "bytes": 221,
+          "sha256": "06eef3d6009e121c7974d389bec1f49cd65dc477c4516a4d430256eb3d164e13"
+        },
+        "game-000011/events.jsonl": {
+          "bytes": 21400,
+          "sha256": "536509303d2ec3fbaf4868e0c98ce5cca0b0cc4ad24c978886a9cfb97bd8e319"
+        },
+        "game-000011/games.jsonl": {
+          "bytes": 247,
+          "sha256": "685ca36671f9062f314a7f9cc3123683845ee8ffee905d52e30113bb9e8c1f18"
+        },
+        "game-000011/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000011/report.json": {
+          "bytes": 217,
+          "sha256": "42e3105fcf1139b54a0b9919d9c6e945e2b04f37d66d7e1218b76a7c5a795d45"
+        },
+        "game-000012/events.jsonl": {
+          "bytes": 30376,
+          "sha256": "b0251ed4fc0ee239016b187494e64875c680305a1418873988495e88a627837c"
+        },
+        "game-000012/games.jsonl": {
+          "bytes": 251,
+          "sha256": "4d34dd98d0449296fa782c7ba9abe6408acee8e5bdc45fde21dbd1732e13e0b4"
+        },
+        "game-000012/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000012/report.json": {
+          "bytes": 221,
+          "sha256": "928fcfe7deaca112ef10efd21f097417a7e95848785f3a4ac59663e16bc1dba1"
+        },
+        "game-000013/events.jsonl": {
+          "bytes": 57070,
+          "sha256": "b175b8b8931f379492c4249d2a73515babefa38b751c4db2311340ccd4c8e350"
+        },
+        "game-000013/games.jsonl": {
+          "bytes": 252,
+          "sha256": "90798fa03b2a2ace4af8d1387afbe13e53e49509aaeea99d0288b09901a6e589"
+        },
+        "game-000013/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000013/report.json": {
+          "bytes": 221,
+          "sha256": "32e89a8cdc3ff24561c7558de1609e64a52df203c98423fdb278715aefd85ceb"
+        },
+        "game-000014/events.jsonl": {
+          "bytes": 61973,
+          "sha256": "5bccd6d5a7f6d91dfd55837e39b646b0c68a25d71d54db92e20818fe2b7de010"
+        },
+        "game-000014/games.jsonl": {
+          "bytes": 250,
+          "sha256": "8bdee2c58000b941adcf0faf56a7f72d36418cb9ec2f3262256de2df7bb67f3b"
+        },
+        "game-000014/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000014/report.json": {
+          "bytes": 221,
+          "sha256": "1bbefba9dc25aba2473f67ffb6c8bd6124dff869b09c0ef65aebf8d3415de193"
+        },
+        "game-000015/events.jsonl": {
+          "bytes": 31425,
+          "sha256": "1be52630fd6bcb3b1856c50731ebc30e702af290883447dbb224782c87506207"
+        },
+        "game-000015/games.jsonl": {
+          "bytes": 250,
+          "sha256": "215005f368fa427dfe0ade0aba6498e004960d2ea781a8b4526d2e619c4d4b03"
+        },
+        "game-000015/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000015/report.json": {
+          "bytes": 221,
+          "sha256": "b91f11045c7e288c62ff7c1e9a08d842aadc03eca78d2f9db0c9412b19d96bef"
+        },
+        "game-000016/events.jsonl": {
+          "bytes": 45785,
+          "sha256": "663eead0edbd2c11d8268d599416956bc1af29b2e71e0083b9168ae2d569eaca"
+        },
+        "game-000016/games.jsonl": {
+          "bytes": 250,
+          "sha256": "c5188b2229c75a691b3d08a4da069959d4ec00e723cd7ab891e0786abcf75fbc"
+        },
+        "game-000016/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000016/report.json": {
+          "bytes": 221,
+          "sha256": "8f4c214143e3e67349d3bd1fdd76c3d0d968e03c033a2b11fa725230eb523e22"
+        },
+        "game-000017/events.jsonl": {
+          "bytes": 45281,
+          "sha256": "eb1cf663b4e4f3052abf20be553807bf0f527eba59a6da55a72ec5c830c310ad"
+        },
+        "game-000017/games.jsonl": {
+          "bytes": 250,
+          "sha256": "de63200cfa51978e8d2495777e7a5a18131578d5e2ce044a8beeb874da079b32"
+        },
+        "game-000017/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000017/report.json": {
+          "bytes": 221,
+          "sha256": "e3879ef50cddf521a38570deb5bfd34624c206875e6a5df50730ad78e7efccb5"
+        },
+        "game-000018/events.jsonl": {
+          "bytes": 30903,
+          "sha256": "7c18d1522d8ee62e77e09e85d09a87588024d4c456b3b3f4365b1f1a6b81a6d3"
+        },
+        "game-000018/games.jsonl": {
+          "bytes": 251,
+          "sha256": "b01e0fb989538ad6026e9df41a6824eef5b1e696e36d90c3436e7d2cc5ee33a0"
+        },
+        "game-000018/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000018/report.json": {
+          "bytes": 221,
+          "sha256": "79ca7721de33c268ee14a7532d08fae68f869d49e154367fd1cca5ace5c458ae"
+        },
+        "game-000019/events.jsonl": {
+          "bytes": 45298,
+          "sha256": "331fae58c134aae7d98226930938fab13db4bfd6fecdf2192ed23ec55a46c966"
+        },
+        "game-000019/games.jsonl": {
+          "bytes": 251,
+          "sha256": "9e984ca64c0919fef4c55047c613f77d983486fde2aa38df19358aa94e79f78f"
+        },
+        "game-000019/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000019/report.json": {
+          "bytes": 221,
+          "sha256": "e3879ef50cddf521a38570deb5bfd34624c206875e6a5df50730ad78e7efccb5"
+        },
+        "game-000020/events.jsonl": {
+          "bytes": 50917,
+          "sha256": "bf384a790f81d627c82fa8f02abf8872e9cf54945906ea855d137b165ea34908"
+        },
+        "game-000020/games.jsonl": {
+          "bytes": 250,
+          "sha256": "03600f3d56c502e87f3814c8a6b946baf06c05172f47dcd685002a12e07dea08"
+        },
+        "game-000020/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000020/report.json": {
+          "bytes": 221,
+          "sha256": "2cd14c45855c5fc8cc5b969b0a2dabe78490d931268500e0bb7fa97878bb47b7"
+        },
+        "game-000021/events.jsonl": {
+          "bytes": 38853,
+          "sha256": "f4f66bfa7344ff5ac0949b4a1422fc75fa87e3d705793eb4809ad0eec0fb95b9"
+        },
+        "game-000021/games.jsonl": {
+          "bytes": 250,
+          "sha256": "64a8b6f52a069c320b3ad0ab292fec9aeebcb8fd1151dd890a99b1db8fc0f884"
+        },
+        "game-000021/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000021/report.json": {
+          "bytes": 221,
+          "sha256": "8bb0918b91755bcedbb421e47ba0517d987f792d2cc5db55a1fd313e8fcc6390"
+        },
+        "game-000022/events.jsonl": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "game-000022/games.jsonl": {
+          "bytes": 183,
+          "sha256": "76ca552c90e7bb828467926ec9fc51ad695aa6b965a45af80b5d6fd34e4c5fca"
+        },
+        "game-000022/manifest.json": {
+          "bytes": 2240,
+          "sha256": "902d713bf4f24d13e0f7a7b41c8c7bfdf55bef475bd8aad7c2e7f870cefafcc9"
+        },
+        "game-000022/report.json": {
+          "bytes": 119,
+          "sha256": "2defeeefb69d8ba515baa263c1f8c921e2004521b8e8c18e1c6f996235c991bf"
+        },
+        "games.jsonl": {
+          "bytes": 16164,
+          "sha256": "572339e4d7500c42d4a9819a8184473671428046bb28bc88a615a9a51101a479"
+        },
+        "manifest.json": {
+          "bytes": 2311,
+          "sha256": "159603577b0d996fb39ff6ce5fc4b1f67687a6904a2c5e33252c89494b088e44"
+        },
+        "summary.json": {
+          "bytes": 804,
+          "sha256": "d7ceeee5b93c6456e87926b3dcfbc67dd75d2a607d62eaa6664bbe55e7ef7dd5"
+        }
+      }
+    },
+    {
+      "id": "continuation78",
+      "run": "riichi-ranked-continuation78-v1",
+      "kind": "campaign",
+      "runtime_variant": "uninstrumented",
+      "requested_games": 78,
+      "terminal_status": "stopped",
+      "pins": {
+        "game-000001/events.jsonl": {
+          "bytes": 40133,
+          "sha256": "01282b7ea7e6aef2e14cd782a8c2bae2652d3804f4a9489069f32cde3311731f"
+        },
+        "game-000001/games.jsonl": {
+          "bytes": 250,
+          "sha256": "b9a0c08735ce782002b5e16ba1ab77d786d21f2b4a0d162b9c7b26c6f4610f65"
+        },
+        "game-000001/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000001/report.json": {
+          "bytes": 221,
+          "sha256": "d4ebfa7a1270ad8d72abbdb7a6a6fa00f6a2a7c07bd1222471fef3c1809e613f"
+        },
+        "game-000002/events.jsonl": {
+          "bytes": 54499,
+          "sha256": "b31e7755860cfbf527b66b8ca581057a19642e6deba623559973719d33c55cf0"
+        },
+        "game-000002/games.jsonl": {
+          "bytes": 250,
+          "sha256": "9984590b228ab7742c3243a84ec92f087888610524d687827e4d1e26603a1548"
+        },
+        "game-000002/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000002/report.json": {
+          "bytes": 221,
+          "sha256": "a7d4a2d13f7a080184db44cb201511f6fe32fdbf229276b5a8d7a76d420c4876"
+        },
+        "game-000003/events.jsonl": {
+          "bytes": 43505,
+          "sha256": "34f0b8c307f6bb7ffaea2f33193317108e342fb5b1f38ab612e73f0714a17846"
+        },
+        "game-000003/games.jsonl": {
+          "bytes": 251,
+          "sha256": "43e3a399df5fe0a390dd1c3941c4034b3a95dc7ead89d962ffe502bddd26999a"
+        },
+        "game-000003/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000003/report.json": {
+          "bytes": 221,
+          "sha256": "35408e5f30c257af97a4703503c29021e88ab3d223af1f7a67208af90fb21f55"
+        },
+        "game-000004/events.jsonl": {
+          "bytes": 26530,
+          "sha256": "385d9736e11acf73f620229f152a4141f927f7ac5795376098c22bcb01cf11f9"
+        },
+        "game-000004/games.jsonl": {
+          "bytes": 251,
+          "sha256": "17724bc43df9a8c4af641f3083c4c1a5b01bb0588adcab60787101aff9446f23"
+        },
+        "game-000004/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000004/report.json": {
+          "bytes": 221,
+          "sha256": "e1d6a7cb5ae429b4b9db03a9b4ecada4956e4a164360c415badb931dcde99542"
+        },
+        "game-000005/events.jsonl": {
+          "bytes": 50933,
+          "sha256": "cdcf15d2863985d751657e39f5664bdd61fef022c149e5621aadb60bfbd871bf"
+        },
+        "game-000005/games.jsonl": {
+          "bytes": 251,
+          "sha256": "dbff98c28d86ab7d4206707cdab9efd01ef106e2b95de4b7522c32b5a2a3a148"
+        },
+        "game-000005/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000005/report.json": {
+          "bytes": 221,
+          "sha256": "2cd14c45855c5fc8cc5b969b0a2dabe78490d931268500e0bb7fa97878bb47b7"
+        },
+        "game-000006/events.jsonl": {
+          "bytes": 27305,
+          "sha256": "c6dd314b79473c6266cc0cd7a00c0d2e122fe5e107b7e2bf601015d01913522b"
+        },
+        "game-000006/games.jsonl": {
+          "bytes": 251,
+          "sha256": "f5d8aa55fe733203a62002510d33a94c80f7aa5397a0bf035f0ecce3a264c68d"
+        },
+        "game-000006/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000006/report.json": {
+          "bytes": 221,
+          "sha256": "cefca2f24f2d377d2082b5aa8c5ab19fd38c888c4e2d974702f0ed961d4a3871"
+        },
+        "game-000007/events.jsonl": {
+          "bytes": 29540,
+          "sha256": "d6f866d8c83dbcdb6da969babd998d52a7701607757b825216cd3d94aad85d88"
+        },
+        "game-000007/games.jsonl": {
+          "bytes": 262,
+          "sha256": "4460c57db829969458010057602e3ff23ee0477912d9864c9e8f28cfdfba308d"
+        },
+        "game-000007/manifest.json": {
+          "bytes": 2240,
+          "sha256": "902d713bf4f24d13e0f7a7b41c8c7bfdf55bef475bd8aad7c2e7f870cefafcc9"
+        },
+        "game-000007/report.json": {
+          "bytes": 221,
+          "sha256": "a38cc51432c657b1cea8513db323bd578be8deda352df95266bbc86778eef87a"
+        },
+        "games.jsonl": {
+          "bytes": 5180,
+          "sha256": "e1c3f9596bc6a0ac9ff37ae9365a99a9acbb5c3547db3391cba07ce3d2e4bdfe"
+        },
+        "manifest.json": {
+          "bytes": 2309,
+          "sha256": "47e10917aae778e5ff072afcf08f8a9ec9a2eb4a00b05379c574f610d27610e9"
+        },
+        "summary.json": {
+          "bytes": 801,
+          "sha256": "77e3548912bb9b4c345144624e52b1763b25215b268628d41ae1c4753a302b57"
+        }
+      }
+    },
+    {
+      "id": "diagnostic1",
+      "run": "riichi-ranked-diagnostic-v1",
+      "kind": "campaign",
+      "runtime_variant": "parent_transport_observer",
+      "requested_games": 1,
+      "terminal_status": "complete",
+      "pins": {
+        "diagnostic/events.jsonl": {
+          "bytes": 1806,
+          "sha256": "673ebf9f8ccf3c1a421d890676a60599ccffd36a5b9b24668cfda750869599d7"
+        },
+        "diagnostic/manifest.json": {
+          "bytes": 926,
+          "sha256": "b9b8ce41390eec75d649fbb026d53a837c995de0bbc749ea8e7bf1784939c6f2"
+        },
+        "diagnostic/result.json": {
+          "bytes": 222,
+          "sha256": "5e300232e5c35a418059af16d3b7e9f74d3efa54f001e4ea3ca54d0430cfd850"
+        },
+        "game-000001/events.jsonl": {
+          "bytes": 32697,
+          "sha256": "2471d3e96a8a1f035f2ff8440a6424318269560f492f29ce59931edc6ccc343b"
+        },
+        "game-000001/games.jsonl": {
+          "bytes": 250,
+          "sha256": "0818e14e618381c3f0bc95592800b5c44e1a00161fdee75a1827c759388cad81"
+        },
+        "game-000001/manifest.json": {
+          "bytes": 2238,
+          "sha256": "664c0c9e62b43b8588f9999987d432ca79eb32fd6d1848e79f54aca23b386a28"
+        },
+        "game-000001/report.json": {
+          "bytes": 221,
+          "sha256": "426ad886fce666644ea0684fad02ed341309e9932f655e15a891252ffb8b374c"
+        },
+        "games.jsonl": {
+          "bytes": 734,
+          "sha256": "50b4e7ab9b1ac9736d4ada9fe2934309daef734794c5544adbcd912532f9e555"
+        },
+        "manifest.json": {
+          "bytes": 2299,
+          "sha256": "949603693c5b5f12ec3f6fe3d4babdec3cdcf993f4b1377234202f24cf97a8ee"
+        },
+        "summary.json": {
+          "bytes": 786,
+          "sha256": "132c3ff8cee9d3069fe9a0f433890857600db4673e6d6d54c9471d3282a0fc65"
+        }
+      }
+    }
+  ],
+  "plans": [
+    {
+      "path": "/Users/zhou/MyCodes/AgariLab/agari-research/experiments/riichi-ranked-100-20261028-v1/observed-series-plan-v1.json",
+      "bytes": 4023,
+      "sha256": "554a8c1d9d8169f01344066e20351ac11f8ac78352f24cb77c66b68fade96d41"
+    }
+  ]
+}
