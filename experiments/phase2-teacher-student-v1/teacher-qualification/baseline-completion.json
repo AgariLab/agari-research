@@ -1,0 +1,10 @@
+{
+  "plan_sha256": "b7d064ef17b51b7ae7c2e1d99e8d835b1b8248f7aab04baf1ee21cde540bc879",
+  "schema_version": 1,
+  "sha256": {
+    "candidate-latencies.json": "b4dc1f3907aecdaedcbfe8cedf8a854b86a8124a4431811fba5fa52de1831f33",
+    "games.jsonl": "290ed18daf8758abf40a8f979d9458e7dd4b8b4aedc12135f1db2c3c4a97b56d",
+    "manifest.json": "253e80bfed7728f286273f77ceb083a8264d3a7b3ea0aa63c6ce9b324755df40",
+    "report.json": "e1cb228b1afdca18eff7f696a35e8c9675907ea910acb13cac6dbd212c74e714"
+  }
+}

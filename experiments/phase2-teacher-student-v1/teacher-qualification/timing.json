@@ -1,0 +1,37 @@
+{
+  "candidate_latency_scope": "complete agent.act call; teacher includes local adapter/IPC/inference; excludes initialization and platform network",
+  "concurrent_workloads": "Baseline and teacher qualification overlapped; CPU/MPS acceptance and later workspace activity also overlapped. These are observed loaded-machine measurements, not idle throughput.",
+  "game_loop_scope": "sum of per-game loop time after agent reset; excludes initialization and final report merge",
+  "measurements": {
+    "baseline": {
+      "candidate_decisions": 166300,
+      "candidate_latency_ms_max": 0.5467499140650034,
+      "candidate_latency_ms_mean": 0.11877672371980401,
+      "candidate_latency_ms_p95": 0.1638340763747692,
+      "game_loop_seconds_sum": 99.82366052782163,
+      "process_log_sha256": "8e6099184f12298e49b2f4010abaf4beae9edb91eb1c5fef61cc29b0d79e70fc",
+      "system_seconds": 8.66,
+      "time_l_maximum_resident_set_size_bytes": 279379968,
+      "time_l_peak_memory_footprint_bytes": 225100616,
+      "user_seconds": 124.34,
+      "wall_seconds": 154.8
+    },
+    "teacher": {
+      "candidate_decisions": 161397,
+      "candidate_latency_ms_max": 92.17470907606184,
+      "candidate_latency_ms_mean": 7.148907523989798,
+      "candidate_latency_ms_p95": 11.607417021878064,
+      "game_loop_seconds_sum": 1237.8739242564188,
+      "process_log_sha256": "7ab62cba650d5e37f21bb0f01781e53ded212554ff563b486193392fa0eabd83",
+      "system_seconds": 615.56,
+      "time_l_maximum_resident_set_size_bytes": 372719616,
+      "time_l_peak_memory_footprint_bytes": 250037112,
+      "user_seconds": 2947.4,
+      "wall_seconds": 4394.64
+    }
+  },
+  "memory_scope": "Raw macOS time -l reported byte counts; not a measured simultaneous sum across parent and Mortal worker processes",
+  "original_scope_correction": "Original report latency_scope says excludes transport; this is imprecise for the external adapter IPC. Original report bytes are preserved.",
+  "process_scope": "time real/user/sys for each whole qualification invocation, including setup and verification",
+  "schema_version": 1
+}

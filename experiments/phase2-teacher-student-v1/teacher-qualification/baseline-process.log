@@ -1,0 +1,19 @@
+{"status": "complete", "games": 1000, "candidate": {"mean_rank": 2.5, "rank_rates": [0.25, 0.25, 0.25, 0.25], "mean_point_delta": 0}}
+      154.80 real       124.34 user         8.66 sys
+           279379968  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               22402  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+               31899  voluntary context switches
+              964195  involuntary context switches
+       2558319815328  instructions retired
+        569925646480  cycles elapsed
+           225100616  peak memory footprint

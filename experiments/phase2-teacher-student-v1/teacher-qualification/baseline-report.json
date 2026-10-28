@@ -1,0 +1,89 @@
+{
+  "attempts": {
+    "failed": 0,
+    "total": 250,
+    "unsealed": 0
+  },
+  "bootstrap_samples": 2000,
+  "bootstrap_seed": 0,
+  "candidate": {
+    "mean_point_delta": 0,
+    "mean_rank": 2.5,
+    "rank_rates": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ]
+  },
+  "candidate_decisions": 166300,
+  "candidate_diagnostics": {
+    "deal_in_payments": 1517,
+    "deal_in_rate": 0.15397215397215397,
+    "deal_ins": 1504,
+    "hands": 9768,
+    "kan_events": 1,
+    "meld_events": 0,
+    "open_hand_rate": 0.0,
+    "open_hands": 0,
+    "riichi_declarations": 3759,
+    "riichi_hands": 3670,
+    "riichi_rate": 0.37571662571662573,
+    "ron_wins": 1517,
+    "tsumo_wins": 486,
+    "win_rate": 0.20505733005733007,
+    "wins": 2003
+  },
+  "candidate_latency_ms_max": 0.5467499140650034,
+  "candidate_latency_ms_mean": 0.11877672371980401,
+  "candidate_latency_ms_p95": 0.1638340763747692,
+  "ci95": {
+    "mean_point_delta": [
+      0,
+      0
+    ],
+    "mean_rank": [
+      2.5,
+      2.5
+    ],
+    "rank_1_rate": [
+      0.25,
+      0.25
+    ],
+    "rank_2_rate": [
+      0.25,
+      0.25
+    ],
+    "rank_3_rate": [
+      0.25,
+      0.25
+    ],
+    "rank_4_rate": [
+      0.25,
+      0.25
+    ]
+  },
+  "ci_method": "seed-group-percentile-bootstrap",
+  "decisions": 665200,
+  "elapsed_seconds": 99.82366052782163,
+  "event_counts": {
+    "ankan": 4,
+    "dahai": 498980,
+    "dora": 4,
+    "end_game": 1000,
+    "end_kyoku": 9768,
+    "hora": 8012,
+    "reach": 15036,
+    "reach_accepted": 14680,
+    "ryukyoku": 1808,
+    "start_game": 1000,
+    "start_kyoku": 9768,
+    "tsumo": 500928
+  },
+  "games": 1000,
+  "illegal_actions": 0,
+  "latency_scope": "agent.act only; candidate seat isolated; excludes loading and transport",
+  "promotion_sample_size_met": false,
+  "seed_groups": 250,
+  "status": "complete"
+}

@@ -1,0 +1,78 @@
+{
+  "binding": {
+    "collection_identity": {
+      "code": {
+        "package": "agari-kit",
+        "source_sha256": "c3a791b966a688a211bbb7bf1b87dcb908a80b474b75105ae90052d2d9a5cfb7",
+        "version": "0.1.0"
+      },
+      "engine": {
+        "binary_sha256": "169c8c2c53bdace01e4ca319f54050565fe728a5b1b2fc6b7f3046738887071d",
+        "version": "0.4.10"
+      },
+      "rules": {
+        "engine_version": "0.4.10",
+        "game_mode": "4p-red-half",
+        "preset": "tenhou"
+      }
+    },
+    "legality": {
+      "checks": [
+        "four-seat-native-half-games",
+        "seat-0-mjai.jsonl.gz",
+        "seat-0-trace.jsonl.gz",
+        "seat-1-mjai.jsonl.gz",
+        "seat-1-trace.jsonl.gz",
+        "seat-2-mjai.jsonl.gz",
+        "seat-2-trace.jsonl.gz",
+        "seat-3-mjai.jsonl.gz",
+        "seat-3-trace.jsonl.gz",
+        "test_ankan_dora_rinshan",
+        "test_kakan_delayed_dora_chankan",
+        "test_kyushu_decision_and_new_hand",
+        "test_reach_followup_discard",
+        "test_red_five_chi_followup_discard",
+        "test_red_five_pon_followup_discard",
+        "test_two_ron_events_then_next_hand"
+      ],
+      "path": "runs/phase2-mortal-s42-protocol-qualification-v1/report.json",
+      "sha256": "a8e1256a0ce4110a0226f0f899fe8134c0cf0ecc5b45eeed7b1f1cca1c30504c"
+    },
+    "qualification_sha256": "13b1805c13b0957eea9e22044e43418f5c9ed9aa145018e88554f5135ee6f538",
+    "registration_sha256": "65b87b00fc62eda020ee92e16be4004ff6170828990feb3621c4354d956d811f",
+    "run": "runs/phase2-teacher-qualification-v1"
+  },
+  "bootstrap_samples": 2000,
+  "bootstrap_seed": 0,
+  "counts": {
+    "baseline": {
+      "attempts": {
+        "failed": 0,
+        "total": 250,
+        "unsealed": 0
+      },
+      "games": 1000,
+      "illegal_actions": 0,
+      "seed_groups": 250
+    },
+    "teacher": {
+      "attempts": {
+        "failed": 0,
+        "total": 250,
+        "unsealed": 0
+      },
+      "games": 1000,
+      "illegal_actions": 0,
+      "seed_groups": 250
+    }
+  },
+  "qualification_status": "passed",
+  "schema_version": 1,
+  "seed_end_inclusive": 2610249,
+  "seed_start": 2610000,
+  "source_bytes_unchanged": true,
+  "status": "independently-verified",
+  "verification_method": "Frozen phase2_contract.require_qualification; no report write or game execution",
+  "verification_wall_seconds": 4.756577791995369,
+  "verified_at_utc": "2026-10-28T18:27:51.091585+00:00"
+}

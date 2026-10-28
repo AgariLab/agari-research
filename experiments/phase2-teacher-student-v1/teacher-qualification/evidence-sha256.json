@@ -1,0 +1,108 @@
+{
+  "artifacts": {
+    "baseline-process.log": {
+      "archive": "baseline-process.log",
+      "bytes": 911,
+      "sha256": "8e6099184f12298e49b2f4010abaf4beae9edb91eb1c5fef61cc29b0d79e70fc"
+    },
+    "baseline/candidate-latencies.json": {
+      "archive": null,
+      "bytes": 3790824,
+      "sha256": "b4dc1f3907aecdaedcbfe8cedf8a854b86a8124a4431811fba5fa52de1831f33"
+    },
+    "baseline/completion.json": {
+      "archive": "baseline-completion.json",
+      "bytes": 492,
+      "sha256": "555fd81476a3aabc26aad119de70ac71e82a18c50a4532936017d146e14de559"
+    },
+    "baseline/games.jsonl": {
+      "archive": null,
+      "bytes": 1310856,
+      "sha256": "290ed18daf8758abf40a8f979d9458e7dd4b8b4aedc12135f1db2c3c4a97b56d"
+    },
+    "baseline/manifest.json": {
+      "archive": null,
+      "bytes": 305016,
+      "sha256": "253e80bfed7728f286273f77ceb083a8264d3a7b3ea0aa63c6ce9b324755df40"
+    },
+    "baseline/plan.json": {
+      "archive": null,
+      "bytes": 14721,
+      "sha256": "b7d064ef17b51b7ae7c2e1d99e8d835b1b8248f7aab04baf1ee21cde540bc879"
+    },
+    "baseline/plan.sha256": {
+      "archive": null,
+      "bytes": 65,
+      "sha256": "a2f4e03714e89f680f7ab8f43929f0b09eaeb15abedb3148f699ebfdb9f56d04"
+    },
+    "baseline/report.json": {
+      "archive": "baseline-report.json",
+      "bytes": 1822,
+      "sha256": "e1cb228b1afdca18eff7f696a35e8c9675907ea910acb13cac6dbd212c74e714"
+    },
+    "comparison-contract.json": {
+      "archive": "comparison-contract.json",
+      "bytes": 465,
+      "sha256": "30c81aad0a2dcb109cbe07f11d9ac5cea604d2a231f52a661dd43cfa1603e343"
+    },
+    "qualification.json": {
+      "archive": "qualification.json",
+      "bytes": 13056,
+      "sha256": "13b1805c13b0957eea9e22044e43418f5c9ed9aa145018e88554f5135ee6f538"
+    },
+    "registration.json": {
+      "archive": "registration.json",
+      "bytes": 17477,
+      "sha256": "65b87b00fc62eda020ee92e16be4004ff6170828990feb3621c4354d956d811f"
+    },
+    "teacher-process.log": {
+      "archive": "teacher-process.log",
+      "bytes": 923,
+      "sha256": "7ab62cba650d5e37f21bb0f01781e53ded212554ff563b486193392fa0eabd83"
+    },
+    "teacher/candidate-latencies.json": {
+      "archive": null,
+      "bytes": 3399434,
+      "sha256": "765bb503de5da271c1545689f72ef38ddddbed79e2c7aae467db14106319eaea"
+    },
+    "teacher/completion.json": {
+      "archive": "teacher-completion.json",
+      "bytes": 492,
+      "sha256": "8ab2b74a7821284794d5fcde502805b74aa92ab8bc8f0250257a76490773a2ee"
+    },
+    "teacher/games.jsonl": {
+      "archive": null,
+      "bytes": 1316563,
+      "sha256": "4f5575589e06512924e8e5fd79662366b83f69e796558287ad7c9f4352ade728"
+    },
+    "teacher/manifest.json": {
+      "archive": null,
+      "bytes": 305038,
+      "sha256": "b56b197f32f63bcf3233b41d9dbe5fd3f6422a993b52442410787f050ff00b69"
+    },
+    "teacher/plan.json": {
+      "archive": null,
+      "bytes": 14743,
+      "sha256": "13bb343eec7aa0ddbb92bfa224fa764dbbcf88dc60d892575df70c29294213d2"
+    },
+    "teacher/plan.sha256": {
+      "archive": null,
+      "bytes": 65,
+      "sha256": "7c4afb4f6b5e0aecced793d293b90c85047accdd3a57c06ce8a42900cbd7547d"
+    },
+    "teacher/report.json": {
+      "archive": "teacher-report.json",
+      "bytes": 1950,
+      "sha256": "63a9e6b0fb38b327badadef5cea0a787ec12e3df2b04993e0329841a05003065"
+    }
+  },
+  "frozen_research_directory": "/Users/zhou/MyCodes/AgariLab/phase2-runtime-20261029-v1/agari-research",
+  "implementation_sha256": {
+    "experiments/phase2-teacher-student-v1/protocol.json": "ea527aeeafaf4f22d88c324990c75a2a43776c9dd70ea6b5d060954ddabf485c",
+    "experiments/phase2-teacher-student-v1/qualify_teacher.py": "a007a6663a290837a0dc72b4ce4b898bbbf0f367b3d2097f20c9c6273af1649d",
+    "scripts/compare_evaluations.py": "7a8c9dda7d8cabbb48a6dc726f5d65c7bb8f0d70258ee30e5894452439d03edf",
+    "scripts/phase2_contract.py": "48f17c50338522819724d06b5bfe4dcd48011afe42631711e4ffc7ff7959d47b"
+  },
+  "schema_version": 1,
+  "source_directory": "/Volumes/新加卷/AgariLab/runs/phase2-teacher-qualification-v1"
+}

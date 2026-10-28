@@ -1,0 +1,93 @@
+{
+  "attempts": {
+    "failed": 0,
+    "total": 250,
+    "unsealed": 0
+  },
+  "bootstrap_samples": 2000,
+  "bootstrap_seed": 0,
+  "candidate": {
+    "mean_point_delta": 16018.9,
+    "mean_rank": 1.579,
+    "rank_rates": [
+      0.611,
+      0.236,
+      0.116,
+      0.037
+    ]
+  },
+  "candidate_decisions": 161397,
+  "candidate_diagnostics": {
+    "deal_in_payments": 502,
+    "deal_in_rate": 0.05093395937531898,
+    "deal_ins": 499,
+    "hands": 9797,
+    "kan_events": 160,
+    "meld_events": 4931,
+    "open_hand_rate": 0.3469429417168521,
+    "open_hands": 3399,
+    "riichi_declarations": 2100,
+    "riichi_hands": 2077,
+    "riichi_rate": 0.21200367459426356,
+    "ron_wins": 2653,
+    "tsumo_wins": 813,
+    "win_rate": 0.3537817699295703,
+    "wins": 3466
+  },
+  "candidate_latency_ms_max": 92.17470907606184,
+  "candidate_latency_ms_mean": 7.148907523989798,
+  "candidate_latency_ms_p95": 11.607417021878064,
+  "ci95": {
+    "mean_point_delta": [
+      14867.9,
+      17213.3
+    ],
+    "mean_rank": [
+      1.522,
+      1.639
+    ],
+    "rank_1_rate": [
+      0.577,
+      0.643
+    ],
+    "rank_2_rate": [
+      0.209,
+      0.264
+    ],
+    "rank_3_rate": [
+      0.098,
+      0.137
+    ],
+    "rank_4_rate": [
+      0.025,
+      0.05
+    ]
+  },
+  "ci_method": "seed-group-percentile-bootstrap",
+  "decisions": 645756,
+  "elapsed_seconds": 1237.8739242564188,
+  "event_counts": {
+    "ankan": 80,
+    "chi": 2148,
+    "dahai": 486191,
+    "daiminkan": 10,
+    "dora": 169,
+    "end_game": 1000,
+    "end_kyoku": 9797,
+    "hora": 8432,
+    "kakan": 80,
+    "pon": 2694,
+    "reach": 12781,
+    "reach_accepted": 12301,
+    "ryukyoku": 1430,
+    "start_game": 1000,
+    "start_kyoku": 9797,
+    "tsumo": 483903
+  },
+  "games": 1000,
+  "illegal_actions": 0,
+  "latency_scope": "agent.act only; candidate seat isolated; excludes loading and transport",
+  "promotion_sample_size_met": false,
+  "seed_groups": 250,
+  "status": "complete"
+}
