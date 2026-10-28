@@ -42,6 +42,32 @@ rechecks the sealed campaigns and paired confidence interval. Training config
 preparation requires that completed qualification, exact four-teacher collection
 identities and the pre-registered collection seeds.
 
+The execution tools are separately frozen at research
+`b9ee0715c8e1c16ea811e3e37f2a8ebd89814671` in
+`phase2-tools-20261029-v1/agari-research`. Their `--runtime-root` still selects
+the original paired runtime above. The combined research suite passes 115
+tests; no runtime source or qualification contract changed for these tools.
+
+- [`collect_teacher_pilot.py`](../../scripts/collect_teacher_pilot.py) rechecks
+  qualification before the registered 1,000-game collection, records each
+  invocation, and publishes the verified split only after collection completes.
+- [`run_prepared_training.py`](../../scripts/run_prepared_training.py) executes
+  one of nine prepared jobs, with explicit recovery and complete process cost
+  receipts. [Training commands and recovery](TRAINING_RUNBOOK.md) include
+  separate GRP and CQL invocations for measuring their costs.
+- [`phase2_evaluation_matrix.py`](../../scripts/phase2_evaluation_matrix.py)
+  binds all nine completed models and both development pools before selection.
+  A qualifying small matrix must complete the large matrix before final seeds
+  are opened. One shared reservation binds the final candidate across matrices.
+  Akochan currently has a disjoint 16+48 seed-group command plan; its combined
+  exploratory report remains to be implemented before that evaluation runs.
+
+The external `runs/phase2-pilot-1000-launch-v1/` driver records the handoff from
+the existing qualification to `phase2-teacher-1000-v1`, then to the nine CPU
+configs in `runs/phase2-pilot-1000-v1/`. It waits for complete qualification,
+stops on a failed gate or paused collection, and does not start training or
+development/final games. Its source and step logs remain with that run.
+
 Model source: [Mortal-S42 fixed publication](https://huggingface.co/haor/Mortal-S42/tree/524981f21a929e3c3b269f65af79b84163bd02ca).
 Published file hashes must be checked against downloaded bytes; publisher
 evaluation is not a substitute for local independent evaluation.
