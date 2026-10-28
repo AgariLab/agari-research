@@ -82,8 +82,23 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python ../agari-kit
 [第二份执行计划](observed-series-plan-v2.json)在旧计划终止后登记最多 30 个新尝试，
 名称为 `riichi-ranked-observed-s02-000001-v1` 至 `s02-000030-v1`，基线 70 完整、3 中断。
 继续固定模型、引擎、wrapper 及连接参数，单场串行，首个非成功退出即停止，不重试失败 run，不重复验证。
-新 head 为 [series-registry-v2.json](series-registry-v2.json)，追加到不可变 v1；后续审计与发布须显式选择 v2。
+对应 head 为 [series-registry-v2.json](series-registry-v2.json)，追加到不可变 v1。
 计划数不代表已执行数，实时结果以全部已登记 run 的真实 end_game 与 series 审计为准。
+
+第二份计划完成前 20 场后，在 `s02-000021-v1`（全局第 94 次尝试）停止；
+`s02-000022-v1` 至 `s02-000030-v1` 保持未执行。
+该次握手在观察器启动后约 2.997 秒成功，随后约 58.432 秒记录连接丢失，应用消息接收数为 0。
+没有收到或发出关闭帧，没有观察到本地 keepalive 超时；具体关闭方、服务器是否开局及评级影响未知。
+[第四次中断证据](fourth-connection-interruption-v1/README.md)保留全部十份原件和校验和。
+
+2026-10-28 追加第三份计划前，独立审计为 **94 次尝试、90 场健康完整、4 次中断、0 场进行中**，
+integrity verified、完整性错误为空，仅因完整场目标未到而 pending。
+完整场 14,325 次请求全部 accepted，中断场 115 次另列，全部终止尝试合计 14,440 次。
+[第三份执行计划](observed-series-plan-v3.json)于前计划终止后预登记 10 个新尝试，
+名称为 `riichi-ranked-observed-s03-000001-v1` 至 `s03-000010-v1`，基线 90 完整、4 中断。
+模型、引擎、wrapper 和连接配置不变，继续单场串行、首错停止、不重试失败 run、不重复验证。
+当前 head 为 [series-registry-v3.json](series-registry-v3.json)，后续审计与发布须显式选择 v3；
+全部旧 registry、旧计划及停止后的未执行尾部保持原样。
 
 审计 17 项及
 [series 发布门禁](../full-coverage-trace-1000-v1/release-v2-series-workflow.md)24 项合成测试通过，

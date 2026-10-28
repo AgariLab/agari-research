@@ -4,12 +4,13 @@
 
 工具仅访问本机证据、源码和固定身份文件，不连接游戏服务器、不读取凭证或环境值，也不启动 bot。模型、客户端核心源码、本地引擎及监督脚本仍按实际字节核验；诊断 wrapper 另有固定身份。
 
-当前生产 head 为 [series-registry-v2.json](series-registry-v2.json)，SHA
-`fc884967d5d2cd00bce879bfa4e0a2a43b6524791d9e0c13e525538f439a88fe`。
-第一份计划在第 42 次尝试连接打开超时后停止，累计 70 完整、3 中断；旧停止后缀保持未执行。
-v2 追加 [30 次新尝试计划](observed-series-plan-v2.json)，SHA
-`c066bd6ebd4e405827b64a6fdb7027c261964f0d8617aec7744fca73b923840a`，
-不改根 registry 或第一份计划。以下当前生产命令显式选择 v2；省略参数仍会读取旧 v1。
+当前生产 head 为 [series-registry-v3.json](series-registry-v3.json)，SHA
+`6f3f279caafcce2dabb8dc3b3747f0757eb4e33d2755c81626f297702de4ce5d`。
+第一份计划在第 42 次尝试连接打开超时后停止；第二份计划在第 21 次尝试握手成功后无关闭帧断开，
+累计 90 完整、4 中断；两份旧计划的停止后缀均保持未执行。
+v3 追加 [10 次新尝试计划](observed-series-plan-v3.json)，SHA
+`95b74f69d815b320b571985282a692dd2ced5c1be7f0984baa895964a80c041b`，
+不改旧 registry 或旧计划。以下当前生产命令显式选择 v3；省略参数仍会读取旧 v1。
 
 ## 初版登记
 
@@ -32,7 +33,7 @@ registry 同时绑定主代理在执行前写出的 [observed-series-plan-v1.jso
 
 ```sh
 python3 -B experiments/riichi-ranked-100-20261028-v1/audit_ranked_series.py \
-  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v2.json
+  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v3.json
 ```
 
 也可用 `--registry /absolute/path/to/registry-v2.json` 选择合法追加链的 head。工具必须递归验证到固定根摘要；旧历史、身份、目标和旧计划前缀都不得改写。
