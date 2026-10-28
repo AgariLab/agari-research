@@ -18,6 +18,8 @@ import sys
 
 LAUNCH = "runs/phase2-pilot-1000-launch-v1"
 PREPARATION = "runs/phase2-pilot-1000-v1"
+TEACHER = "runs/phase2-mortal-s42-v1/agent.json"
+QUALIFICATION = "runs/phase2-teacher-qualification-v1"
 DATASETS = {"teacher": "phase2-teacher-1000-v1", "weak": "selfplay-v1"}
 PROBE = "phase2-teacher-probe-v1"
 PARTITIONS = ("train", "validation", "test")
@@ -279,6 +281,9 @@ def build(metadata, context, output):
     manifest = metadata.read(PREPARATION + "/manifest.json")
     require(manifest["status"] == "prepared-not-trained" and manifest["test_partition_content_opened"] is False,
             "Preparation is not complete or opened held-out content")
+    require(manifest["teacher_binding"]["descriptor"] == TEACHER
+            and manifest["qualification"]["run"] == QUALIFICATION,
+            "Teacher descriptor/qualification must use the fixed prior evidence paths")
     protocol = context.rt.protocol
     require(protocol["seeds"]["teacher_1000"] == {"start": 2630000, "count": 1000, "rotations": 1}, "Wrong registered pilot cohort")
     summaries, source_sets = {}, {}

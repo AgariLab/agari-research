@@ -30,8 +30,8 @@ class MetadataReportTests(unittest.TestCase):
                       "development": {"start": 2660000, "count": 250, "rotations": 4},
                       "final_promotion": {"start": 2680000, "count": 2500, "rotations": 4}}}
         self.manifest = {"status": "prepared-not-trained", "test_partition_content_opened": False,
-            "teacher_provenance": self.teacher, "teacher_binding": {"weights_sha256": "c" * 64},
-            "qualification": {"run": "runs/qualified", "collection_identity": self.identity,
+            "teacher_provenance": self.teacher, "teacher_binding": {"descriptor": report.TEACHER, "weights_sha256": "c" * 64},
+            "qualification": {"run": report.QUALIFICATION, "collection_identity": self.identity,
                               "qualification_sha256": "d" * 64}, "datasets": {}, "jobs": []}
         self.splits, self.audits = {}, {}
         for name, start in (("weak", 0), ("teacher", 2630000)):
@@ -217,6 +217,16 @@ class MetadataReportTests(unittest.TestCase):
         self.context.preparation.assert_not_called()
         with self.assertRaisesRegex(ValueError, "JSON metadata"):
             report.Metadata(self.root).read("datasets/raw/test.verification.json")
+
+    def test_qualification_and_teacher_paths_cannot_redirect_helper_to_dataset_content(self):
+        for parent, field in (("teacher_binding", "descriptor"), ("qualification", "run")):
+            with self.subTest(field=field):
+                original = self.manifest[parent][field]
+                self.manifest[parent][field] = "datasets/raw/hidden.json"
+                self.save_manifest()
+                self.assert_rejected("fixed prior evidence paths")
+                self.context.preparation.assert_not_called()
+                self.manifest[parent][field] = original
 
     def test_configuration_budget_cannot_change_even_with_updated_file_sha(self):
         job = self.manifest["jobs"][0]
