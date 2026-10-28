@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "games_requested": 1,
+  "games_attempted": 1,
+  "games_completed": 1,
+  "healthy_games": 1,
+  "status": "complete",
+  "current_game": null,
+  "error": null,
+  "counts": {
+    "local_timeouts": 0,
+    "send_timeouts": 0,
+    "ack_rejected": 0,
+    "ack_unparseable": 0,
+    "ack_defaulted": 0,
+    "ack_stale": 0,
+    "unknown_ack_status": 0,
+    "suppressed_after_timeout": 0,
+    "requests": 127,
+    "replies_prepared": 127,
+    "replies_sent": 127,
+    "ack_accepted": 127,
+    "duplicate_start": 0,
+    "duplicate_requests": 0,
+    "stale_requests": 0,
+    "duplicate_acks": 0,
+    "unknown_messages": 0
+  },
+  "latency": {
+    "count": 127,
+    "mean_ms": 7.109660775342032,
+    "max_ms": 26.78370801731944
+  },
+  "elapsed_seconds": 217.18835187493823
+}

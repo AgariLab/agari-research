@@ -1,0 +1,1 @@
+{"mode": "ranked", "status": "interrupted", "seat": 2, "scores": null, "validation_passed": null, "degraded": false, "counts": {"requests": 115, "replies_prepared": 115, "replies_sent": 115, "ack_accepted": 115}, "failure": "connection_closed", "game_index": 0}

@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "record_kind": "second_connection_interruption_evidence",
+  "archived_on": "2026-10-28",
+  "source_directory": "/Volumes/新加卷/AgariLab/runs/riichi-ranked-continuation78-v1",
+  "status": "interrupted_evidence_only",
+  "final_acceptance": false,
+  "batch": {
+    "requested_games": 78,
+    "attempts": 7,
+    "completed_games": 6,
+    "healthy_completed": 6,
+    "interrupted_attempts": 1,
+    "status": "stopped",
+    "error": "game_incomplete",
+    "stopped_at": "2026-10-28T02:25:27.405569+00:00",
+    "observed_requests": 1059,
+    "completed_game_requests": 944,
+    "interrupted_attempt_requests": 115
+  },
+  "interrupted_attempt": {
+    "global_attempt": 30,
+    "campaign_game": 7,
+    "status": "interrupted",
+    "failure": "connection_closed",
+    "seat": 2,
+    "scores": null,
+    "start_game_observed": true,
+    "end_game_observed": false,
+    "event_lines": 231,
+    "decision_events": 115,
+    "accepted_ack_events": 115,
+    "request_ids_unique_and_paired": true,
+    "counts": {
+      "requests": 115,
+      "replies_prepared": 115,
+      "replies_sent": 115,
+      "ack_accepted": 115
+    },
+    "degraded": false,
+    "elapsed_seconds": 313.85760312504135,
+    "local_final_result": "unknown",
+    "local_final_rank": "unknown",
+    "actual_rating_change": "unknown",
+    "close_code": "not_recorded",
+    "close_reason": "not_recorded"
+  },
+  "cumulative_context": {
+    "ended_attempts": 30,
+    "completed_games": 28,
+    "interrupted_attempts": 2,
+    "completed_game_requests": 4367,
+    "all_observed_requests": 4482,
+    "difference_is_incomplete_attempt_requests": 115,
+    "sources": [
+      {
+        "path": "/Volumes/新加卷/AgariLab/runs/riichi-ranked-first-v1/games.jsonl",
+        "sha256": "95dfed903415964073d319f592e7e530d2e1607db0693a907952e7a6369381ea"
+      },
+      {
+        "path": "/Volumes/新加卷/AgariLab/runs/riichi-ranked-campaign-remaining99-v1/games.jsonl",
+        "sha256": "572339e4d7500c42d4a9819a8184473671428046bb28bc88a615a9a51101a479"
+      }
+    ]
+  },
+  "platform_documented_behavior": {
+    "source": "https://riichi.dev/docs/ranked",
+    "accessed_on": "2026-10-28",
+    "statement": "After an in-game WebSocket drop, remaining actions default automatically, the game still completes, and its result counts toward rating.",
+    "scope": "Documented platform behavior, not a retrieved final score or rating update for this particular game."
+  },
+  "identity": {
+    "local_engine": {
+      "version": "0.4.10",
+      "binary_sha256": "169c8c2c53bdace01e4ca319f54050565fe728a5b1b2fc6b7f3046738887071d"
+    },
+    "launcher_sha256": "cd570e8abc1b5b028661f6dfa7881ebdea7c650db11b7d5a0c7fd53adbe4aede",
+    "weights_sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096",
+    "tool_source_sha256": "e1991979d79a373ca54050786616f57ded571a8d20de326a6e66982244dd1979",
+    "research_source_sha256": "43eabb39e1518ec550f8692bce79224060f07aa280f12a254b990ccc2c3e7e21"
+  },
+  "diagnostic_session_context": {
+    "source": "Parent-agent execution observations; not fields in the seven archived transport files.",
+    "supervisor_exit_code": 1,
+    "session": 83479,
+    "terminated_pids": [
+      7975,
+      7983
+    ],
+    "public_status_reported_server_engine_version": "0.4.11",
+    "direct_tls_observation": "timeout",
+    "proxy_status_observation": "reachable",
+    "server_upgrade_time": "unknown",
+    "causal_connection_to_disconnect": "not_established",
+    "third_batch_started_at_archival": false
+  },
+  "frozen_acceptance": {
+    "single_interruption_auditor_sha256": "c45a93bbac71db060dbaf0cf8436288eaa3458a380081e938aafea5575415cd2",
+    "single_interruption_audit_status": "invalid",
+    "original_auditor_sha256": "191c396e01574782942059c902ff6ae7ad915c7a68e000cf663f9c43077bbc40",
+    "thresholds_changed": false
+  },
+  "copied_files": {
+    "parent/manifest.json": {
+      "bytes": 2309,
+      "sha256": "47e10917aae778e5ff072afcf08f8a9ec9a2eb4a00b05379c574f610d27610e9",
+      "matches_source": true
+    },
+    "parent/summary.json": {
+      "bytes": 801,
+      "sha256": "77e3548912bb9b4c345144624e52b1763b25215b268628d41ae1c4753a302b57",
+      "matches_source": true
+    },
+    "parent/games.jsonl": {
+      "bytes": 5180,
+      "sha256": "e1c3f9596bc6a0ac9ff37ae9365a99a9acbb5c3547db3391cba07ce3d2e4bdfe",
+      "matches_source": true
+    },
+    "failed-game-000007/manifest.json": {
+      "bytes": 2240,
+      "sha256": "902d713bf4f24d13e0f7a7b41c8c7bfdf55bef475bd8aad7c2e7f870cefafcc9",
+      "matches_source": true
+    },
+    "failed-game-000007/report.json": {
+      "bytes": 221,
+      "sha256": "a38cc51432c657b1cea8513db323bd578be8deda352df95266bbc86778eef87a",
+      "matches_source": true
+    },
+    "failed-game-000007/games.jsonl": {
+      "bytes": 262,
+      "sha256": "4460c57db829969458010057602e3ff23ee0477912d9864c9e8f28cfdfba308d",
+      "matches_source": true
+    },
+    "failed-game-000007/events.jsonl": {
+      "bytes": 29540,
+      "sha256": "d6f866d8c83dbcdb6da969babd998d52a7701607757b825216cd3d94aad85d88",
+      "matches_source": true
+    }
+  },
+  "credential_pattern_scan": {
+    "scope": "Only the seven evidence files; no credential or environment values read.",
+    "findings": {
+      "parent/manifest.json": {
+        "jwt": 0,
+        "private_key": 0
+      },
+      "parent/summary.json": {
+        "jwt": 0,
+        "private_key": 0
+      },
+      "parent/games.jsonl": {
+        "jwt": 0,
+        "private_key": 0
+      },
+      "failed-game-000007/manifest.json": {
+        "jwt": 0,
+        "private_key": 0
+      },
+      "failed-game-000007/report.json": {
+        "jwt": 0,
+        "private_key": 0
+      },
+      "failed-game-000007/games.jsonl": {
+        "jwt": 0,
+        "private_key": 0
+      },
+      "failed-game-000007/events.jsonl": {
+        "jwt": 0,
+        "private_key": 0
+      }
+    },
+    "limitation": "Static JWT/private-key patterns only, not a general secret-detection guarantee."
+  },
+  "limitations": [
+    "Incomplete-attempt decisions must not enter completed-game score/rank or completed-game action statistics.",
+    "Accepted replies before disconnect do not establish a complete game or a healthy attempt.",
+    "Specific transport/root cause and actual server-side final score/rating effect are not present in local records."
+  ]
+}

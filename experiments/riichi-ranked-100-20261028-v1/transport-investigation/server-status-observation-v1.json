@@ -1,0 +1,14 @@
+{
+  "retrieved_at": "2026-10-28T02:41:26.088950+00:00",
+  "endpoint": "https://game.riichi.dev/status",
+  "authentication": "none",
+  "network_route": "local HTTP proxy",
+  "response": {
+    "status": "online",
+    "engine_version": "0.4.11",
+    "ranked_4p_queue_size": 1,
+    "ranked_3p_queue_size": 2,
+    "active_games": 5
+  },
+  "scope": "This response only describes this observation time; it does not establish past server versions or the cause of connection closures."
+}

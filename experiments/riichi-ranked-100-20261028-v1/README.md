@@ -8,7 +8,7 @@
 
 - 始终使用 `models/full-coverage-trace-1000-v1/ppo-agent.json`，PPO SHA-256：
   `613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096`。
-- 真实端点 `wss://game.riichi.dev/ws/ranked`，RiichiEnv 0.4.10，默认 Tenhou 四人赤牌半庄。
+- 真实端点 `wss://game.riichi.dev/ws/ranked`，本地引擎 RiichiEnv 0.4.10，默认 Tenhou 四人赤牌半庄。
   本机引擎二进制和推理实现逐场绑定；服务端未声明其二进制摘要，兼容性通过真实请求检验。
 - 首场使用现有 CLI 单场运行，目录 `runs/riichi-ranked-first-v1/`。
   首场健康后，剩余 99 场使用 `agari-kit/scripts/run_online_campaign.py`，
@@ -45,16 +45,30 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python ../agari-kit
 日志未保留 close code，具体关闭原因不明；没有本地开局记录不等于可以断言服务器未开局或评级未受影响。
 [中断证据](connection-interruption-v1/README.md)保留原父索引、失败子记录及完整校验和。
 
-确认旧进程真实退出后，于 01:42:37 UTC 使用同一源码、模型、引擎和监督脚本，在新目录
-`runs/riichi-ranked-continuation78-v1/` 继续剩余 78 场。上文命令仅替换为
-`--games 78 --run riichi-ranked-continuation78-v1`，未再次 validate，已收到 start_game 和 accepted 回执。
-当前总完成数为新批次 summary 的 `games_completed + 22`；总连接尝试为 `games_attempted + 23`。
+01:42:37 UTC 启动的 `runs/riichi-ranked-continuation78-v1/` 也已在 02:25:27 UTC 停止：
+6 场完整，第 7 次尝试开局后约 313.86 秒断线。seat 2、115 次动作均 accepted，但没有 end_game 或终分；
+真实服务器结算未知。[第二次中断证据](second-connection-interruption-v1/README.md)完整保留原件。
 
-[原独立验收工具](AUDIT.md)及[原发布顺序](../full-coverage-trace-1000-v1/release-v2-workflow.md)
-保留原门槛，发生中断后不能借其发布 `final-audit/` 或清单；历史 v1 不改。
-恢复后的独立审核将另外保留全部 101 次尝试：100 场完整结果与 1 次中断分别展示，
-只可记为 completed_with_interruption，不能冒充原连续零故障批次。
-新的 continuation 审计与发布工具正在准备；续跑若再次失败，当前恢复方案也不能发布。
+02:53:41–02:57:18 UTC 完成唯一诊断对局 `runs/riichi-ranked-diagnostic-v1/`：seat 0，
+终分 `[4600, 32500, 49800, 13100]`，127 次动作全部 accepted，零超时、失败或降级。
+因此当前共 **31 次尝试、29 场完整、2 次中断**。完整场 4,494 次请求，全部观察 4,609 次；
+后者包含中断场的 115 次。该场未复现断线，不能据此推断原问题已修复。
+诊断观察器保留原连接配置、模型和推理源码；作为单独的 `parent_transport_observer` 运行变体记录，
+其脚本 SHA 为 `9c8dd327662276771082a5dd543b7bd4b00d8fa419ce3de64962a808cd10e294`。
+关闭清理阶段缺少 close frame 并不推翻此前真实 end_game，也不能证明此前断线原因。没有重复 validation。
+[单场诊断证据](diagnostic-first-v1/README.md)保留十份原件与校验和。
+
+[原独立验收工具](AUDIT.md)与[原发布顺序](../full-coverage-trace-1000-v1/release-v2-workflow.md)
+保留原门槛；[一次中断恢复版本](CONTINUATION-AUDIT.md)也因第二次中断而不满足。
+两者均不能发布真实最终审核或 release-v2。统一 series registry 正在实现，固定目标 100 场完整，
+逐批保留全部尝试及来源摘要，分别报告完整性、完成进度和故障；原连续零故障标准保持未通过。
+历史 release-v1 与失败批次不重写，之后的完整场不替换或掩盖失败记录。
+
+后续已按 [不可变执行计划](observed-series-plan-v1.json) 登记最多 71 次新尝试，
+使用同一单场诊断 wrapper，依次创建 `riichi-ranked-observed-000001-v1` 至 `000071-v1`。
+每次仍为 games=1，唯一活动连接；任一非成功退出立即停止，不自动重试失败场。
+启动前逐次核对脚本、计划、模型与描述文件摘要。未创建的计划项不算实际尝试。
+当前实时完成数须核对新 run 的真实 end_game 再加 29，不能以计划数代替实测。
 
 本地 `decision.latency_ms` 计消息接收到动作准备的客户端处理时间，
 `action_ack.elapsed_ms` 是服务端报告的耗时，二者不混算。排位顺位是在线匹配结果，
