@@ -64,13 +64,28 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python ../agari-kit
 逐批保留全部尝试及来源摘要，分别报告完整性、完成进度和故障；原连续零故障标准保持未通过。
 历史 release-v1 与失败批次不重写，之后的完整场不替换或掩盖失败记录。
 
-后续已按 [不可变执行计划](observed-series-plan-v1.json) 登记最多 71 次新尝试，
+此前按 [第一份不可变执行计划](observed-series-plan-v1.json) 登记最多 71 次新尝试，
 使用同一单场诊断 wrapper，依次创建 `riichi-ranked-observed-000001-v1` 至 `000071-v1`。
 每次仍为 games=1，唯一活动连接；任一非成功退出立即停止，不自动重试失败场。
 启动前逐次核对脚本、计划、模型与描述文件摘要。未创建的计划项不算实际尝试。
-当前实时完成数须核对新 run 的真实 end_game 再加 29，不能以计划数代替实测。
-2026-10-28 03:35 UTC 的独立只读核对为 34 场完整、2 次中断、1 场进行中：完整场 5,147 次请求，
-中断场 115 次；状态 pending，完整性错误为空。审计 17 项及
+该计划于 06:46:39 UTC 按首错停止：前 41 个 run 完整，`000042` 在连接打开阶段约 15 秒超时，
+没有观察到成功握手、start_game、end_game 或动作请求。前一 `000041` 的 229 次请求属于完整场，
+不能与后续失败混淆。原计划 `000043`–`000071` 保持未执行，不续跑该停止后缀。
+[第三次中断证据](third-connection-interruption-v1/README.md)保存全部十份受控原件；
+连接对象创建不等于成功握手，具体代理/TLS/HTTP 阶段、服务器最终结果与评级影响仍未知。
+
+2026-10-28 06:51 UTC 的独立只读核对为 **73 次尝试、70 场完整、3 次中断、0 场进行中**：
+完整场 10,942 次请求全部 accepted，中断场 115 次另列，全部终止尝试合计 11,057 次。
+状态 pending，仅因完整场目标未达到；integrity verified、完整性错误为空，核对 601 份来源文件。
+不将 70 场结果发布为最终审核或 release-v2。
+
+[第二份执行计划](observed-series-plan-v2.json)在旧计划终止后登记最多 30 个新尝试，
+名称为 `riichi-ranked-observed-s02-000001-v1` 至 `s02-000030-v1`，基线 70 完整、3 中断。
+继续固定模型、引擎、wrapper 及连接参数，单场串行，首个非成功退出即停止，不重试失败 run，不重复验证。
+新 head 为 [series-registry-v2.json](series-registry-v2.json)，追加到不可变 v1；后续审计与发布须显式选择 v2。
+计划数不代表已执行数，实时结果以全部已登记 run 的真实 end_game 与 series 审计为准。
+
+审计 17 项及
 [series 发布门禁](../full-coverage-trace-1000-v1/release-v2-series-workflow.md)24 项合成测试通过，
 真实发布器只读联调正确保持 pending，未生成最终审核或 release-v2。
 

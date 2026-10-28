@@ -29,6 +29,9 @@
 series 根 registry 固定为
 `564d5f67baaa9dd0c901313ae3c5879b4e81ffb437c1d7e38c5f760a4fa5cc2f`。
 默认读取 `series-registry-v1.json`；显式 `--registry` 可以指定已登记的追加链新 head。
+当前生产 head 为 `series-registry-v2.json`，SHA
+`fc884967d5d2cd00bce879bfa4e0a2a43b6524791d9e0c13e525538f439a88fe`；
+以下命令均显式选择 v2，保留第三次连接打开超时及新登记的 30 个尝试。
 独立审计验证 predecessor 摘要、连续 revision、旧计划前缀及不可变历史，不能借换 head 换 root。
 审计发布与 release 准备必须使用同一个 head；新 head 不允许覆盖已有独立审计或 release。
 
@@ -37,15 +40,19 @@ series 根 registry 固定为
 在保留已记录源码、模型和引擎的研究仓库锁定环境中，先只读检查：
 
 ```sh
-.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py
+.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py \
+  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v2.json
 ```
 
 真实 100 个健康完整局齐备、全部实际尝试已结束并经审查后，依次执行：
 
 ```sh
-.venv/bin/python -B experiments/riichi-ranked-100-20261028-v1/audit_ranked_series.py --write
-.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py --write
-.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py --verify-release
+.venv/bin/python -B experiments/riichi-ranked-100-20261028-v1/audit_ranked_series.py \
+  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v2.json --write
+.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py \
+  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v2.json --write
+.venv/bin/python -B experiments/full-coverage-trace-1000-v1/build_model_release_v2_series.py \
+  --registry experiments/riichi-ranked-100-20261028-v1/series-registry-v2.json --verify-release
 ```
 
 若采用后续 registry head，为上述独立审计和三种发布器模式显式传入同一个
