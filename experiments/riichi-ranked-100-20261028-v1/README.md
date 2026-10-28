@@ -24,7 +24,7 @@
 模型、引擎、工具源码和监督脚本身份逐场核对。等待匹配的空闲超时为 1,800 秒，单次动作仍按服务器预算执行。
 脚本的 10 项模拟测试覆盖停止门槛、断线、旧目录保护、身份变化、凭证不入日志及取消清理。
 
-实际启动命令（在研究仓库）：
+初始批次启动命令（在研究仓库，现已停止，原目录保留）：
 
 ```sh
 HTTPS_PROXY=http://127.0.0.1:10800/ HTTP_PROXY=http://127.0.0.1:10800/ \
@@ -38,11 +38,23 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python ../agari-kit
 
 首场已完整完成：seat 0，终分 `[-300, 14600, 46100, 39600]`，第四名；
 127 次请求、发送和 `accepted` 回执，零超时、非法回执或降级。原始安全记录保存在 `first-game/`。
-剩余 99 场监督运行已启动，当前尚未将其标为全部完成；以外置 `summary.json` 与逐场记录为实时依据。
+原 99 场监督运行于 2026-10-28 01:37:48 UTC 停止：21 场完整，随后第 22 次尝试约 33.53 秒后
+`connection_closed`；events 为空、请求数为 0、seat/scores 为 null，未观察到 start_game。
+首场加已结束的 21 场累计 22 场完整，3,423 个请求均 accepted，另保留这一次中断。
+旧清单保持 stopped，不能声称原 99 场批次完成或连续零故障。
+日志未保留 close code，具体关闭原因不明；没有本地开局记录不等于可以断言服务器未开局或评级未受影响。
+[中断证据](connection-interruption-v1/README.md)保留原父索引、失败子记录及完整校验和。
 
-[独立验收工具](AUDIT.md)已准备好，19 项合成门禁测试通过；当前真实探测仅返回 pending，
-尚未生成 `final-audit/`。全部结束后先逐场重算真实事件、回执、分数、身份与父索引，
-再按[发布顺序](../full-coverage-trace-1000-v1/release-v2-workflow.md)生成新的模型清单。
+确认旧进程真实退出后，于 01:42:37 UTC 使用同一源码、模型、引擎和监督脚本，在新目录
+`runs/riichi-ranked-continuation78-v1/` 继续剩余 78 场。上文命令仅替换为
+`--games 78 --run riichi-ranked-continuation78-v1`，未再次 validate，已收到 start_game 和 accepted 回执。
+当前总完成数为新批次 summary 的 `games_completed + 22`；总连接尝试为 `games_attempted + 23`。
+
+[原独立验收工具](AUDIT.md)及[原发布顺序](../full-coverage-trace-1000-v1/release-v2-workflow.md)
+保留原门槛，发生中断后不能借其发布 `final-audit/` 或清单；历史 v1 不改。
+恢复后的独立审核将另外保留全部 101 次尝试：100 场完整结果与 1 次中断分别展示，
+只可记为 completed_with_interruption，不能冒充原连续零故障批次。
+新的 continuation 审计与发布工具正在准备；续跑若再次失败，当前恢复方案也不能发布。
 
 本地 `decision.latency_ms` 计消息接收到动作准备的客户端处理时间，
 `action_ack.elapsed_ms` 是服务端报告的耗时，二者不混算。排位顺位是在线匹配结果，

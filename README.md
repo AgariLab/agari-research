@@ -178,7 +178,8 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python scripts/vali
 固定弱对手池 1,000 半庄无非法动作；相对旧标签整轮模型的平均顺位差 +0.011，
 配对 95% 区间 [−0.034, +0.059]，尚无明确方向性结论。
 随后已通过一次真实 riichi.dev 验证：120 次动作全部 accepted，服务端返回 `passed=true`，用户确认 Bot active。
-首场正式排位已完成，剩余 99 场正由逐场健康监督脚本执行；验证通过不代表棋力验收。
+原排位批次累计 22 场完整完成后，发生一次未记录到 start_game 的连接中断并按门槛停止。
+中断原件保留，同一模型与源码在独立批次继续剩余 78 场；整批尚未验收，也不宣称连续零故障或棋力晋级。
 证据见 [真实平台验证](experiments/riichi-validation-20261028-v1/README.md) 和
 [首批 100 场排位](experiments/riichi-ranked-100-20261028-v1/README.md)。
 
