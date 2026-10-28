@@ -57,7 +57,7 @@ the upstream GRP label intentionally describes the preceding round settlement.
 
 
 def trace_rounds(mjai_path: Path, trace_path: Path, *, producer: dict,
-                 max_steps: int = 100000):
+                 max_steps: int = 100000, include_forced: bool = False):
     """Yield actual non-forced decisions grouped by native, checked round results.
 
 The caller must verify archive/receipt hashes and complete engine replay first.
@@ -127,7 +127,7 @@ The pinned kit parser bounds each JSON record; the trace is streamed, while the
             if len(matches) != 1:
                 raise DataError(f"{where}: submitted action is not uniquely native-legal")
             actions[seat] = matches[0]
-            if len(legal) > 1:
+            if len(legal) > 1 or include_forced:
                 players[seat].append(Decision(steps, observation, matches[0]))
         observations = engine.step(actions)
         steps += 1

@@ -6,6 +6,16 @@ import torch
 import torch.nn.functional as F
 
 
+def bc_loss(q_values, actions, masks):
+    """Hard behavior labels; masked-out native actions never receive gradients."""
+    if not torch.all(masks.gather(1, actions[:, None])):
+        raise ValueError("BC actions must be legal")
+    logits = q_values.masked_fill(~masks, -torch.inf)
+    loss = F.cross_entropy(logits, actions)
+    return loss, {"cross_entropy": loss,
+                  "accuracy": (logits.argmax(1) == actions).float().mean()}
+
+
 def cql_loss(q_values, aux_logits, actions, masks, targets, ranks, *, alpha=5.0, aux_weight=0.2):
     if not torch.all(masks.gather(1, actions[:, None])):
         raise ValueError("CQL actions must be legal")

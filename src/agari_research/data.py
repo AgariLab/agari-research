@@ -15,9 +15,11 @@ from agari_kit.engine import require_engine
 from agari_kit.mjai import DataError, canonical_json, read_events
 from agari_kit.storage import Storage
 from riichienv import MjaiReplay
+from agari_kit.validation import _trace_records
 
 from .features import action_mask, grp_features, policy_features, predicted_rewards, rank_of
 from .trace_samples import trace_rounds
+from .selection import agent_identity_sha256, normalize_policy_filter
 
 
 def require_trace_receipt(record: dict, receipt: dict) -> None:
@@ -39,8 +41,9 @@ def require_trace_receipt(record: dict, receipt: dict) -> None:
 
 
 class FrozenDataset:
-    def __init__(self, storage: Storage, split_path: Path):
+    def __init__(self, storage: Storage, split_path: Path, *, policy_filter=None):
         self.storage = storage
+        self.policy_filter = normalize_policy_filter(policy_filter)
         self.manifest = json.loads(split_path.read_text())
         body = {key: value for key, value in self.manifest.items() if key != "dataset_sha256"}
         digest = hashlib.sha256(canonical_json(body).encode()).hexdigest()
@@ -57,10 +60,40 @@ class FrozenDataset:
             for record in self.manifest["partitions"][part]:
                 receipt = verify_record(storage, record, replay=True)
                 require_trace_receipt(record, receipt)
+                if self.policy_filter is not None:
+                    self.policy_players(record, verified=True)
                 producer_engines.add((receipt["engine_version"], receipt["engine_binary_sha256"]))
         self.producer_engines = [{"version": version, "binary_sha256": digest}
                                  for version, digest in sorted(producer_engines)]
         self.sha256 = digest
+
+    def policy_players(self, record: dict, *, verified: bool = False) -> list[int]:
+        """Select by this game's recorded content identity, never by seat number."""
+        selection = getattr(self, "policy_filter", None)
+        if selection is None:
+            return list(range(4))
+        if not verified:
+            require_trace_receipt(record, verify_record(self.storage, record, replay=False))
+        records = iter(_trace_records(self.storage.path(record["trace_path"])))
+        try:
+            _, header = next(records)
+        except StopIteration as exc:
+            raise DataError("Policy selection requires a seeded trace header") from exc
+        finally:
+            records.close()
+        provenance, agents = header.get("agent_provenance"), header.get("agents")
+        if (not isinstance(provenance, list) or len(provenance) != 4
+                or not isinstance(agents, list) or len(agents) != 4):
+            raise DataError("Policy selection requires provenance for all four trace players")
+        selected = []
+        for seat, item in enumerate(provenance):
+            if not isinstance(item, dict) or item.get("name") != agents[seat]:
+                raise DataError("Trace agent names disagree with their provenance")
+            if agent_identity_sha256(item) in selection["agent_identity_sha256"]:
+                selected.append(seat)
+        if not selected:
+            raise DataError(f"No requested policy identity occurs in game {record['game_id']}")
+        return selected
 
     def records(self, partition: str, seed: int | None = None):
         if partition not in ("train", "validation"):
@@ -95,10 +128,11 @@ class FrozenDataset:
 
     def cql_game_samples(self, record: dict, grp, config: dict):
         grp.eval()
+        players = self.policy_players(record)
         for round_samples in self.trace_game_rounds(record):
             features = round_samples.features
             rewards = predicted_rewards(grp, features, config["pts_weight"], config["device"])
-            for player in range(4):
+            for player in players:
                 steps = round_samples.players[player]
                 rank = rank_of(features["round_end_scores"], player)
                 for index, decision in enumerate(steps):
@@ -111,23 +145,56 @@ class FrozenDataset:
                     yield (policy_features(observation), torch.tensor(action_id), mask,
                            torch.tensor(target, dtype=torch.float32), torch.tensor(rank))
 
-    def trace_game_rounds(self, record: dict):
+    def bc_samples(self, partition: str, seed: int | None = None):
+        for record in self.records(partition, seed):
+            yield from self.bc_game_samples(record)
+
+    def bc_game_samples(self, record: dict):
+        players = self.policy_players(record)
+        for round_samples in self.trace_game_rounds(record):
+            for player in players:
+                for decision in round_samples.players[player]:
+                    mask = action_mask(decision.observation)
+                    action_id = decision.action.encode()
+                    if not 0 <= action_id < 82 or not mask[action_id]:
+                        raise DataError("Replay action does not match the native legal mask")
+                    yield policy_features(decision.observation), torch.tensor(action_id), mask
+
+    def policy_diagnostic_samples(self, partition: str):
+        """Validation-only labels retain forced actions as a separate group."""
+        if partition != "validation":
+            raise DataError("Policy diagnostics only read the validation partition")
+        for record in self.records(partition):
+            players = self.policy_players(record)
+            for round_samples in self.trace_game_rounds(record, include_forced=True):
+                for player in players:
+                    for decision in round_samples.players[player]:
+                        mask = action_mask(decision.observation)
+                        action_id = decision.action.encode()
+                        if not 0 <= action_id < 82 or not mask[action_id]:
+                            raise DataError("Diagnostic action does not match the native legal mask")
+                        yield (policy_features(decision.observation), torch.tensor(action_id), mask,
+                               str(decision.action.action_type).split(".")[-1],
+                               len(decision.observation.legal_actions()) == 1)
+
+    def trace_game_rounds(self, record: dict, *, include_forced: bool = False):
         # Recheck the content-bound receipt on every pass, including resumes;
         # complete native/MJAI verification was performed at dataset opening.
         receipt = verify_record(self.storage, record, replay=False)
         require_trace_receipt(record, receipt)
         yield from trace_rounds(self.storage.path(record["mjai_path"]),
                                 self.storage.path(record["trace_path"]),
-                                producer=receipt["producer_code"])
+                                producer=receipt["producer_code"], include_forced=include_forced)
 
     def sample_counts(self, partition: str) -> list[dict]:
         """Count the same native samples as training, never trace decision totals."""
         counts = []
         for record in self.records(partition):
             grp_count = cql_count = 0
+            players = self.policy_players(record)
             for round_samples in self.trace_game_rounds(record):
                 grp_count += 4
-                cql_count += sum(len(decisions) for decisions in round_samples.players)
+                cql_count += sum(len(round_samples.players[player]) for player in players)
             if not grp_count or not cql_count:
                 raise DataError(f"Complete game produced no training samples: {record['game_id']}")
             counts.append({"game_id": record["game_id"], "sha256": record["sha256"],

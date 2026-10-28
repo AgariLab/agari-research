@@ -27,9 +27,9 @@ class ModelAgent:
                 or self.metadata.get("engine_version") != "0.4.10"):
             raise ValueError("Incompatible model provenance or observation encoding")
         self.kind = self.metadata["kind"]
-        classes = {"cql": QNetwork, "ppo": ActorCriticNetwork}
+        classes = {"bc": QNetwork, "cql": QNetwork, "ppo": ActorCriticNetwork}
         if self.kind not in classes:
-            raise ValueError("Only exported CQL/PPO policies implement Agent")
+            raise ValueError("Only exported BC/CQL/PPO policies implement Agent")
         self.model = classes[self.kind](**self.metadata["model_config"])
         self.model.load_state_dict(self.metadata["state_dict"], strict=True)
         self.model.to(device).eval()
