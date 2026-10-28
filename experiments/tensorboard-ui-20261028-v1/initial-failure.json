@@ -1,0 +1,43 @@
+{
+  "purpose": "Existing training scalar curves displayed in actual Chrome TensorBoard UI; no training",
+  "started_at_utc": "2026-10-28T03:51:19Z",
+  "event_file": "/Volumes/新加卷/AgariLab/runs/full-coverage-trace-1000-v1/tensorboard/events.out.tfevents.1793131978.zhou-mac-mini.9260.0",
+  "event_bytes": 5408636,
+  "event_sha256_before": "8ff3a23221e8bab6ef7f50ab410572bbe070be2dca970396604e6abe91c6707c",
+  "views": [],
+  "commands": [],
+  "network_policy": "Chrome uses a loopback-only proxy; target Fetch interception allows only this TensorBoard origin; no remote requests permitted",
+  "blocked_requests": [],
+  "tensorboard_command": [
+    "/Users/zhou/MyCodes/AgariLab/agari-research/.venv/bin/python",
+    "-m",
+    "tensorboard.main",
+    "--logdir",
+    "/Volumes/新加卷/AgariLab/runs/full-coverage-trace-1000-v1/tensorboard",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "49172",
+    "--load_fast=false",
+    "--reload_interval",
+    "0"
+  ],
+  "tensorboard_pid": 96199,
+  "cleanup": {
+    "chrome": null,
+    "tensorboard": {
+      "pid": 96199,
+      "exit_code": 1,
+      "pid_absent": true
+    },
+    "tensorboard_port_closed": true,
+    "remaining_profile_processes": [],
+    "profile_removed": true
+  },
+  "event_sha256_after": "8ff3a23221e8bab6ef7f50ab410572bbe070be2dca970396604e6abe91c6707c",
+  "event_unchanged": true,
+  "network_requests": [],
+  "runtime_exceptions": [],
+  "external_network_requests": [],
+  "finished_at_utc": "2026-10-28T03:51:19Z"
+}

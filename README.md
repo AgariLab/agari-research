@@ -98,6 +98,19 @@ PPO 的恢复边界是完整更新。`checkpoint_interval_updates` 默认 1，�
 - `models/<run>/{grp,cql,ppo}.pt`：阶段完成后的权重及对应 `.json` 摘要。
 - `models/<run>/{cql,ppo}-agent.json`：公共工具可加载的工厂描述，绑定权重文件 SHA-256。
 
+查看既有训练曲线，不会启动训练或改写事件日志：
+
+```sh
+python3 ../agari-kit/scripts/with_storage.py uv run --frozen tensorboard \
+  --logdir '/Volumes/新加卷/AgariLab/runs/full-coverage-trace-1000-v1/tensorboard' \
+  --host 127.0.0.1 --port 6006
+```
+
+浏览器打开 `http://127.0.0.1:6006/`，在 Scalars 中用 `grp`、`cql`、`ppo` 筛选各阶段指标。
+外置根目录或实验名不同则调整 `--logdir`；端口占用时修改 `--port` 并使用对应地址。
+查看完毕按 `Ctrl-C` 停止服务。固定的 TensorBoard 2.20.0 仍依赖 `pkg_resources`，
+因此项目运行时同时约束 `setuptools<82`；仅配置构建依赖不足以保证查看命令可启动。
+
 ```sh
 python3 ../agari-kit/scripts/with_storage.py uv run --frozen agari evaluate \
   --candidate @/Volumes/新加卷/AgariLab/models/baseline-smoke/ppo-agent.json \

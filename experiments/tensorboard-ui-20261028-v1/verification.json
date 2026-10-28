@@ -1,0 +1,650 @@
+{
+  "status": "passed_on_isolated_feature_environment",
+  "branch": "fix/tensorboard-viewer",
+  "main_environment_changed": false,
+  "default_environment_failure": {
+    "tensorboard": "2.20.0",
+    "setuptools": "84.2.1",
+    "error": "ModuleNotFoundError: No module named pkg_resources",
+    "evidence": "initial-failure.json",
+    "log": "initial-failure.log"
+  },
+  "dependency_version_changes": {
+    "setuptools": {
+      "before": "84.2.1",
+      "after": "81.0.0"
+    }
+  },
+  "only_lock_package_records_changed": [
+    "agari-research",
+    "setuptools"
+  ],
+  "cli_smoke": {
+    "command": "UV_PROJECT_ENVIRONMENT='/Volumes/新加卷/AgariLab/runs/tensorboard-ui-v1/project-env' python3 ../agari-kit/scripts/with_storage.py uv run --frozen --offline python -m unittest discover -s tests -p test_tensorboard.py -v",
+    "exit_code": 0,
+    "tests": 1,
+    "seconds": 13.254,
+    "purpose": "Real scalar event writing and tensorboard.main --inspect; no training"
+  },
+  "lock_check": {
+    "command": "UV_PROJECT_ENVIRONMENT='/Volumes/新加卷/AgariLab/runs/tensorboard-ui-v1/project-env' python3 ../agari-kit/scripts/with_storage.py uv lock --check --offline",
+    "exit_code": 0
+  },
+  "final_views": [
+    {
+      "label": "PPO final: smoothing 0, outlier cropping disabled",
+      "browser_observation": {
+        "url": "http://127.0.0.1:49725/?darkMode=true#scalars&tagFilter=%5Eppo%2F&_smoothingWeight=0",
+        "smoothing": "0",
+        "filter": "^ppo/",
+        "cards": [
+          {
+            "tag": "ppo/entropy",
+            "rect": {
+              "x": 381,
+              "y": 191,
+              "width": 330,
+              "height": 258,
+              "top": 191,
+              "right": 711,
+              "bottom": 449,
+              "left": 381
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 123,
+                "path_length": 259.1864929199219,
+                "bbox": {
+                  "width": 208.828125,
+                  "height": 152.01124572753906
+                },
+                "rendered_points": 4,
+                "first": {
+                  "step": 1,
+                  "scalar": 0.9089949727058411
+                },
+                "last": {
+                  "step": 4,
+                  "scalar": 1.0464062690734863
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "ppo/kl",
+            "rect": {
+              "x": 721,
+              "y": 191,
+              "width": 330,
+              "height": 258,
+              "top": 191,
+              "right": 1051,
+              "bottom": 449,
+              "left": 721
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 129,
+                "path_length": 245.77578735351562,
+                "bbox": {
+                  "width": 201.03515625,
+                  "height": 136.09698486328125
+                },
+                "rendered_points": 4,
+                "first": {
+                  "step": 1,
+                  "scalar": 0.00023952216724865139
+                },
+                "last": {
+                  "step": 4,
+                  "scalar": 0.012542075477540493
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "ppo/kl_coef",
+            "rect": {
+              "x": 1061,
+              "y": 191,
+              "width": 330,
+              "height": 258,
+              "top": 191,
+              "right": 1391,
+              "bottom": 449,
+              "left": 1061
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 125,
+                "path_length": 245.6822509765625,
+                "bbox": {
+                  "width": 193.2421875,
+                  "height": 151.71429443359375
+                },
+                "rendered_points": 4,
+                "first": {
+                  "step": 1,
+                  "scalar": 0
+                },
+                "last": {
+                  "step": 4,
+                  "scalar": 0.006000000052154064
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "ppo/loss",
+            "rect": {
+              "x": 381,
+              "y": 459,
+              "width": 330,
+              "height": 258,
+              "top": 459,
+              "right": 711,
+              "bottom": 717,
+              "left": 381
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 129,
+                "path_length": 417.919677734375,
+                "bbox": {
+                  "width": 216.62109375,
+                  "height": 140.6001739501953
+                },
+                "rendered_points": 4,
+                "first": {
+                  "step": 1,
+                  "scalar": 3.331594944000244
+                },
+                "last": {
+                  "step": 4,
+                  "scalar": 2.0606329441070557
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "ppo/minibatches",
+            "rect": {
+              "x": 721,
+              "y": 459,
+              "width": 330,
+              "height": 258,
+              "top": 459,
+              "right": 1051,
+              "bottom": 717,
+              "left": 721
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 131,
+                "path_length": 308.63983154296875,
+                "bbox": {
+                  "width": 216.62109375,
+                  "height": 147.5
+                },
+                "rendered_points": 4,
+                "first": {
+                  "step": 1,
+                  "scalar": 6
+                },
+                "last": {
+                  "step": 4,
+                  "scalar": 8
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "ppo/policy_loss",
+            "rect": {
+              "x": 1061,
+              "y": 459,
+              "width": 330,
+              "height": 258,
+              "top": 459,
+              "right": 1391,
+              "bottom": 717,
+              "left": 1061
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 129,
+                "path_length": 346.68402099609375,
+                "bbox": {
+                  "width": 201.03515625,
+                  "height": 126.50940704345703
+                },
+                "rendered_points": 4,
+                "first": {
+                  "step": 1,
+                  "scalar": 0.004164807498455048
+                },
+                "last": {
+                  "step": 4,
+                  "scalar": -0.007071381434798241
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "ppo/samples",
+            "rect": {
+              "x": 381,
+              "y": 727,
+              "width": 330,
+              "height": 258,
+              "top": 727,
+              "right": 711,
+              "bottom": 985,
+              "left": 381
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 130,
+                "path_length": 332.04205322265625,
+                "bbox": {
+                  "width": 216.62109375,
+                  "height": 146.65713500976562
+                },
+                "rendered_points": 4,
+                "first": {
+                  "step": 1,
+                  "scalar": 166
+                },
+                "last": {
+                  "step": 4,
+                  "scalar": 218
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "ppo/value_loss",
+            "rect": {
+              "x": 721,
+              "y": 727,
+              "width": 330,
+              "height": 258,
+              "top": 727,
+              "right": 1051,
+              "bottom": 985,
+              "left": 721
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 129,
+                "path_length": 443.7689208984375,
+                "bbox": {
+                  "width": 216.62109375,
+                  "height": 159.25747680664062
+                },
+                "rendered_points": 4,
+                "first": {
+                  "step": 1,
+                  "scalar": 6.656678199768066
+                },
+                "last": {
+                  "step": 4,
+                  "scalar": 4.137351036071777
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          }
+        ],
+        "ignore_outliers": false
+      },
+      "screenshot": {
+        "path": "/Volumes/新加卷/AgariLab/runs/tensorboard-ui-v1/compat-success/ppo-final.png",
+        "bytes": 117236,
+        "sha256": "c1ce40d11f8e5253549d3d5ebfec7de9e128e2317c154e825ffab7e280b20ce3"
+      }
+    },
+    {
+      "label": "GRP final: smoothing 0, outlier cropping disabled",
+      "browser_observation": {
+        "url": "http://127.0.0.1:49725/?darkMode=true#scalars&tagFilter=%5Egrp%2F(loss%7Clr%7Ccomplete_epochs)%24&_smoothingWeight=0",
+        "smoothing": "0",
+        "filter": "^grp/(loss|lr|complete_epochs)$",
+        "cards": [
+          {
+            "tag": "grp/complete_epochs",
+            "rect": {
+              "x": 381,
+              "y": 191,
+              "width": 330,
+              "height": 258,
+              "top": 191,
+              "right": 711,
+              "bottom": 449,
+              "left": 381
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 25030,
+                "path_length": 389.74078369140625,
+                "bbox": {
+                  "width": 242.45480346679688,
+                  "height": 147.5
+                },
+                "rendered_points": 1000,
+                "first": {
+                  "step": 1,
+                  "scalar": 0
+                },
+                "last": {
+                  "step": 1133,
+                  "scalar": 1
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "grp/loss",
+            "rect": {
+              "x": 721,
+              "y": 191,
+              "width": 330,
+              "height": 258,
+              "top": 191,
+              "right": 1051,
+              "bottom": 449,
+              "left": 721
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 36248,
+                "path_length": 14624.298828125,
+                "bbox": {
+                  "width": 251.50265502929688,
+                  "height": 140.09286499023438
+                },
+                "rendered_points": 1000,
+                "first": {
+                  "step": 1,
+                  "scalar": 1.401013731956482
+                },
+                "last": {
+                  "step": 1133,
+                  "scalar": 1.1595313549041748
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "grp/lr",
+            "rect": {
+              "x": 1061,
+              "y": 191,
+              "width": 330,
+              "height": 258,
+              "top": 191,
+              "right": 1391,
+              "bottom": 449,
+              "left": 1061
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 36534,
+                "path_length": 275.593505859375,
+                "bbox": {
+                  "width": 224.359130859375,
+                  "height": 147.47021484375
+                },
+                "rendered_points": 1000,
+                "first": {
+                  "step": 1,
+                  "scalar": 0.0005000000237487257
+                },
+                "last": {
+                  "step": 1133,
+                  "scalar": 1.0096086811017813e-07
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          }
+        ],
+        "ignore_outliers": false
+      },
+      "screenshot": {
+        "path": "/Volumes/新加卷/AgariLab/runs/tensorboard-ui-v1/compat-success/grp-final.png",
+        "bytes": 151105,
+        "sha256": "e82382db6bc15dd89246e9d758ca278c306f326823334b1ca163172d7bfb751b"
+      }
+    },
+    {
+      "label": "CQL final: smoothing 0, outlier cropping disabled",
+      "browser_observation": {
+        "url": "http://127.0.0.1:49725/?darkMode=true#scalars&tagFilter=%5Ecql%2F(loss%7Cconservative_loss%7Ctd_loss)%24&_smoothingWeight=0",
+        "smoothing": "0",
+        "filter": "^cql/(loss|conservative_loss|td_loss)$",
+        "cards": [
+          {
+            "tag": "cql/conservative_loss",
+            "rect": {
+              "x": 381,
+              "y": 191,
+              "width": 330,
+              "height": 258,
+              "top": 191,
+              "right": 711,
+              "bottom": 449,
+              "left": 381
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 33677,
+                "path_length": 12107.3349609375,
+                "bbox": {
+                  "width": 237.1567840576172,
+                  "height": 143.38087463378906
+                },
+                "rendered_points": 1000,
+                "first": {
+                  "step": 6,
+                  "scalar": 1.744152545928955
+                },
+                "last": {
+                  "step": 8217,
+                  "scalar": 0.7431228160858154
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "cql/loss",
+            "rect": {
+              "x": 721,
+              "y": 191,
+              "width": 330,
+              "height": 258,
+              "top": 191,
+              "right": 1051,
+              "bottom": 449,
+              "left": 721
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 33046,
+                "path_length": 13773.1826171875,
+                "bbox": {
+                  "width": 245.68850708007812,
+                  "height": 139.875732421875
+                },
+                "rendered_points": 1000,
+                "first": {
+                  "step": 6,
+                  "scalar": 9.402538299560547
+                },
+                "last": {
+                  "step": 8217,
+                  "scalar": 5.488990783691406
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "cql/td_loss",
+            "rect": {
+              "x": 1061,
+              "y": 191,
+              "width": 330,
+              "height": 258,
+              "top": 191,
+              "right": 1391,
+              "bottom": 449,
+              "left": 1061
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 33767,
+                "path_length": 14519.177734375,
+                "bbox": {
+                  "width": 237.1567840576172,
+                  "height": 139.3107147216797
+                },
+                "rendered_points": 1000,
+                "first": {
+                  "step": 6,
+                  "scalar": 0.4030377268791199
+                },
+                "last": {
+                  "step": 8217,
+                  "scalar": 1.4593197107315063
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "cql/conservative_loss",
+            "rect": {
+              "x": 381,
+              "y": 861.1875,
+              "width": 330,
+              "height": 272,
+              "top": 861.1875,
+              "right": 711,
+              "bottom": 1133.1875,
+              "left": 381
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 33717,
+                "path_length": 11902.5458984375,
+                "bbox": {
+                  "width": 236.77186584472656,
+                  "height": 140.95068359375
+                },
+                "rendered_points": 1000,
+                "first": {
+                  "step": 6,
+                  "scalar": 1.744152545928955
+                },
+                "last": {
+                  "step": 8217,
+                  "scalar": 0.7431228160858154
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          },
+          {
+            "tag": "cql/loss",
+            "rect": {
+              "x": 721,
+              "y": 861.1875,
+              "width": 330,
+              "height": 272,
+              "top": 861.1875,
+              "right": 1051,
+              "bottom": 1133.1875,
+              "left": 721
+            },
+            "rendered_paths": [
+              {
+                "d_characters": 33069,
+                "path_length": 13540.076171875,
+                "bbox": {
+                  "width": 245.43191528320312,
+                  "height": 137.50494384765625
+                },
+                "rendered_points": 1000,
+                "first": {
+                  "step": 6,
+                  "scalar": 9.402538299560547
+                },
+                "last": {
+                  "step": 8217,
+                  "scalar": 5.488990783691406
+                },
+                "all_scalars_finite": true
+              }
+            ]
+          }
+        ],
+        "ignore_outliers": false
+      },
+      "screenshot": {
+        "path": "/Volumes/新加卷/AgariLab/runs/tensorboard-ui-v1/compat-success/cql-final.png",
+        "bytes": 154960,
+        "sha256": "31c205487b5f2bfa361bb186f7f29ddaad7440cc509599ac37a194f154ef7e73"
+      }
+    }
+  ],
+  "initial_exploratory_view_note": "The first PPO view in raw evidence retains the default outlier scaling and is superseded by PPO final. Only final full-range screenshots are bundled.",
+  "manual_visual_review": "All three bundled screenshots were opened and checked: actual GRP, CQL and PPO SVG curves visible, smoothing 0, ignore outliers unchecked.",
+  "runtime_versions": {
+    "tensorboard": "2.20.0",
+    "setuptools": "81.0.0",
+    "websockets": "15.0.1"
+  },
+  "original_event_bytes": 5408636,
+  "original_event_sha256_before": "8ff3a23221e8bab6ef7f50ab410572bbe070be2dca970396604e6abe91c6707c",
+  "original_event_sha256_after": "8ff3a23221e8bab6ef7f50ab410572bbe070be2dca970396604e6abe91c6707c",
+  "event_unchanged": true,
+  "main_lock_sha256_before": "e77f024ebd5a8f4ab8cc686ce3ec3e6acccb7a997f574d02f3bf0679bd4e0406",
+  "main_lock_sha256_after": "e77f024ebd5a8f4ab8cc686ce3ec3e6acccb7a997f574d02f3bf0679bd4e0406",
+  "main_setuptools_after": "84.2.1",
+  "cleanup": {
+    "chrome": {
+      "pid": 20712,
+      "exit_code": 0,
+      "pid_absent": true
+    },
+    "tensorboard": {
+      "pid": 20144,
+      "exit_code": 0,
+      "pid_absent": true
+    },
+    "tensorboard_port_closed": true,
+    "remaining_profile_processes": [],
+    "profile_removed": true
+  },
+  "http_request_count": 52,
+  "external_http_request_count": 0,
+  "javascript_exception_count": 0,
+  "raw_success_evidence_sha256": "8364e304b6c32592b26b8ae14465dac68b803e7848cfdaea35caf0ce30091067",
+  "capture_script_sha256": "aa1e084692563bfb8f98da0f769cf7106b89e6b2c77d1145183b9eb8febe3835",
+  "screenshots_sha256": {
+    "cql-final.png": "31c205487b5f2bfa361bb186f7f29ddaad7440cc509599ac37a194f154ef7e73",
+    "ppo-final.png": "c1ce40d11f8e5253549d3d5ebfec7de9e128e2317c154e825ffab7e280b20ce3",
+    "grp-final.png": "e82382db6bc15dd89246e9d758ca278c306f326823334b1ca163172d7bfb751b"
+  }
+}

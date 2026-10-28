@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/zhou/MyCodes/AgariLab/agari-research/.venv/lib/python3.12/site-packages/tensorboard/main.py", line 27, in <module>
+    from tensorboard import default
+  File "/Users/zhou/MyCodes/AgariLab/agari-research/.venv/lib/python3.12/site-packages/tensorboard/default.py", line 30, in <module>
+    import pkg_resources
+ModuleNotFoundError: No module named 'pkg_resources'

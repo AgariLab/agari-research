@@ -15,6 +15,8 @@ dependencies = [
     "numpy==2.4.1",
     "torch==2.9.1",
     "tensorboard==2.20.0",
+    # TensorBoard 2.20 still imports pkg_resources, removed in setuptools 82.
+    "setuptools>=77.0.3,<82",
 ]
 
 [project.scripts]
