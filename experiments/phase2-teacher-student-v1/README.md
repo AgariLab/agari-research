@@ -53,7 +53,8 @@ The execution tools are separately frozen at research
 `b9ee0715c8e1c16ea811e3e37f2a8ebd89814671` in
 `phase2-tools-20261029-v1/agari-research`. Their `--runtime-root` still selects
 the original paired runtime above. These base execution tools passed 115 tests;
-with the later standalone Akochan helper, the combined suite passes 136 tests.
+with the standalone Akochan helper and finite batch drivers, the combined suite
+passes 187 tests, including seven real short-process cleanup checks on macOS.
 No runtime source or qualification contract changed for these tools.
 
 - [`collect_teacher_pilot.py`](../../scripts/collect_teacher_pilot.py) rechecks
@@ -81,6 +82,31 @@ configs in `runs/phase2-pilot-1000-v1/`. Qualification verification exited 0 and
 pilot collection began on 2026-10-29 at 02:27 Asia/Shanghai. It stops on a failed
 gate or paused collection, and does not start training or development/final
 games. Its source and step logs remain with that run.
+
+The finite batch drivers are frozen separately at
+`9dd2902e23429c6364071291a5556d35b312fb1f` in
+`phase2-batch-tools-20261029-v1/agari-research`. Both were registered and started
+on 2026-10-29 at 03:16 Asia/Shanghai; they are currently waiting on their actual
+upstream processes, with no student update or development game started:
+
+- [`phase2_training_batch.py`](../../scripts/phase2_training_batch.py), in
+  `runs/phase2-training-1000-launch-v1/`, waits for the pilot driver to exit with
+  verified preparation. It runs A-2026 alone, then at most two jobs when current
+  available memory meets the registered threshold. C jobs explicitly stop at
+  GRP completion before resuming CQL; budget pauses never resume automatically.
+- [`phase2_development_batch.py`](../../scripts/phase2_development_batch.py), in
+  `runs/phase2-development-1000-launch-v1/`, requires all nine models and their
+  fifteen execution steps to pass verification. It creates
+  `runs/phase2-development-small-v1/`, runs the twenty fixed 1,000-game campaigns,
+  and produces a scale decision only after all campaigns are sealed. The first
+  two primary campaigns measure memory serially before concurrency can reach two.
+
+Each batch has one 172,800-second budget including upstream waiting, a 2 GiB
+minimum available-memory floor, immutable input identities and owned-process
+cleanup. Their original registration, process identity, command output and
+completion receipts remain under external storage. They do not automatically
+start 10,000-game collection, final evaluation or Akochan. See the
+[execution runbook](TRAINING_RUNBOOK.md) for exact entry points and recovery.
 
 Model source: [Mortal-S42 fixed publication](https://huggingface.co/haor/Mortal-S42/tree/524981f21a929e3c3b269f65af79b84163bd02ca).
 Published file hashes must be checked against downloaded bytes; publisher
