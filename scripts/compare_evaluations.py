@@ -20,6 +20,9 @@ def read_run(directory: Path):
     paths = {name: directory / name for name in ("manifest.json", "games.jsonl")}
     contents = {name: path.read_bytes() for name, path in paths.items()}
     manifest = json.loads(contents["manifest.json"])
+    if "campaign_plan_sha256" in manifest:
+        from agari_kit.evaluation_campaign import verify_campaign
+        verify_campaign(directory)
     rows = [json.loads(line) for line in contents["games.jsonl"].splitlines() if line.strip()]
     if manifest.get("status") != "complete":
         raise ValueError("Only completed evaluation runs can be compared")
@@ -75,7 +78,42 @@ def inference_identity(provenance):
             "artifact_names": sorted(provenance["artifacts"])}
 
 
-def compare(baseline: Path, candidate: Path, *, bootstrap_samples: int = 2000, bootstrap_seed: int = 0):
+def identity_sha256(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"),
+                                     allow_nan=False).encode()).hexdigest()
+
+
+def comparison_conditions(manifest):
+    return {**{key: manifest[key] for key in ("rules", "engine", "code", "python")},
+            "opponent_lineup": manifest["lineup"][1:],
+            "opponent_provenance": manifest["lineup_provenance"][1:],
+            "seeds": sorted(manifest["seeds"])}
+
+
+def validate_contract(contract, old, new):
+    """A different-candidates contract binds both complete candidate identities.
+
+    SHA-256 values use canonical JSON (sorted keys, compact separators). Register
+    the contract and hypothesis before evaluating/selecting the candidate. This
+    explicit contract permits candidate factory/source/kwargs changes only; it
+    never relaxes the shared rules, runtime, opponents or paired seed checks.
+    """
+    required = {"schema_version", "kind", "hypothesis", "primary_metric",
+                "baseline_provenance_sha256", "candidate_provenance_sha256", "conditions_sha256"}
+    if (not isinstance(contract, dict) or set(contract) != required
+            or type(contract["schema_version"]) is not int or contract["schema_version"] != 1
+            or contract["kind"] != "different-candidates" or contract["primary_metric"] != "mean_rank"
+            or not isinstance(contract["hypothesis"], str) or not contract["hypothesis"].strip()):
+        raise ValueError("Invalid explicit candidate comparison contract")
+    expected = {"baseline_provenance_sha256": identity_sha256(old["lineup_provenance"][0]),
+                "candidate_provenance_sha256": identity_sha256(new["lineup_provenance"][0]),
+                "conditions_sha256": identity_sha256(comparison_conditions(old))}
+    if any(contract[key] != value for key, value in expected.items()):
+        raise ValueError("Candidate comparison contract identity mismatch")
+
+
+def compare(baseline: Path, candidate: Path, *, bootstrap_samples: int = 2000, bootstrap_seed: int = 0,
+            contract: dict | None = None):
     if bootstrap_samples < 100:
         raise ValueError("Use at least 100 bootstrap samples")
     old, old_rows, old_hashes = read_run(baseline)
@@ -89,7 +127,10 @@ def compare(baseline: Path, candidate: Path, *, bootstrap_samples: int = 2000, b
             or old["lineup_provenance"][1:] != new["lineup_provenance"][1:]):
         raise ValueError("Opponent configuration, artifacts or source differ")
     inference = inference_identity(old["lineup_provenance"][0])
-    if inference != inference_identity(new["lineup_provenance"][0]):
+    new_inference = inference_identity(new["lineup_provenance"][0])
+    if contract is not None:
+        validate_contract(contract, old, new)
+    elif inference != new_inference:
         raise ValueError("Candidate inference factory, source or non-artifact arguments differ")
     if set(old_rows) != set(new_rows):
         raise ValueError("Runs must contain the same seeds and all four rotations")
@@ -122,12 +163,22 @@ def compare(baseline: Path, candidate: Path, *, bootstrap_samples: int = 2000, b
         "ci95": intervals, "ci_method": "paired-seed-group-percentile-bootstrap",
         "bootstrap_seed": bootstrap_seed, "bootstrap_samples": bootstrap_samples,
         "conditions": {key: old[key] for key in ("rules", "engine", "code", "python")},
-        "candidate_inference": inference,
+        "candidate_inference": new_inference,
         "opponent_provenance": old["lineup_provenance"][1:], "seeds": seeds,
         "promotion_sample_size_met": len(old_rows) >= 10000,
         "strength_acceptance": "not-established-by-this-comparison",
         "analysis_script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     }
+    if contract is not None:
+        report["baseline_inference"] = inference
+        report["comparison_contract"] = contract
+        report["comparison_contract_sha256"] = identity_sha256(contract)
+    if all("candidate_diagnostics" in row for row in (*old_rows.values(), *new_rows.values())):
+        from agari_kit.evaluation import DIAGNOSTIC_COUNTS, diagnostic_rates
+        for label, rows in (("baseline", old_rows), ("candidate", new_rows)):
+            counts = {key: sum(row["candidate_diagnostics"][key] for row in rows.values())
+                      for key in DIAGNOSTIC_COUNTS}
+            report[label]["diagnostics"] = diagnostic_rates(counts)
     for directory, hashes in ((baseline, old_hashes), (candidate, new_hashes)):
         if hashes != {name: hashlib.sha256((directory / name).read_bytes()).hexdigest() for name in hashes}:
             raise ValueError("Evaluation files changed during comparison")
@@ -139,13 +190,15 @@ def main():
     parser.add_argument("--baseline", required=True, help="Storage-relative completed evaluation directory")
     parser.add_argument("--candidate", required=True, help="Storage-relative completed evaluation directory")
     parser.add_argument("--output", required=True, help="New storage-relative JSON report")
+    parser.add_argument("--contract", type=Path, help="Pre-registered JSON contract allowing explicit candidate implementation differences")
     args = parser.parse_args()
     storage = Storage.from_env()
     storage.check(probe=True)
     output = storage.path(args.output)
     if output.exists():
         raise FileExistsError("Select a new comparison report path")
-    report = compare(storage.path(args.baseline), storage.path(args.candidate))
+    contract = json.loads(args.contract.read_bytes()) if args.contract else None
+    report = compare(storage.path(args.baseline), storage.path(args.candidate), contract=contract)
     report["inputs"] = {"baseline": args.baseline, "candidate": args.candidate}
     output.parent.mkdir(parents=True, exist_ok=True)
     write_json(output, report)

@@ -40,6 +40,16 @@ def fixture(root, name, ranks_by_seed):
 
 
 class EvaluationComparisonTests(unittest.TestCase):
+    def contract(self, baseline, candidate):
+        old, _, _ = comparison.read_run(baseline)
+        new, _, _ = comparison.read_run(candidate)
+        return {"schema_version": 1, "kind": "different-candidates",
+                "hypothesis": "A new encoder improves mean rank against the frozen opponent pool",
+                "primary_metric": "mean_rank",
+                "baseline_provenance_sha256": comparison.identity_sha256(old["lineup_provenance"][0]),
+                "candidate_provenance_sha256": comparison.identity_sha256(new["lineup_provenance"][0]),
+                "conditions_sha256": comparison.identity_sha256(comparison.comparison_conditions(old))}
+
     def test_paired_effect_preserved_despite_different_seed_difficulty(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -110,6 +120,50 @@ class EvaluationComparisonTests(unittest.TestCase):
                     path.write_text(json.dumps(manifest))
                     with self.assertRaisesRegex(ValueError, "Candidate inference"):
                         comparison.compare(old, new)
+
+    def test_explicit_contract_allows_exact_candidate_difference_not_runtime_or_opponent_drift(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            old = fixture(root, "old", {10: 2, 11: 3})
+            new = fixture(root, "new", {10: 1, 11: 2})
+            path = new / "manifest.json"
+            manifest = json.loads(path.read_bytes())
+            provenance = manifest["lineup_provenance"][0]
+            provenance["factory"] = "new_encoder:Agent"
+            provenance["source"]["source_sha256"] = "e" * 64
+            provenance["descriptor"]["kwargs"]["torch_threads"] = 2
+            path.write_text(json.dumps(manifest))
+            contract = self.contract(old, new)
+            report = comparison.compare(old, new, contract=contract)
+            self.assertEqual(report["difference"]["mean_rank"], -1)
+            self.assertEqual(report["comparison_contract"], contract)
+            self.assertNotEqual(report["baseline_inference"], report["candidate_inference"])
+            for field in ("engine", "code", "python", "lineup_provenance"):
+                altered = json.loads(json.dumps(manifest))
+                if field == "lineup_provenance":
+                    altered[field][1]["name"] = "changed-opponent"
+                else:
+                    altered[field] = "changed"
+                path.write_text(json.dumps(altered))
+                with self.subTest(field=field), self.assertRaises(ValueError):
+                    comparison.compare(old, new, contract=contract)
+            path.write_text(json.dumps(manifest))
+            provenance["artifacts"]["weights_path"]["sha256"] = "unregistered-weight"
+            path.write_text(json.dumps(manifest))
+            with self.assertRaisesRegex(ValueError, "contract identity"):
+                comparison.compare(old, new, contract=contract)
+
+    def test_contract_rejects_missing_hypothesis_and_wrong_primary_metric(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            old = fixture(root, "old", {10: 2, 11: 3})
+            new = fixture(root, "new", {10: 1, 11: 2})
+            for field, value in (("hypothesis", ""), ("primary_metric", "mean_point_delta"),
+                                 ("conditions_sha256", "wrong")):
+                contract = self.contract(old, new)
+                contract[field] = value
+                with self.subTest(field=field), self.assertRaises(ValueError):
+                    comparison.compare(old, new, contract=contract)
 
 
 if __name__ == "__main__":
