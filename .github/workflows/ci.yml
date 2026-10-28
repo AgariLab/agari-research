@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: AgariLab/agari-kit
-          ref: b822234a701063c2b795500d624f45bcfe52ec23
+          ref: 78719f35ea17d68e3a6fcfd04a2aa969a95142cc
           path: agari-kit
       - uses: actions/setup-python@v5
         with:
