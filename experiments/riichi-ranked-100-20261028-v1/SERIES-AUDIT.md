@@ -12,6 +12,11 @@ v3 追加 [10 次新尝试计划](observed-series-plan-v3.json)，SHA
 `95b74f69d815b320b571985282a692dd2ced5c1be7f0984baa895964a80c041b`，
 不改旧 registry 或旧计划。以下当前生产命令显式选择 v3；省略参数仍会读取旧 v1。
 
+最终 v3 计划的 10 场均已完整结束；[series-audit/report.json](series-audit/report.json)
+于 2026-10-28 发布，核验 104 次实际尝试、100 健康完整、4 次中断、0 活动或无效尝试，
+915 份来源（含 866 份原件）完整性 verified。
+本批已发布，不重复执行 `--write`；已有结果只读复核，旧失败和未执行尾部保持原样。
+
 ## 初版登记
 
 [series-registry-v1.json](series-registry-v1.json) 的根摘要为 `564d5f67baaa9dd0c901313ae3c5879b4e81ffb437c1d7e38c5f760a4fa5cc2f`，绑定四个既有 run 的全部 136 份原始文件：

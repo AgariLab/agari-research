@@ -4,6 +4,35 @@
 验证只进行一次，证据见 [validation](../riichi-validation-20261028-v1/README.md)。
 本批目标为 100 场完整正式半庄，检验线上接入与运行可靠性，不作为棋力晋级验收。
 
+## 最终结果
+
+2026-10-28，全部运行已结束，最终审计已独立发布并由模型发布器重新核验。
+[审核报告](series-audit/report.json)、[全部尝试](series-audit/attempts.json)、
+[915 份来源摘要](series-audit/source-sha256.json)及 [SHA256SUMS](series-audit/SHA256SUMS)
+保留整个登记链，覆盖 866 份原始文件。最终 head 为 registry v3；两份旧计划未执行的 38 项继续保留。
+
+| 指标 | 结果 |
+| --- | --- |
+| 实际尝试 / 健康完整 / 中断 | 104 / 100 / 4 |
+| 活动尝试 / 无效记录 / 完整性错误 | 0 / 0 / 0 |
+| 完整场请求 / accepted | 15,949 / 15,949 |
+| 中断场请求 / accepted | 115 / 115，单独统计 |
+| 完整场本地决策平均 / P95 / 最大 | 6.803 / 7.341 / 30.103 ms |
+| 完整场服务端 elapsed 平均 / P95 / 最大 | 542.752 / 1,164.2 / 14,512 ms |
+| 一 / 二 / 三 / 四位 | 12 / 18 / 26 / 44，无并列 |
+| 平均顺位 / 终分 / 相对初始 25,000 得失点 | 3.02 / 16,714 / −8,286 |
+
+全部已观察动作的本地/发送超时、错误回执及降级相关计数为零；四次连接中断仍为失败尝试，
+不能据 accepted 动作推断其中未观察到的服务器结算或评级影响。
+审核 `final_acceptance=true` 表示固定的 100 个健康完局及证据完整性目标通过；
+`original_zero_failure_criterion_met=false` 保留，不能表述为连续 100 场零故障。
+
+[模型 release-v2](../full-coverage-trace-1000-v1/model-release-v2.json) 已在冻结运行环境中生成并复核，
+两份相同副本均为 887,451 字节，SHA
+`8edf5751901cadfa02af084a12e5d2048894c28a5e704d2778894c5fc1a09e2e`。
+发布清单继承训练、1,000 本地半庄及唯一验证局，追加全部排位尝试；原 v1 和失败原件均未改写。
+这些在线匹配成绩不替代固定对手棋力评测或 1,000 场/七日榜单目标。
+
 ## 固定条件与执行方式
 
 - 始终使用 `models/full-coverage-trace-1000-v1/ppo-agent.json`，PPO SHA-256：
@@ -102,7 +131,7 @@ integrity verified、完整性错误为空，仅因完整场目标未到而 pend
 
 审计 17 项及
 [series 发布门禁](../full-coverage-trace-1000-v1/release-v2-series-workflow.md)24 项合成测试通过，
-真实发布器只读联调正确保持 pending，未生成最终审核或 release-v2。
+完成前的真实发布器只读联调正确保持 pending；现已按上述最终结果完成独立审计及 release-v2 发布。
 
 本地 `decision.latency_ms` 计消息接收到动作准备的客户端处理时间，
 `action_ack.elapsed_ms` 是服务端报告的耗时，二者不混算。排位顺位是在线匹配结果，
