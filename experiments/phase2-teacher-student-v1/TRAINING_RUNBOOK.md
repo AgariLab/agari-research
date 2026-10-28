@@ -1,4 +1,4 @@
-# Phase 2：本机训练与开发评测执行说明
+# Phase 2：本机训练、开发评测与结果报告
 
 本说明对应已登记的三臂、三个训练种子，以及随后限定范围的开发评测。下列命令是使用规程，不表示训练或评测已经启动或完成。教师资格和 1,000 局教师数据通过门禁后，准备器才会生成九个配置；配置尚未生成时，不能预先填写实际更新数，也不能把目录存在当成准备完成。本文不启动在线 Bot，不自动扩量、最终评测或 Akochan 对局。
 
@@ -232,3 +232,21 @@ runner 还要求已有 `metrics.jsonl` 与 checkpoint 更新位置完全一致�
 所有验证使用完整 validation，间隔 `ceil(U/3)`，阶段末再验证。每种方法只用自己的 `validation_loss` 选最小值，完全相同时保留更早 update；BC 是 masked CE，CQL 是完整 CQL 目标。逐动作类型及 choice/forced 诊断保留，不能拿跨方法 loss 排名。best 可以早于 final，但只有所有阶段完成后才有资格进入评测。
 
 执行端和评测端共用 `phase2_evaluation_matrix.py::verify_completed_job(rt, prepared, job_id, job)`。它返回实际版本化最佳权重及 SHA、完整训练证据、初始 Q 身份和固定推理参数。评测矩阵还要检查同一 seed 三臂初始 Q SHA 相同、九模型均完整，随后复制并绑定 `latest.pt` 选定的不可变快照。`best-bc-agent.json` / `best-cql-agent.json` 便于浏览，但正式评测不能手选其他 update 或仅信任可被恢复重写的 alias。最后跨臂的候选选择以登记的 development 对战指标进行；开发评测由上面的独立 batch 执行，两套流程都不消费训练数据 test 分区的动作。
+
+## 完整开发结果的薄报告
+
+结果汇总入口冻结在 `phase2-results-tools-20261029-v1/agari-research`，提交 `aacf3f7a5341ca75dc363f78fb2078eb15a2df8d`；它继续调用原 b9ee 工具及原 paired runtime。只有九模型和 20 项开发评测全部完成，且原 `development-report.json` 与原门禁重算一致，才会写入一个新的报告目录。
+
+```sh
+PHASE2_RESULTS_TOOLS=/Users/zhou/MyCodes/AgariLab/phase2-results-tools-20261029-v1/agari-research
+"$PHASE2_PYTHON" -B "$PHASE2_RESULTS_TOOLS/scripts/report_teacher_student_results.py" \
+  --runtime-root "$PINNED_ROOT" --tools-root "$PHASE2_TOOLS" \
+  --matrix runs/phase2-development-small-v1 \
+  --output runs/phase2-results-small-v1
+```
+
+报告输出 `summary.json`、`sources.json`、`README.md` 与 `selected-validation/` 下九条原始 metrics 行。全部训练种子和两池结果分别列出；原配对区间、选模和扩量结论直接沿用，不跨池或跨种子平均区间／百分位，也不按跨方法 validation loss 排名。若后续进入 large，使用已登记并完整完成的 large matrix 和另一个新报告目录，不能通过替换 preparation 混合来源。
+
+原 runner 的所有尝试均保留，未知成本为 null；C 的阶段成本依历史 checkpoint SHA 和进度链归因，证据不足时保留未归因。这里的调用耗时之和不等于并行批处理墙钟，也不含未绑定的 inspection／外层调度成本。开发评测中的 `elapsed_seconds` 仅为对局循环耗时；完整命令成本及 large 基准复用历史须另行绑定实际执行回执，不据此报告新增 20,000 局或本轮完整成本。
+
+该入口不读取数据轨迹、MJAI、test 动作或 final 成绩，不运行模型、对局或扩量。原始大文件留在外置存储，薄报告只绑定来源哈希并保留必要原行；准备和开发结果未完成时，不能将工具存在或测试通过当成真实研究结果。
