@@ -40,6 +40,10 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python ../agari-kit
 127 次请求、发送和 `accepted` 回执，零超时、非法回执或降级。原始安全记录保存在 `first-game/`。
 剩余 99 场监督运行已启动，当前尚未将其标为全部完成；以外置 `summary.json` 与逐场记录为实时依据。
 
+[独立验收工具](AUDIT.md)已准备好，19 项合成门禁测试通过；当前真实探测仅返回 pending，
+尚未生成 `final-audit/`。全部结束后先逐场重算真实事件、回执、分数、身份与父索引，
+再按[发布顺序](../full-coverage-trace-1000-v1/release-v2-workflow.md)生成新的模型清单。
+
 本地 `decision.latency_ms` 计消息接收到动作准备的客户端处理时间，
 `action_ack.elapsed_ms` 是服务端报告的耗时，二者不混算。排位顺位是在线匹配结果，
 不与固定种子、固定对手的离线筛选直接配对比较。
