@@ -53,8 +53,9 @@ The execution tools are separately frozen at research
 `b9ee0715c8e1c16ea811e3e37f2a8ebd89814671` in
 `phase2-tools-20261029-v1/agari-research`. Their `--runtime-root` still selects
 the original paired runtime above. These base execution tools passed 115 tests;
-with the standalone Akochan helper and finite batch drivers, the combined suite
-passes 187 tests, including seven real short-process cleanup checks on macOS.
+with the standalone Akochan helper and finite batch drivers, 187 tests passed,
+including seven real short-process cleanup checks on macOS. The metadata report
+adds thirteen passing gate tests.
 No runtime source or qualification contract changed for these tools.
 
 - [`collect_teacher_pilot.py`](../../scripts/collect_teacher_pilot.py) rechecks
@@ -107,6 +108,16 @@ cleanup. Their original registration, process identity, command output and
 completion receipts remain under external storage. They do not automatically
 start 10,000-game collection, final evaluation or Akochan. See the
 [execution runbook](TRAINING_RUNBOOK.md) for exact entry points and recovery.
+
+[`report_teacher_pilot.py`](../../scripts/report_teacher_pilot.py) produces a
+small data report only after the successful pilot/preparation handoff. It binds
+the complete 900/50/50 split, all four teacher identities, native replay
+receipts, source/probe isolation and the nine configurations' U/G budgets. It
+reads metadata only; the original weak test receipt limitation remains explicit,
+and evaluation isolation checks registered seed ranges only. The report tool is
+separately frozen at `88c3fc1e25cacf9b3e39662acb7b635760ea9dc8` in
+`phase2-report-tools-20261029-v1/agari-research`; its `--tools-root` is still the
+original b9ee checkout. No real pilot report has been generated yet.
 
 Model source: [Mortal-S42 fixed publication](https://huggingface.co/haor/Mortal-S42/tree/524981f21a929e3c3b269f65af79b84163bd02ca).
 Published file hashes must be checked against downloaded bytes; publisher
