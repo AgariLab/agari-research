@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "artifact": "historical-runtime-preservation-receipt",
+  "status": "complete",
+  "completed_at": "2026-10-28T15:03:40.155707+00:00",
+  "manifest": {
+    "path": "/Volumes/新加卷/AgariLab/runs/release-runtime-20261028-v1/manifest.json",
+    "bytes": 8864,
+    "sha256": "6ab7a20882191360c9736d0b84b6378154e3d3b5a08fcb8e72445ca1056f7a64"
+  },
+  "preservation_script_sha256": "eebad36e8c7ca492ffe6dc06f7de0f1e1aebde7a2bac90b2fe69582520d0f542",
+  "frozen_repositories": {
+    "research": {
+      "canonical_path": "/Users/zhou/MyCodes/AgariLab/agari-research",
+      "commit": "abc2f3b61a829d9bdfd0e06f0bd0f9b37ce17e39",
+      "tracked_worktree_status": ""
+    },
+    "kit": {
+      "canonical_path": "/Users/zhou/MyCodes/AgariLab/agari-kit",
+      "commit": "44003b3dd5f9cd993a9a1226ba08bf905df0edf1",
+      "tracked_worktree_status": ""
+    }
+  },
+  "release_v2": {
+    "bytes": 887451,
+    "sha256": "8edf5751901cadfa02af084a12e5d2048894c28a5e704d2778894c5fc1a09e2e",
+    "paths": [
+      "/Users/zhou/MyCodes/AgariLab/agari-research/experiments/full-coverage-trace-1000-v1/model-release-v2.json",
+      "/Volumes/新加卷/AgariLab/models/full-coverage-trace-1000-v1/release-v2.json"
+    ]
+  },
+  "series_audit_sha256": {
+    "SHA256SUMS": "81abeb11bff76f5c9a44ca4afda05fddba29de643ee0c143587f0eb9c96ab3c2",
+    "attempts.json": "922de6a042068decb77ad26762bcc74c2dd649c5e4bc87804f940a492a90aabb",
+    "report.json": "564750fe9c29edb880f8f8d48667843f6ee2d1fe1ca3d3b04079dcb7b5b7ce25",
+    "source-sha256.json": "f4f2c670c9a8f31df03674ea77d5abc6f280ed8f604661b4cdcf72ab11a4e46b"
+  },
+  "registry": {
+    "path": "/Users/zhou/MyCodes/AgariLab/agari-research/experiments/riichi-ranked-100-20261028-v1/series-registry-v3.json",
+    "revision": 3,
+    "sha256": "6f3f279caafcce2dabb8dc3b3747f0757eb4e33d2755c81626f297702de4ce5d"
+  },
+  "runtime": {
+    "python": {
+      "implementation": "CPython",
+      "version": "3.12.16"
+    },
+    "research_lock_sha256": "e77f024ebd5a8f4ab8cc686ce3ec3e6acccb7a997f574d02f3bf0679bd4e0406",
+    "cpython_directory": "/Users/zhou/.local/share/uv/python/cpython-3.12.16-macos-aarch64-none",
+    "cpython_binary_sha256": "7a427de7a538c033f821bae69d18dba1fcf01e1947f8fdfece0d9654f680a787",
+    "interpreter_alias_path": "/Users/zhou/.local/share/uv/python/cpython-3.12-macos-aarch64-none",
+    "interpreter_alias_target": "/Users/zhou/.local/share/uv/python/cpython-3.12.16-macos-aarch64-none",
+    "venv_python_link": "/Users/zhou/.local/share/uv/python/cpython-3.12-macos-aarch64-none/bin/python3.12",
+    "pyvenv_cfg": "home = /Users/zhou/.local/share/uv/python/cpython-3.12-macos-aarch64-none/bin\nimplementation = CPython\nuv = 0.13.6\nversion_info = 3.12\ninclude-system-site-packages = false\n",
+    "venv_distribution_versions": {
+      "setuptools": "84.2.1",
+      "riichienv": "0.4.10",
+      "numpy": "2.4.1",
+      "tensorboard": "2.20.0",
+      "torch": "2.9.1"
+    },
+    "venv_engine": {
+      "path": "/Users/zhou/MyCodes/AgariLab/agari-research/.venv/lib/python3.12/site-packages/riichienv/_riichienv.cpython-312-darwin.so",
+      "sha256": "169c8c2c53bdace01e4ca319f54050565fe728a5b1b2fc6b7f3046738887071d"
+    }
+  },
+  "archives": [
+    {
+      "source": "/Users/zhou/MyCodes/AgariLab/agari-research/.venv",
+      "archive": "research-venv.tar",
+      "bytes": 730869760,
+      "sha256": "3e55d56e5ed65f7f6d139690c2012b674b22f87aadf1a2c6e9fb810f01573e84",
+      "members": 27762,
+      "inventory": "research-venv.members.json",
+      "inventory_sha256": "a1eaabba1422611247cbcc55305e43fef54f81bbfffa72dcd9ab43be98a61616",
+      "verification": "all paths, types, modes, regular-file bytes/SHA and symlink targets match"
+    },
+    {
+      "source": "/Users/zhou/.local/share/uv/python/cpython-3.12.16-macos-aarch64-none",
+      "archive": "cpython-3.12.16-macos-aarch64-none.tar",
+      "bytes": 75028480,
+      "sha256": "ee619ed16ee0aa055e05c6c09fe34c05a0d40cb6678c55990cd99e6e35e98173",
+      "members": 2107,
+      "inventory": "cpython-3.12.16-macos-aarch64-none.members.json",
+      "inventory_sha256": "9784e996d1321e9e163be30ae26cf4b97929a61b41adf81f5680a9a8c11330a6",
+      "verification": "all paths, types, modes, regular-file bytes/SHA and symlink targets match"
+    }
+  ],
+  "ranked_directory_count_at_publication": 77,
+  "ranked_directory_names_source": "manifest.json#/identity/ranked_directories_at_publication",
+  "source_writes": false,
+  "restoration_performed": false,
+  "cross_machine_migration_verified": false,
+  "excluded_from_runtime_archives": [
+    "datasets",
+    "models",
+    "checkpoints",
+    "ranked_and_other_run_logs",
+    "git_repositories_and_history"
+  ],
+  "scope_note": "Compact extraction from the completed external manifest; no member inventories or full file list are copied. Original experiment artifacts and Git history remain required."
+}

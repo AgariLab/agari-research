@@ -16,7 +16,7 @@ uv 的默认索引是清华源 `https://mirrors.tuna.tsinghua.edu.cn/pypi/web/si
 
 ```sh
 git clone https://github.com/AgariLab/agari-kit.git
-git -C agari-kit checkout c3d7b343f9c2bf85e9bda6fb3015a6a90bc69080
+git -C agari-kit checkout b822234a701063c2b795500d624f45bcfe52ec23
 git clone https://github.com/AgariLab/agari-research.git
 cd agari-research
 ```
@@ -195,6 +195,8 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python scripts/vali
 完整场 15,949 次动作全部 accepted，零本地/发送超时或错误回执；中断场另有 115 次 accepted，不计入完整场成绩。
 最终审计与 [release-v2](experiments/full-coverage-trace-1000-v1/model-release-v2.json) 已发布并重新核验，原 v1 保持不变。
 平均顺位 3.02；完整性与完成目标通过，原连续零故障标准仍未通过，不据此宣称棋力晋级。
+回放及 TensorBoard 修复合入前已保存旧环境；旧清单的冻结版本、备份回执和复核命令见
+[历史环境复核](experiments/full-coverage-trace-1000-v1/historical-verification.md)。
 证据见 [真实平台验证](experiments/riichi-validation-20261028-v1/README.md) 和
 [首批 100 场排位](experiments/riichi-ranked-100-20261028-v1/README.md)。
 
@@ -202,7 +204,7 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python scripts/vali
 CPU 13.67ms、MPS 5.63ms。此测量仅含网络训练计算，不含解析或自博弈；尚未以完整 MPS 训练验收替代 CPU 结果。
 
 GitHub CI 将本仓库与 `AgariLab/agari-kit` 并列检出，用锁文件安装包括 PyTorch 的完整环境后运行测试。
-公共工具的 CI 引用固定为 `c3d7b343f9c2bf85e9bda6fb3015a6a90bc69080`；本机仍使用相邻工作目录。
+公共工具的 CI 引用固定为 `b822234a701063c2b795500d624f45bcfe52ec23`，包含已验收的回放与诊断实现；本机仍使用相邻工作目录。
 
 独立进程的在线协议兼容性可以在本机预检，不需要 Token，也不会连接 riichi.dev：
 

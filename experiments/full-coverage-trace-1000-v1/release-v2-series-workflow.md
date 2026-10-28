@@ -11,6 +11,9 @@
 下文 `--write` 保留首次发布顺序；本批文件已存在，应使用 `--verify-release`，不能重复创建。
 默认运行只读，未完成时返回 pending，不创建任何真实发布文件。
 
+发布后主线已合入回放及 TensorBoard 修复。下列历史复核命令必须使用原冻结版本和环境；
+已完成的环境保留、原路径要求及恢复步骤见 [历史环境复核](historical-verification.md)。
+
 ## 固定门禁
 
 1. 先核对原 `build_model_release_v2.py` SHA256

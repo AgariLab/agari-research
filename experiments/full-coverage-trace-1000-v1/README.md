@@ -100,3 +100,7 @@ Python/依赖与原生引擎二进制也必须相同。以后源码升级时，�
 清单追加独立核验的 100 个健康完局、全部 104 次尝试及 4 次中断，完整场 15,949 次动作全部 accepted。
 原 v1 的字段和历史来源保留，状态为 `completed_with_interruptions`，不宣称连续零故障或棋力晋级。
 旧严格 1+99 发布工具仍保留，其门槛不适用于这批有中断的记录。
+
+回放与 TensorBoard 修复已在发布后合入，当前主环境不再等同于历史发布环境。
+旧环境及真实解释器已完成外置备份；冻结 commit、路径约束和恢复后复核命令见
+[historical-verification.md](historical-verification.md)，精简回执见 [runtime-preservation.json](runtime-preservation.json)。
