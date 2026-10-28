@@ -1,7 +1,8 @@
 # Phase 2: teacher baseline and student learning
 
 Registered 2026-10-29 before model acquisition and all new games/training.
-Status: implementation in progress; no teacher strength or student improvement claim yet.
+Status: implementation and CPU/MPS resume checks complete; teacher strength
+qualification running. No teacher strength or student improvement claim yet.
 
 The immutable [protocol](protocol.json) records the teacher release, incumbent,
 disjoint seed ranges, three training arms, selection rule and inference gates.
@@ -28,6 +29,18 @@ The 48-hour limit applies to each invocation and pauses at a complete game,
 seed group or optimizer update. Resume retains the experiment identity. CPU is
 the baseline; MPS requires actual training and resume validation before use.
 No paid compute or online matches are started by this protocol.
+
+[CPU/MPS evidence](device-smoke/README.md) confirms exact same-device recovery
+for BC and GRP/CQL. The first matrix uses CPU uniformly because the measured
+small tasks show no clear overall MPS throughput advantage.
+
+Frozen qualification runtime: kit `78719f35ea17d68e3a6fcfd04a2aa969a95142cc`,
+research `80d3c4204d381a93a7f53d729fa59c6074ff1b42`. Both sources are isolated
+from later documentation edits. `qualify_teacher.py` registers and verifies
+the real protocol evidence before either 1,000-game side runs; its report stage
+rechecks the sealed campaigns and paired confidence interval. Training config
+preparation requires that completed qualification, exact four-teacher collection
+identities and the pre-registered collection seeds.
 
 Model source: [Mortal-S42 fixed publication](https://huggingface.co/haor/Mortal-S42/tree/524981f21a929e3c3b269f65af79b84163bd02ca).
 Published file hashes must be checked against downloaded bytes; publisher

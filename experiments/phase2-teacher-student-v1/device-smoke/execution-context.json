@@ -1,0 +1,31 @@
+{
+  "concurrent_workloads": [
+    "independent teacher-qualification baseline and teacher evaluations coordinated by root"
+  ],
+  "cross_device_tensor_equality_required": false,
+  "exit_code": 0,
+  "external_process_timing": {
+    "real_seconds": 89.36,
+    "source": "observed /usr/bin/time -p output from exec session 29785",
+    "sys_seconds": 4.62,
+    "user_seconds": 62.35
+  },
+  "frozen_worktrees": {
+    "agari-kit": {
+      "commit": "78719f35ea17d68e3a6fcfd04a2aa969a95142cc",
+      "path": "/Users/zhou/MyCodes/AgariLab/phase2-runtime-20261029-v1/agari-kit",
+      "status": "clean"
+    },
+    "agari-research": {
+      "commit": "80d3c4204d381a93a7f53d729fa59c6074ff1b42",
+      "path": "/Users/zhou/MyCodes/AgariLab/phase2-runtime-20261029-v1/agari-research",
+      "status": "clean"
+    }
+  },
+  "recorded_at_utc": "2026-10-28T17:16:56.753700+00:00",
+  "report_sha256": "4b4a9f0037e4779a2d574b8d7035275ecd398bcb5359907ee93c5e40a04a6de2",
+  "schema_version": 1,
+  "script_sha256": "ee71a5aef698ca45903242dc87b918caae4cda2d71e128b35388626108c07286",
+  "test_partition_content_opened": false,
+  "timing_scope": "shared host with concurrent workloads; single qualification measurement, not an idle-machine throughput benchmark"
+}
