@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment": "phase2-teacher-student-v1",
+  "registered_date": "2026-10-29",
+  "rule_preset": "4p-red-half/tenhou",
+  "engine_version": "0.4.10",
+  "max_wall_seconds_per_invocation": 172800,
+  "storage_root": "/Volumes/新加卷/AgariLab",
+  "teacher": {
+    "repository": "haor/Mortal-S42",
+    "revision": "524981f21a929e3c3b269f65af79b84163bd02ca",
+    "weights": "weights/s42-inference.pth",
+    "bytes": 43670035,
+    "sha256": "e5f6955b6f19007fd65315e53291b36994493046bc118b991b959e9dc596d660",
+    "qualification": "Candidate source only until independent local checks and qualification pass"
+  },
+  "incumbent": {
+    "descriptor": "models/full-coverage-trace-1000-v1/ppo-agent.json",
+    "weights_sha256": "613d6a20cf1057a9c6556153a5506fdc11d115f62aaf5de83e39143572bd9096"
+  },
+  "seeds": {
+    "teacher_qualification": {"start": 2610000, "count": 250, "rotations": 4},
+    "teacher_probe": {"start": 2620000, "count": 16, "rotations": 1},
+    "teacher_1000": {"start": 2630000, "count": 1000, "rotations": 1},
+    "teacher_10000": {"start": 2640000, "count": 10000, "rotations": 1},
+    "development": {"start": 2660000, "count": 250, "rotations": 4},
+    "akochan_exploratory": {"start": 2670000, "initial_count": 16, "count": 64, "rotations": 4},
+    "final_promotion": {"start": 2680000, "count": 2500, "rotations": 4}
+  },
+  "training": {
+    "seeds": [2026, 2027, 2028],
+    "model_reference_config": "configs/full-coverage-small.json",
+    "model": {"in_channels": 74, "num_actions": 82, "conv_channels": 32, "num_blocks": 2, "fc_dim": 128, "tile_dim": 34, "aux_dims": 4},
+    "policy_batch_size": 64,
+    "policy_updates": "ceil(3 * max(weak_training_decisions, teacher_training_decisions) / 64)",
+    "checkpoint_selection": "Lowest own-method loss on complete validation partition; no test content read",
+    "arms": [
+      {"id": "A", "data": "existing-efficiency", "stages": ["bc"]},
+      {"id": "B", "data": "four-seat-teacher", "stages": ["bc"]},
+      {"id": "C", "data": "four-seat-teacher", "stages": ["grp", "cql"]}
+    ],
+    "split": [0.9, 0.05, 0.05],
+    "grp_cost_separate": true,
+    "ppo_in_scope": false
+  },
+  "evaluation": {
+    "qualification_opponents": ["incumbent", "incumbent", "incumbent"],
+    "primary_opponents": ["teacher", "incumbent", "efficiency"],
+    "weak_opponents": ["efficiency", "random", "tsumogiri"],
+    "akochan_opponents": ["akochan", "efficiency", "tsumogiri"],
+    "primary_metric": "candidate_minus_incumbent_mean_rank",
+    "inference": "paired-complete-seed-group-bootstrap-95pct",
+    "promotion_condition": "At least 10000 games per model and CI upper bound < 0; no invalid/missing games",
+    "teacher_condition": "1000 games per model and CI upper bound < 0; adapter legality checks pass",
+    "candidate_selection": "Lowest development primary-pool mean rank; ties by lower fourth-place rate then higher point delta; report all three training seeds",
+    "final_candidate_frozen_before_final_seeds": true
+  },
+  "gates": {
+    "teacher_failure": "Retain diagnosis and stop automatic teacher data expansion",
+    "scale_10000": "Teacher BC or CQL beats incumbent in paired development primary-pool mean-rank 95pct CI; otherwise retain 1k results without automatic expansion",
+    "gpu": "Provide measured migration and cost proposal before any paid compute",
+    "online": "No connection, validation or ranked batch in this phase"
+  }
+}
