@@ -16,7 +16,7 @@ uv 的默认索引是清华源 `https://mirrors.tuna.tsinghua.edu.cn/pypi/web/si
 
 ```sh
 git clone https://github.com/AgariLab/agari-kit.git
-git -C agari-kit checkout 9e3e866a046e40fecf94d03d315c9cc000d015b1
+git -C agari-kit checkout c3d7b343f9c2bf85e9bda6fb3015a6a90bc69080
 git clone https://github.com/AgariLab/agari-research.git
 cd agari-research
 ```
@@ -187,7 +187,7 @@ python3 ../agari-kit/scripts/with_storage.py uv run --frozen python scripts/vali
 CPU 13.67ms、MPS 5.63ms。此测量仅含网络训练计算，不含解析或自博弈；尚未以完整 MPS 训练验收替代 CPU 结果。
 
 GitHub CI 将本仓库与 `AgariLab/agari-kit` 并列检出，用锁文件安装包括 PyTorch 的完整环境后运行测试。
-公共工具的 CI 引用固定为 `9e3e866a046e40fecf94d03d315c9cc000d015b1`；本机仍使用相邻工作目录。
+公共工具的 CI 引用固定为 `c3d7b343f9c2bf85e9bda6fb3015a6a90bc69080`；本机仍使用相邻工作目录。
 
 独立进程的在线协议兼容性可以在本机预检，不需要 Token，也不会连接 riichi.dev：
 
