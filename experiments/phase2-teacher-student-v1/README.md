@@ -1,8 +1,9 @@
 # Phase 2: teacher baseline and student learning
 
 Registered 2026-10-29 before model acquisition and all new games/training.
-Status: implementation and CPU/MPS resume checks complete; teacher strength
-qualification running. No teacher strength or student improvement claim yet.
+Status: implementation and CPU/MPS resume checks complete; teacher qualification
+passed and the registered 1,000-game pilot collection is running. Student training
+and independent promotion evaluation remain outstanding.
 
 The immutable [protocol](protocol.json) records the teacher release, incumbent,
 disjoint seed ranges, three training arms, selection rule and inference gates.
@@ -42,11 +43,18 @@ rechecks the sealed campaigns and paired confidence interval. Training config
 preparation requires that completed qualification, exact four-teacher collection
 identities and the pre-registered collection seeds.
 
+[Independent teacher qualification](teacher-qualification/README.md) passed:
+1,000 games per side, 250 paired seed groups, zero failed/unsealed attempts and
+zero illegal actions. Mean rank is 1.579 for S42 versus 2.500 for the incumbent;
+the paired difference is -0.921 with 95% CI [-0.978, -0.861]. This establishes
+the registered fixed-pool teacher gate, not student promotion or online strength.
+
 The execution tools are separately frozen at research
 `b9ee0715c8e1c16ea811e3e37f2a8ebd89814671` in
 `phase2-tools-20261029-v1/agari-research`. Their `--runtime-root` still selects
-the original paired runtime above. The combined research suite passes 115
-tests; no runtime source or qualification contract changed for these tools.
+the original paired runtime above. These base execution tools passed 115 tests;
+with the later standalone Akochan helper, the combined suite passes 136 tests.
+No runtime source or qualification contract changed for these tools.
 
 - [`collect_teacher_pilot.py`](../../scripts/collect_teacher_pilot.py) rechecks
   qualification before the registered 1,000-game collection, records each
@@ -59,14 +67,20 @@ tests; no runtime source or qualification contract changed for these tools.
   binds all nine completed models and both development pools before selection.
   A qualifying small matrix must complete the large matrix before final seeds
   are opened. One shared reservation binds the final candidate across matrices.
-  Akochan currently has a disjoint 16+48 seed-group command plan; its combined
-  exploratory report remains to be implemented before that evaluation runs.
+- [`phase2_akochan.py`](../../scripts/phase2_akochan.py) binds the final freeze,
+  runs the disjoint 16+48 seed groups only after both initial campaigns pass,
+  and recomputes pooled confidence intervals and latency percentiles from raw
+  paired groups and samples. Its separate frozen checkout is
+  `phase2-akochan-tools-20261029-v1/agari-research` at
+  `db831239dacebf503d60e98a8ac1151e301bbc68`; pass the original tools research
+  checkout above as `--tools-root`. No real Akochan evaluation has started.
 
 The external `runs/phase2-pilot-1000-launch-v1/` driver records the handoff from
-the existing qualification to `phase2-teacher-1000-v1`, then to the nine CPU
-configs in `runs/phase2-pilot-1000-v1/`. It waits for complete qualification,
-stops on a failed gate or paused collection, and does not start training or
-development/final games. Its source and step logs remain with that run.
+the completed qualification to `phase2-teacher-1000-v1`, then to the nine CPU
+configs in `runs/phase2-pilot-1000-v1/`. Qualification verification exited 0 and
+pilot collection began on 2026-10-29 at 02:27 Asia/Shanghai. It stops on a failed
+gate or paused collection, and does not start training or development/final
+games. Its source and step logs remain with that run.
 
 Model source: [Mortal-S42 fixed publication](https://huggingface.co/haor/Mortal-S42/tree/524981f21a929e3c3b269f65af79b84163bd02ca).
 Published file hashes must be checked against downloaded bytes; publisher
